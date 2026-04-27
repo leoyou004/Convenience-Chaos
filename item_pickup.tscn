@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bldpxovo52jyb"]
+
+[ext_resource type="Script" uid="uid://c6840liospf1k" path="res://item_pickup.gd" id="1_im1t2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_im1t2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lpngd"]
+
+[node name="ItemPickup" type="Node3D" unique_id=1440671623]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2018923830]
+script = ExtResource("1_im1t2")
+
+[node name="Label3D" type="Label3D" parent="Area3D" unique_id=370605202]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=1939421947]
+mesh = SubResource("SphereMesh_im1t2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=831944787]
+shape = SubResource("SphereShape3D_lpngd")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

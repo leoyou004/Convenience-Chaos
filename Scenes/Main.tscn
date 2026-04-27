@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://84y40uwq3x3c" path="res://Scenes/StoreMap.tscn" id="2_kln2b"]
 [ext_resource type="PackedScene" uid="uid://b4j1n4w3cj2bg" path="res://Scenes/GameUI.tscn" id="3_kln2b"]
 [ext_resource type="Script" uid="uid://dly8agh4d7cq2" path="res://autoloads/hot_bar_manager.gd" id="3_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://bldpxovo52jyb" path="res://item_pickup.tscn" id="5_pbw6q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rgh2o"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -38,3 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7264452, 0)
 script = ExtResource("3_rgh2o")
 
 [node name="GameUI" parent="HotBarManager" unique_id=556926182 instance=ExtResource("3_kln2b")]
+
+[node name="ItemPickup" parent="." unique_id=1440671623 instance=ExtResource("5_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82671094, -8.561018)

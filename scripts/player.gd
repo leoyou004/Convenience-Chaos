@@ -12,19 +12,26 @@ var current_speed = speed
 var mouse_sensitivity = 0.002
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-const CROUCH_HEIGHT_MULTIPLIER := 0.5
-const PRONE_HEIGHT_MULTIPLIER := 0.25
-const SPRINT_MAX_SECONDS := 6.0
+const STANDING_HEIGHT := 0.7  # absolute height in meters (now the lower standing pose)
+const CROUCH_HEIGHT := 0.3 # absolute height in meters (now the taller crouch pose)
+const PRONE_HEIGHT := 0.001 # absolute height in meters (prone position)
+const STANDING_CAMERA_HEIGHT := 0.5
+const CROUCH_CAMERA_HEIGHT := 0.15
+const PRONE_CAMERA_HEIGHT := 0.001
+const SPRINT_MAX_SECONDS := 7.0
 const SPRINT_RECHARGE_SECONDS := 10.0
 
 var is_crouching = false
 var is_prone = false
+var is_exhausted = false  # Prevents sprinting until stamina fully recharges
 
 var base_collision_position_y: float
 var base_collision_half_height: float = 0.0
-var base_capsule_height: float = 0.0
+var base_capsule_height: float = 1.0  # Normal standing height
 var base_capsule_radius: float = 0.0
-var base_camera_height: float
+var base_camera_height: float = 0.9   # Camera height when standing
+var crouch_camera_height: float = 0.5  # Camera height when crouching
+var prone_camera_height: float = 0.15   # Camera height when prone
 var sprint_stamina: float = SPRINT_MAX_SECONDS
 
 func _ready():
@@ -42,7 +49,7 @@ func _ready():
 	base_collision_position_y = collision_shape.position.y
 	base_camera_height = camera_mount.position.y
 
-	_apply_posture_height(1.0)
+	_apply_posture_height(STANDING_HEIGHT)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -67,7 +74,17 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("drop_item"):
 		HotBarManager.drop_active_item(self)
 
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Vector2.ZERO
+	if Input.is_key_pressed(KEY_W):
+		input_dir.y -= 1
+	if Input.is_key_pressed(KEY_S):
+		input_dir.y += 1
+	if Input.is_key_pressed(KEY_A):
+		input_dir.x -= 1
+	if Input.is_key_pressed(KEY_D):
+		input_dir.x += 1
+	input_dir = input_dir.normalized()
+	
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
@@ -85,7 +102,7 @@ func _physics_process(delta):
 	var is_standing := not is_crouching and not is_prone
 	var wants_to_sprint := Input.is_action_pressed("sprint") and is_standing
 
-	if wants_to_sprint and sprint_stamina > 0.0:
+	if wants_to_sprint and sprint_stamina > 0.0 and not is_exhausted:
 		sprint_stamina = maxf(0.0, sprint_stamina - delta)
 		current_speed = sprint_speed
 	else:
@@ -96,34 +113,46 @@ func _physics_process(delta):
 			current_speed = crouch_speed
 		else:
 			current_speed = speed
+	
+	# Check exhaustion state
+	if sprint_stamina <= 0.0:
+		is_exhausted = true
+	elif sprint_stamina >= SPRINT_MAX_SECONDS:
+		is_exhausted = false
+	
+	# Emit sprint stamina signal for UI
+	SignalBus.sprint_stamina_changed.emit(sprint_stamina, SPRINT_MAX_SECONDS)
 
 	if Input.is_action_just_pressed("crouch"):
 		if is_prone:
 			is_prone = false
 			is_crouching = true
-			_apply_posture_height(CROUCH_HEIGHT_MULTIPLIER)
+			_apply_posture_height(CROUCH_HEIGHT)
 		elif is_crouching:
 			is_crouching = false
-			_apply_posture_height(1.0)
+			_apply_posture_height(STANDING_HEIGHT)
 		else:
 			is_crouching = true
-			_apply_posture_height(CROUCH_HEIGHT_MULTIPLIER)
+			_apply_posture_height(CROUCH_HEIGHT)
 
 	if Input.is_action_just_pressed("prone"):
 		if is_crouching:
 			is_crouching = false
 			is_prone = true
-			_apply_posture_height(PRONE_HEIGHT_MULTIPLIER)
+			_apply_posture_height(PRONE_HEIGHT)
 		elif is_prone:
 			is_prone = false
-			_apply_posture_height(1.0)
+			_apply_posture_height(STANDING_HEIGHT)
 		else:
 			is_prone = true
-			_apply_posture_height(PRONE_HEIGHT_MULTIPLIER)
+			_apply_posture_height(PRONE_HEIGHT)
 
 	move_and_slide()
 
-func _apply_posture_height(multiplier: float) -> void:
+func _apply_posture_height(height: float) -> void:
+	# Convert absolute height to multiplier
+	var multiplier = height / base_capsule_height
+	
 	if collision_shape.shape is CapsuleShape3D:
 		var capsule := collision_shape.shape as CapsuleShape3D
 
@@ -135,5 +164,10 @@ func _apply_posture_height(multiplier: float) -> void:
 		var height_delta := base_collision_half_height - new_half_height
 		collision_shape.position.y = base_collision_position_y - height_delta
 
-	# Move the mount, not the camera — the mount holds the actual elevation
-	camera_mount.position.y = base_camera_height * multiplier
+	# Set camera height based on posture
+	if is_prone:
+		camera_mount.position.y = PRONE_CAMERA_HEIGHT
+	elif is_crouching:
+		camera_mount.position.y = CROUCH_CAMERA_HEIGHT
+	else:
+		camera_mount.position.y = STANDING_CAMERA_HEIGHT
