@@ -12,6 +12,8 @@ var current_speed = speed
 var mouse_sensitivity = 0.002
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var hand_display: Node3D = null
+
 const STANDING_HEIGHT := 0.7  # absolute height in meters (now the lower standing pose)
 const CROUCH_HEIGHT := 0.3 # absolute height in meters (now the taller crouch pose)
 const PRONE_HEIGHT := 0.001 # absolute height in meters (prone position)
@@ -50,6 +52,12 @@ func _ready():
 	base_camera_height = camera_mount.position.y
 
 	_apply_posture_height(STANDING_HEIGHT)
+	
+	# Set up hand display for items
+	_setup_hand_display()
+	
+	# Connect to hotbar updates to display item in hand
+	HotBarManager.hotbar_updated.connect(_on_hotbar_updated)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -73,6 +81,8 @@ func _physics_process(delta):
 		HotBarManager.set_active_slot(2)
 	if Input.is_action_just_pressed("drop_item"):
 		HotBarManager.drop_active_item(self)
+	if Input.is_action_just_pressed("throw_item"):
+		HotBarManager.throw_active_item(self)
 
 	var input_dir = Vector2.ZERO
 	if Input.is_key_pressed(KEY_W):
@@ -171,3 +181,35 @@ func _apply_posture_height(height: float) -> void:
 		camera_mount.position.y = CROUCH_CAMERA_HEIGHT
 	else:
 		camera_mount.position.y = STANDING_CAMERA_HEIGHT
+
+func _setup_hand_display() -> void:
+	# Create a visual indicator for held item in hand (upper right of camera view)
+	hand_display = Node3D.new()
+	hand_display.name = "HandDisplay"
+	camera_mount.add_child(hand_display)
+	hand_display.position = Vector3(0.3, -0.2, -0.5)
+
+func _on_hotbar_updated(slots: Array, active_slot: int) -> void:
+	if hand_display == null:
+		return
+	
+	# Clear existing visual
+	for child in hand_display.get_children():
+		child.queue_free()
+	
+	var active_item = slots[active_slot]
+	if active_item == null:
+		return
+	
+	# Try to get icon from item resource
+	var icon = null
+	if typeof(active_item) == TYPE_OBJECT:
+		icon = active_item.get("icon") if active_item.has_method("get") else null
+	
+	if icon and icon is Texture2D:
+		# Create a sprite to display the item icon
+		var sprite = Sprite3D.new()
+		sprite.texture = icon
+		sprite.pixel_size = 0.01
+		sprite.scale = Vector3(2, 2, 1)
+		hand_display.add_child(sprite)

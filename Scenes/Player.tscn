@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c763t5ji3vrmu" path="res://scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Script" uid="uid://bgaa217bpd75i" path="res://scripts/noise_emitter.gd" id="1_rpqav"]
+[ext_resource type="Script" uid="uid://hvf27n5wefnr" path="res://scripts/interact.gd" id="2_gntrk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rwas"]
 height = 1.6713257
@@ -22,6 +23,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15340495, 0)
 
 [node name="InteractRay" type="RayCast3D" parent="CameraMount/Camera3D" unique_id=1772735213]
 transform = Transform3D(1, 0, 0, 0, -0.04951217, -0.99877363, 0, 0.99877363, -0.04951217, 0.0032610893, -0.41693527, -0.28117222)
+debug_shape_thickness = 3
+script = ExtResource("2_gntrk")
 
 [node name="NoiseEmitter" type="Area3D" parent="." unique_id=1780354063]
 visible = false

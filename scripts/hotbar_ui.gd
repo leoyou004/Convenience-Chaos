@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 # Updates the Hotbar UI when HotBarManager changes
-onready var slots_nodes := []
+@onready var slots_nodes := []
 
 func _ready() -> void:
 	# Cache TextureRect children
