@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bldpxovo52jyb"]
 
-[ext_resource type="Script" uid="uid://c6840liospf1k" path="res://item_pickup.gd" id="1_im1t2"]
-[ext_resource type="Resource" uid="uid://d2umpya8n0ll" path="res://items/test_item.tres" id="2_test"]
+[ext_resource type="Script" uid="uid://c6840liospf1k" path="res://scripts/item_pickup.gd" id="1_im1t2"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_im1t2"]
 
@@ -10,10 +9,9 @@
 [node name="ItemPickup" type="Node3D" unique_id=1440671623]
 
 [node name="Area3D" type="Area3D" parent="." unique_id=2018923830]
-script = ExtResource("1_im1t2")
-item_resource = ExtResource("2_test")
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("1_im1t2")
 
 [node name="Label3D" type="Label3D" parent="Area3D" unique_id=370605202]
 

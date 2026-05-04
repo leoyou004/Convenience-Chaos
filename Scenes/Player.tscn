@@ -27,7 +27,6 @@ debug_shape_thickness = 3
 script = ExtResource("2_gntrk")
 
 [node name="NoiseEmitter" type="Area3D" parent="." unique_id=1780354063]
-visible = false
 script = ExtResource("1_rpqav")
 
 [node name="NoiseShape" type="CollisionShape3D" parent="NoiseEmitter" unique_id=575191206]

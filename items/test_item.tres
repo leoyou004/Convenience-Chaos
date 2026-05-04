@@ -1,6 +1,3 @@
-[gd_resource type="Resource"]
+[gd_resource type="Resource" format=3 uid="uid://xpfclat30v0a"]
 
-name = "Test Item"
-icon = null
-
-
+[resource]
