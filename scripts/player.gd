@@ -14,9 +14,9 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var hand_display: Node3D = null
 
-const STANDING_HEIGHT := 0.7  # absolute height in meters (now the lower standing pose)
-const CROUCH_HEIGHT := 0.3 # absolute height in meters (now the taller crouch pose)
-const PRONE_HEIGHT := 0.001 # absolute height in meters (prone position)
+const STANDING_HEIGHT := 0.7
+const CROUCH_HEIGHT := 0.3
+const PRONE_HEIGHT := 0.001
 const STANDING_CAMERA_HEIGHT := 0.5
 const CROUCH_CAMERA_HEIGHT := 0.15
 const PRONE_CAMERA_HEIGHT := 0.001
@@ -25,15 +25,15 @@ const SPRINT_RECHARGE_SECONDS := 10.0
 
 var is_crouching = false
 var is_prone = false
-var is_exhausted = false  # Prevents sprinting until stamina fully recharges
+var is_exhausted = false
 
 var base_collision_position_y: float
 var base_collision_half_height: float = 0.0
-var base_capsule_height: float = 1.0  # Normal standing height
+var base_capsule_height: float = 1.0
 var base_capsule_radius: float = 0.0
-var base_camera_height: float = 0.9   # Camera height when standing
-var crouch_camera_height: float = 0.5  # Camera height when crouching
-var prone_camera_height: float = 0.15   # Camera height when prone
+var base_camera_height: float = 0.9
+var crouch_camera_height: float = 0.5
+var prone_camera_height: float = 0.15
 var sprint_stamina: float = SPRINT_MAX_SECONDS
 
 func _ready():
@@ -52,11 +52,7 @@ func _ready():
 	base_camera_height = camera_mount.position.y
 
 	_apply_posture_height(STANDING_HEIGHT)
-	
-	# Set up hand display for items
 	_setup_hand_display()
-	
-	# Connect to hotbar updates to display item in hand
 	HotBarManager.hotbar_updated.connect(_on_hotbar_updated)
 
 func _input(event):
@@ -73,17 +69,21 @@ func _unhandled_input(event):
 			HotBarManager.cycle_slot(-1)
 
 func _physics_process(delta):
+	# Slot selection
 	if Input.is_action_just_pressed("slot_1"):
 		HotBarManager.set_active_slot(0)
 	if Input.is_action_just_pressed("slot_2"):
 		HotBarManager.set_active_slot(1)
 	if Input.is_action_just_pressed("slot_3"):
 		HotBarManager.set_active_slot(2)
+
+	# Item actions
 	if Input.is_action_just_pressed("drop_item"):
 		HotBarManager.drop_active_item(self)
 	if Input.is_action_just_pressed("throw_item"):
 		HotBarManager.throw_active_item(self)
 
+	# Movement
 	var input_dir = Vector2.ZERO
 	if Input.is_key_pressed(KEY_W):
 		input_dir.y -= 1
@@ -94,7 +94,7 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_D):
 		input_dir.x += 1
 	input_dir = input_dir.normalized()
-	
+
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
@@ -109,6 +109,7 @@ func _physics_process(delta):
 	elif velocity.y < 0.0:
 		velocity.y = 0.0
 
+	# Sprinting
 	var is_standing := not is_crouching and not is_prone
 	var wants_to_sprint := Input.is_action_pressed("sprint") and is_standing
 
@@ -123,16 +124,15 @@ func _physics_process(delta):
 			current_speed = crouch_speed
 		else:
 			current_speed = speed
-	
-	# Check exhaustion state
+
 	if sprint_stamina <= 0.0:
 		is_exhausted = true
 	elif sprint_stamina >= SPRINT_MAX_SECONDS:
 		is_exhausted = false
-	
-	# Emit sprint stamina signal for UI
+
 	SignalBus.sprint_stamina_changed.emit(sprint_stamina, SPRINT_MAX_SECONDS)
 
+	# Posture
 	if Input.is_action_just_pressed("crouch"):
 		if is_prone:
 			is_prone = false
@@ -160,21 +160,16 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _apply_posture_height(height: float) -> void:
-	# Convert absolute height to multiplier
 	var multiplier = height / base_capsule_height
-	
+
 	if collision_shape.shape is CapsuleShape3D:
 		var capsule := collision_shape.shape as CapsuleShape3D
-
 		capsule.height = base_capsule_height * multiplier
-		# Re-lock radius every call so any scale drift can't accumulate
 		capsule.radius = base_capsule_radius
-
 		var new_half_height := (capsule.height / 2.0) + base_capsule_radius
 		var height_delta := base_collision_half_height - new_half_height
 		collision_shape.position.y = base_collision_position_y - height_delta
 
-	# Set camera height based on posture
 	if is_prone:
 		camera_mount.position.y = PRONE_CAMERA_HEIGHT
 	elif is_crouching:
@@ -183,33 +178,29 @@ func _apply_posture_height(height: float) -> void:
 		camera_mount.position.y = STANDING_CAMERA_HEIGHT
 
 func _setup_hand_display() -> void:
-	# Create a visual indicator for held item in hand (upper right of camera view)
 	hand_display = Node3D.new()
 	hand_display.name = "HandDisplay"
 	camera_mount.add_child(hand_display)
-	hand_display.position = Vector3(0.3, -0.2, -0.5)
+	hand_display.position = Vector3(0.15, -0.1, -0.3)
 
 func _on_hotbar_updated(slots: Array, active_slot: int) -> void:
 	if hand_display == null:
 		return
-	
-	# Clear existing visual
+
 	for child in hand_display.get_children():
 		child.queue_free()
-	
+
 	var active_item = slots[active_slot]
 	if active_item == null:
 		return
-	
-	# Try to get icon from item resource
+
 	var icon = null
 	if typeof(active_item) == TYPE_OBJECT:
 		icon = active_item.get("icon") if active_item.has_method("get") else null
-	
+
 	if icon and icon is Texture2D:
-		# Create a sprite to display the item icon
 		var sprite = Sprite3D.new()
 		sprite.texture = icon
-		sprite.pixel_size = 0.01
-		sprite.scale = Vector3(2, 2, 1)
+		sprite.pixel_size = 0.002
+		sprite.scale = Vector3(0.3, 0.3, 1)
 		hand_display.add_child(sprite)

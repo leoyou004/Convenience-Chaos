@@ -1,3 +1,9 @@
-[gd_resource type="Resource" format=3 uid="uid://xpfclat30v0a"]
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://xpfclat30v0a"]
+
+[ext_resource type="Script" uid="uid://dw73xf7uxpuxu" path="res://scripts/item_resourse.gd" id="1_j6h3p"]
+[ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://icon.svg" id="1_naakv"]
 
 [resource]
+script = ExtResource("1_j6h3p")
+icon = ExtResource("1_naakv")
+metadata/_custom_type_script = "uid://dw73xf7uxpuxu"
