@@ -42,3 +42,9 @@ script = ExtResource("3_rgh2o")
 
 [node name="ItemPickup" parent="." unique_id=1470652286 instance=ExtResource("5_v1gob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8456204, -7.7669754)
+
+[node name="ItemPickup2" parent="." unique_id=1440671623 instance=ExtResource("5_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.578418, -12.382096)
+
+[node name="ItemPickup3" parent="." unique_id=83097461 instance=ExtResource("5_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0934637, -15.533951)
