@@ -1,13 +1,13 @@
 extends Node
 
 var signal_bus: Node
-
 var objectives: Dictionary = {
 	"mop_floor":      { "label": "Mop the floor",         "complete": false },
 	"restock_shelves":{ "label": "Restock shelves",        "complete": false },
 	"take_out_trash": { "label": "Take out the trash",     "complete": false },
 	"count_register": { "label": "Count the register",     "complete": false },
 	"turn_off_lights":{ "label": "Turn off aisle lights",  "complete": false },
+	"clean_windows":  { "label": "Clean the windows",      "complete": false },
 }
 
 func _ready():

@@ -1,10 +1,37 @@
 [gd_scene format=3 uid="uid://b4j1n4w3cj2bg"]
 
 [ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://icon.svg" id="1_tyage"]
+[ext_resource type="Script" uid="uid://dobsby5ih2xbg" path="res://scripts/objectives_ui.gd" id="1_wjrrg"]
 [ext_resource type="Script" uid="uid://n5rrsdaw1u4b" path="res://scripts/noise_indicator.gd" id="2_37hul"]
 [ext_resource type="Script" uid="uid://c7f2kulywtk7n" path="res://scripts/alert_icon.gd" id="3_po7eo"]
-[ext_resource type="Script" uid="uid://sprintbar123" path="res://Scenes/sprint_bar.gd" id="4_sprintbar"]
-[ext_resource type="Script" uid="uid://hotbarui123" path="res://scripts/hotbar_ui.gd" id="5_hotbarui"]
+[ext_resource type="Script" uid="uid://oo8x31t8njh2" path="res://scripts/hotbar_ui.gd" id="5_hotbarui"]
+
+[sub_resource type="GDScript" id="GDScript_co6lq"]
+script/source = "extends ProgressBar
+
+func _ready() -> void:
+	# Initialize progress bar
+	min_value = 0.0
+	max_value = 1.0
+	value = 1.0  # Start fully charged
+	modulate.a = 0.7  # Semi-transparent
+	
+	# Connect to sprint stamina signal
+	SignalBus.sprint_stamina_changed.connect(_on_sprint_stamina_changed)
+
+func _on_sprint_stamina_changed(current_stamina: float, max_stamina: float) -> void:
+	# Update progress bar
+	var normalized_stamina = current_stamina / max_stamina if max_stamina > 0 else 0.0
+	value = normalized_stamina
+	
+	# Change color based on stamina level
+	if normalized_stamina <= 0.2:
+		modulate = Color.RED  # Red when low
+	elif normalized_stamina <= 0.5:
+		modulate = Color.YELLOW  # Yellow when medium
+	else:
+		modulate = Color.GREEN  # Green when good
+"
 
 [node name="GameUI" type="CanvasLayer" unique_id=556926182]
 
@@ -29,6 +56,7 @@ offset_top = 3.0
 offset_right = 2.0
 offset_bottom = 220.0
 grow_horizontal = 0
+script = ExtResource("1_wjrrg")
 
 [node name="Objective 1" type="Label" parent="ObjectiveList" unique_id=482281076]
 layout_mode = 2
@@ -144,4 +172,4 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 value = 100.0
-script = ExtResource("4_sprintbar")
+script = SubResource("GDScript_co6lq")
