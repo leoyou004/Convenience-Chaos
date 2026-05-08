@@ -33,6 +33,7 @@ func _update_ui() -> void:
 				label.modulate = Color(1, 1, 1)
 
 func _on_interactable_focused(objective_id: String, _hold_time: float) -> void:
+	print("FOCUSED: ", objective_id)
 	_focused_id = objective_id
 	_update_ui()
 

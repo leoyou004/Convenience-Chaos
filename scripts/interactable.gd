@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var objective_id: String = ""
+@export var objective_id: String = "count_register"
 @export var hold_time: float = 10.0
 @export var prompt_text: String = "Hold E to interact"
 
@@ -9,6 +9,9 @@ var _player_inside: bool = false
 
 func _ready() -> void:
 	set_process(true)
+	print("INTERACTABLE READY - layer: ", collision_layer, " mask: ", collision_mask, " monitoring: ", monitoring, " id: ", objective_id)
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
 func _process(delta: float) -> void:
 	if not _player_inside:
@@ -40,3 +43,10 @@ func _on_body_exited(body: Node) -> void:
 		_progress = 0.0
 		SignalBus.interactable_unfocused.emit()
 		SignalBus.interact_progress.emit(0.0)
+
+func _on_area_entered(area: Area3D) -> void:
+	pass # Replace with function body.
+
+
+func _on_area_exited(area: Area3D) -> void:
+	pass # Replace with function body.
