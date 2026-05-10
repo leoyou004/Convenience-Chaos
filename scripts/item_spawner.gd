@@ -5,6 +5,7 @@ const ITEM_PICKUP_SCRIPT := preload("res://scripts/item_pickup.gd")
 const SPAWN_COUNT := 3
 
 func _ready() -> void:
+	print("SPAWNER READY")
 	_spawn_batch()
 
 func _spawn_batch() -> void:
@@ -14,9 +15,12 @@ func _spawn_batch() -> void:
 func _spawn_item() -> void:
 	var item = load(ITEM_RESOURCE_PATH)
 	var spawn_position = _random_position_in_zone()
+	print("SPAWNING ITEM AT: ", spawn_position)
 
 	var rigid_body := RigidBody3D.new()
 	rigid_body.name = "StockItem"
+	rigid_body.collision_layer = 1
+	rigid_body.collision_mask = 1
 
 	var shape := CollisionShape3D.new()
 	var sphere := SphereShape3D.new()
@@ -48,7 +52,7 @@ func _spawn_item() -> void:
 
 	get_tree().current_scene.add_child(rigid_body)
 	rigid_body.global_position = spawn_position
-	rigid_body.global_position.y += 0.5
+	rigid_body.global_position.y += 1.0
 
 	get_tree().current_scene.add_child(pickup)
 	pickup.global_position = rigid_body.global_position

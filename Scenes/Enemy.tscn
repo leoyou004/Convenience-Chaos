@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dacvqw5g61lxj"]
+
+[ext_resource type="Script" uid="uid://dmo7f8t5h4fqw" path="res://Scenes/enemy.gd" id="1_m1htj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqquq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tt7e2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s7bn3"]
+size = Vector3(1, 1, 20.293)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gqquq"]
+radius = 5.0
+
+[node name="enemy" type="Node3D" unique_id=1703061241]
+
+[node name="Enemy" type="CharacterBody3D" parent="." unique_id=879150185]
+script = ExtResource("1_m1htj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=22295864]
+shape = SubResource("CapsuleShape3D_gqquq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=376030638]
+mesh = SubResource("CapsuleMesh_tt7e2")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy" unique_id=1503617085]
+
+[node name="VisionCone" type="Area3D" parent="Enemy" unique_id=2009105021]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/VisionCone" unique_id=1424281663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.495121)
+shape = SubResource("BoxShape3D_s7bn3")
+
+[node name="HearingRange" type="Area3D" parent="Enemy" unique_id=1354780125]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/HearingRange" unique_id=997895092]
+shape = SubResource("SphereShape3D_gqquq")
