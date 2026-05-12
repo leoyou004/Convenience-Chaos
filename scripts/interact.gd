@@ -14,10 +14,6 @@ func _ready():
 	
 	print("InteractRay ready - enabled: ", enabled, ", mask: ", collision_mask, ", target_pos: ", target_position)
 
-func _physics_process(_delta):
-	# Update raycast state every frame for debugging
-	if Input.is_action_just_pressed("pickup_item"):
-		_attempt_pickup()
 
 func _attempt_pickup() -> void:
 	print("=== PICKUP ATTEMPT ===")

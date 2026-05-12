@@ -10,3 +10,5 @@ signal sprint_stamina_changed(current_stamina, max_stamina)
 signal interactable_focused(objective_id: String, hold_time: float)
 signal interactable_unfocused
 signal interact_progress(progress: float)
+signal enemy_alerted
+signal enemy_calm

@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var collision_shape = $CollisionShape3D
 
 var speed = 5.0
-var sprint_speed = 10.0
+var sprint_speed = 8.0
 var crouch_speed = 2.5
 var prone_speed = 1.0
 var current_speed = speed
