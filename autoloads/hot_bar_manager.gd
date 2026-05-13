@@ -82,13 +82,23 @@ func throw_active_item(player: Node3D) -> bool:
 		await timer.timeout
 		noise_emitter.hide()
 
-	_spawn_physics_pickup(item, throw_position, forward * 15.0)
+	var rigid_body = _spawn_physics_pickup(item, throw_position, forward * 15.0)
+	_wait_for_landing(rigid_body)
 	return true
 
 func emit_hotbar_updated() -> void:
 	hotbar_updated.emit(slots.duplicate(), active_slot)
 
-func _spawn_physics_pickup(item: Resource, spawn_position: Vector3, velocity: Vector3) -> void:
+func _wait_for_landing(rigid_body: RigidBody3D) -> void:
+	while is_instance_valid(rigid_body) and not rigid_body.is_queued_for_deletion():
+		await get_tree().physics_frame
+		if not is_instance_valid(rigid_body):
+			return
+		if rigid_body.linear_velocity.length() < 0.5:
+			SignalBus.distraction_thrown.emit(rigid_body.global_position)
+			return
+
+func _spawn_physics_pickup(item: Resource, spawn_position: Vector3, velocity: Vector3) -> RigidBody3D:
 	var rigid_body := RigidBody3D.new()
 	rigid_body.name = "ThrownItem"
 
@@ -127,3 +137,5 @@ func _spawn_physics_pickup(item: Resource, spawn_position: Vector3, velocity: Ve
 	get_tree().current_scene.add_child(pickup)
 	pickup.global_position = spawn_position
 	pickup.item_resource = item
+
+	return rigid_body
