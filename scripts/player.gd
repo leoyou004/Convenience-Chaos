@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@onready var camera_mount = $CameraMount
-@onready var camera = $CameraMount/Camera3D
+@onready var camera_mount = %CameraMount
+@onready var camera = %CameraMount/Camera3D
 @onready var collision_shape = $CollisionShape3D
 
 var speed = 5.0

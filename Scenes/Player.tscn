@@ -3,11 +3,19 @@
 [ext_resource type="Script" uid="uid://c763t5ji3vrmu" path="res://scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Script" uid="uid://bgaa217bpd75i" path="res://scripts/noise_emitter.gd" id="1_rpqav"]
 [ext_resource type="Script" uid="uid://hvf27n5wefnr" path="res://scripts/interact.gd" id="2_gntrk"]
+[ext_resource type="Shader" uid="uid://b2bih4d0syls" path="res://Scenes/Player.gdshader" id="4_dewec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rwas"]
 height = 1.6713257
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qbkls"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dewec"]
+shader = ExtResource("4_dewec")
+shader_parameter/noise_intensity = 0.1
+shader_parameter/color_bleed = 0.005
+shader_parameter/vignette_strength = 0.4
+shader_parameter/lens_dirt_strength = 0.2
 
 [node name="Player" type="CharacterBody3D" unique_id=1048298426]
 script = ExtResource("1_kyqiw")
@@ -15,7 +23,14 @@ script = ExtResource("1_kyqiw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=363727796]
 shape = SubResource("CapsuleShape3D_0rwas")
 
+[node name="NoiseEmitter" type="Area3D" parent="." unique_id=1780354063]
+script = ExtResource("1_rpqav")
+
+[node name="NoiseShape" type="CollisionShape3D" parent="NoiseEmitter" unique_id=575191206]
+shape = SubResource("SphereShape3D_qbkls")
+
 [node name="CameraMount" type="Node3D" parent="." unique_id=1138456204]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1566695, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraMount" unique_id=183495084]
@@ -26,10 +41,12 @@ transform = Transform3D(1, 0, 0, 0, -0.04951217, -0.99877363, 0, 0.99877363, -0.
 debug_shape_thickness = 3
 script = ExtResource("2_gntrk")
 
-[node name="NoiseEmitter" type="Area3D" parent="." unique_id=1780354063]
-script = ExtResource("1_rpqav")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=422502178]
 
-[node name="NoiseShape" type="CollisionShape3D" parent="NoiseEmitter" unique_id=575191206]
-shape = SubResource("SphereShape3D_qbkls")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=918226730]
+material = SubResource("ShaderMaterial_dewec")
+offset_right = 1930.0
+offset_bottom = 1091.0
+color = Color(1, 1, 1, 0)
 
 [connection signal="body_entered" from="NoiseEmitter" to="NoiseEmitter" method="_on_body_entered"]

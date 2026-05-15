@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://b4j1n4w3cj2bg"]
 
+[ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items/main_menu.gdshader" id="1_d8tla"]
 [ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://icon.svg" id="1_tyage"]
 [ext_resource type="Script" uid="uid://dobsby5ih2xbg" path="res://scripts/objectives_ui.gd" id="1_wjrrg"]
 [ext_resource type="Script" uid="uid://n5rrsdaw1u4b" path="res://scripts/noise_indicator.gd" id="2_37hul"]
+[ext_resource type="Script" uid="uid://d4gog80y88bix" path="res://Scenes/timer.gd" id="2_wjrrg"]
 [ext_resource type="Script" uid="uid://c7f2kulywtk7n" path="res://scripts/alert_icon.gd" id="3_po7eo"]
 [ext_resource type="Script" uid="uid://oo8x31t8njh2" path="res://scripts/hotbar_ui.gd" id="5_hotbarui"]
 
@@ -32,6 +34,15 @@ func _on_sprint_stamina_changed(current_stamina: float, max_stamina: float) -> v
 	else:
 		modulate = Color.GREEN  # Green when good
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tii1l"]
+shader = ExtResource("1_d8tla")
+shader_parameter/time_scale = 1.0
+shader_parameter/distortion_strength = 0.01
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/noise_intensity = 0.1
+shader_parameter/color_bleed = 0.005
+shader_parameter/vignette_strength = 0.4
 
 [node name="GameUI" type="CanvasLayer" unique_id=556926182]
 
@@ -95,6 +106,7 @@ offset_bottom = 245.0
 text = "TIMER"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("2_wjrrg")
 metadata/_edit_use_anchors_ = true
 
 [node name="Hotbar" type="HBoxContainer" parent="." unique_id=1223707221]
@@ -173,3 +185,11 @@ grow_horizontal = 2
 grow_vertical = 0
 value = 100.0
 script = SubResource("GDScript_co6lq")
+
+[node name="VHSShader" type="TextureRect" parent="." unique_id=985550812]
+z_index = 5
+material = SubResource("ShaderMaterial_tii1l")
+offset_left = -28.0
+offset_top = -15.0
+offset_right = 1947.0
+offset_bottom = 1104.0
