@@ -1,10 +1,9 @@
 shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
-uniform float noise_intensity: hint_range(0.0, 1.0) = 0.05;
-uniform float color_bleed: hint_range(0.0, 0.02) = 0.003;
-uniform float vignette_strength: hint_range(0.0, 1.0) = 0.3;
-uniform float lens_dirt_strength: hint_range(0.0, 1.0) = 0.2;
+uniform float noise_intensity: hint_range(0.0, 1.0) = 0.12;
+uniform float glitch_interval: hint_range(5.0, 60.0) = 20.0;
+uniform float glitch_duration: hint_range(0.0, 2.0) = 0.4;
 
 float rand(vec2 co) {
 	return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
@@ -14,29 +13,65 @@ void fragment() {
 	float t = TIME;
 	vec2 uv = SCREEN_UV;
 
-	// Sample screen with RGB color bleed
+	// Glitch window check
+	float cycle = mod(t, glitch_interval);
+	bool in_glitch = cycle < glitch_duration;
+	float glitch_strength = in_glitch ? 1.0 : 0.0;
+
+	// Very subtle tape wobble — much less warp
+	float wobble = sin(uv.y * 80.0 + t * 1.5) * 0.0008;
+	uv.x += wobble;
+
+	// Glitch band tearing — only during glitch
+	if (in_glitch) {
+		float band = floor(uv.y * 12.0 + t * 20.0);
+		float shift = (rand(vec2(band, floor(t * 10.0))) - 0.5) * 0.06;
+		uv.x += shift;
+	}
+
+	uv = clamp(uv, 0.0, 1.0);
+
+	// Subtle RGB color separation
+	float bleed = 0.002 + glitch_strength * 0.012;
 	vec4 color;
-	color.r = texture(SCREEN_TEXTURE, uv + vec2(color_bleed, 0.0)).r;
+	color.r = texture(SCREEN_TEXTURE, uv + vec2(bleed, 0.0)).r;
 	color.g = texture(SCREEN_TEXTURE, uv).g;
-	color.b = texture(SCREEN_TEXTURE, uv - vec2(color_bleed, 0.0)).b;
+	color.b = texture(SCREEN_TEXTURE, uv - vec2(bleed, 0.0)).b;
 	color.a = 1.0;
 
-	// 80s/90s chunky grain
-	float grain = rand(vec2(floor(uv.x * 320.0), floor(uv.y * 240.0)) + floor(t * 20.0));
-	color.rgb += (grain - 0.5) * noise_intensity;
+	// VHS grain
+	float noise_scale = in_glitch ? 0.25 : noise_intensity;
+	float grain = rand(vec2(floor(uv.x * 320.0), floor(uv.y * 240.0)) + floor(t * 24.0));
+	color.rgb += (grain - 0.5) * noise_scale;
 
-	// Vignette darkening edges
+	// Subtle horizontal noise bands
+	float band_noise = rand(vec2(0.0, floor(uv.y * 60.0) + floor(t * 8.0)));
+	color.rgb += (band_noise - 0.5) * 0.05;
+
+	// Very faint tracking lines
+	float tracking = sin(uv.y * 400.0 + t * 0.3) * 0.5 + 0.5;
+	color.rgb *= 1.0 - tracking * 0.04;
+
+	// Glitch color inversion strips
+	if (in_glitch) {
+		float inv_band = floor(uv.y * 10.0 + t * 20.0);
+		if (rand(vec2(inv_band, floor(t * 8.0))) > 0.88) {
+			color.rgb = 1.0 - color.rgb;
+		}
+	}
+
+	// Warm slightly washed out VHS color tone
+	color.r *= 0.9;
+	color.g *= 0.88;
+	color.b *= 1.05;
+
+	// Vignette
 	vec2 vig = uv * (1.0 - uv);
-	float vignette = pow(vig.x * vig.y * 16.0, vignette_strength);
+	float vignette = pow(vig.x * vig.y * 16.0, 0.35);
 	color.rgb *= vignette;
 
-	// White lens dirt spots
-	float dirt = rand(vec2(floor(uv.x * 8.0), floor(uv.y * 5.0)) + 42.0);
-	color.rgb += smoothstep(0.96, 1.0, dirt) * lens_dirt_strength;
-
-	// Soft white center glow like old lens
-	float glow = 1.0 - length(uv - vec2(0.5)) * 1.5;
-	color.rgb += clamp(glow, 0.0, 1.0) * 0.05;
+	// Slight VHS brightness drop
+	color.rgb *= 0.88;
 
 	COLOR = color;
 }
