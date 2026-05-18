@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ciaq4ptu08i1b"]
+
+[ext_resource type="Texture2D" uid="uid://bhv3m285l2gy8" path="res://6twelve/textures/Plants_01.png" id="1_qktyt"]
+
+[resource]
+resource_name = "Plants_01"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_qktyt")
+emission_enabled = true

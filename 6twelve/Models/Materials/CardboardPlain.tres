@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://4uavnx2s3ha4"]
+
+[ext_resource type="Texture2D" uid="uid://dk0qpecqcmg76" path="res://6twelve/textures/CardboardPlain.jpg" id="1_2bv4y"]
+
+[resource]
+resource_name = "CardboardPlain"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_2bv4y")
+emission_enabled = true

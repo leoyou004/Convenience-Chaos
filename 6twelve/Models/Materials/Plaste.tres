@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cgcoq81oefkg2"]
+
+[ext_resource type="Texture2D" uid="uid://8sprm7818qpd" path="res://6twelve/textures/Plaste.jpg" id="1_mwcu5"]
+
+[resource]
+resource_name = "Plaste"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_mwcu5")
+emission_enabled = true

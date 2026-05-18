@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bladewfbokktu"]
+
+[ext_resource type="Texture2D" uid="uid://cb4uugdojn3ij" path="res://6twelve/textures/Respirator.png" id="1_6bctf"]
+
+[resource]
+resource_name = "Respirator"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_6bctf")
+emission_enabled = true

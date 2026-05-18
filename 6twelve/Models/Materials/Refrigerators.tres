@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://sivptrs1sknn"]
+
+[ext_resource type="Texture2D" uid="uid://bkacid8k2hh0d" path="res://6twelve/textures/Refrigerators.jpg" id="1_cfwum"]
+
+[resource]
+resource_name = "Refrigerators"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_cfwum")
+emission_enabled = true

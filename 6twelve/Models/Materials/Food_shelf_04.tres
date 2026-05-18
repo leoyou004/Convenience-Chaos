@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://buf40hl0lpg2h"]
+
+[resource]
+resource_name = "Food_shelf_04"
+vertex_color_use_as_albedo = true
+emission_enabled = true

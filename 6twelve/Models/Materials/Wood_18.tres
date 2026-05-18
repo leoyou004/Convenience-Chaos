@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://br7dwvy7amr2"]
+
+[ext_resource type="Texture2D" uid="uid://dccixayoujjyd" path="res://6twelve/textures/Wood_18.jpg" id="1_t4sej"]
+
+[resource]
+resource_name = "Wood_18"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_t4sej")
+emission_enabled = true

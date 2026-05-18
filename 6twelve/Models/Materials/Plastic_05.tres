@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://chrfouvkcr5mm"]
+
+[ext_resource type="Texture2D" uid="uid://b0ra3p1p742hs" path="res://6twelve/textures/Plastic_05.png" id="1_ld5v3"]
+
+[resource]
+resource_name = "Plastic_05"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_ld5v3")
+emission_enabled = true

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://yn7j1lkaw7cf"]
+
+[ext_resource type="Texture2D" uid="uid://dqe12foh6ey4k" path="res://6twelve/textures/Store_fridge.png" id="1_lu1oi"]
+
+[resource]
+resource_name = "Store_fridge"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_lu1oi")
+emission_enabled = true

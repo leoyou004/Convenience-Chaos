@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bowjjgka05vy4"]
+
+[ext_resource type="Texture2D" uid="uid://7hrw8d6068gx" path="res://6twelve/textures/Trees_Background.png" id="1_bqdvo"]
+
+[resource]
+resource_name = "Trees_Background"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_bqdvo")
+emission_enabled = true

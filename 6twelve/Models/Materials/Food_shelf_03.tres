@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bwvihsa5uquje"]
+
+[ext_resource type="Texture2D" uid="uid://gv6h3wy78qig" path="res://6twelve/textures/Food_shelf_03.jpg" id="1_dd6ju"]
+
+[resource]
+resource_name = "Food_shelf_03"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_dd6ju")
+emission_enabled = true

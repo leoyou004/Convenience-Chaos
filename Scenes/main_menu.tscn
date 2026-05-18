@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://1ovojs0ptwyp"]
+[gd_scene format=3 uid="uid://cbo6wei1h0wms"]
 
 [ext_resource type="Texture2D" uid="uid://c6eh4il6fjp51" path="res://mainmenu-image.png" id="1_1ehe0"]
-[ext_resource type="Shader" path="res://items/main_menu.gdshader" id="1_ce3w2"]
-[ext_resource type="Script" path="res://Normal-Mode-Button.gd" id="2_ce3w2"]
+[ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items/main_menu.gdshader" id="1_ce3w2"]
+[ext_resource type="Script" uid="uid://d1621pod3vhb3" path="res://Normal-Mode-Button.gd" id="2_ce3w2"]
 [ext_resource type="Texture2D" uid="uid://dtbk2vu0d3oup" path="res://text-1778802576909-removebg-preview.png" id="3_n45e2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]

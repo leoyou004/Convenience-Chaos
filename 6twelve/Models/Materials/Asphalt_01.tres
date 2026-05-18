@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dqmcinylh3msy"]
+
+[ext_resource type="Texture2D" uid="uid://ckwqstobn272" path="res://6twelve/textures/Asphalt_01.jpg" id="1_t7ih7"]
+
+[resource]
+resource_name = "Asphalt_01"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_t7ih7")
+emission_enabled = true

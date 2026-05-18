@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c2u4hdtdw82hd"]
+
+[ext_resource type="Texture2D" uid="uid://cibm18eq67y8i" path="res://6twelve/textures/Lottery.png" id="1_q44q6"]
+
+[resource]
+resource_name = "Lottery"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_q44q6")
+emission_enabled = true

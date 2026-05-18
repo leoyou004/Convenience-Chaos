@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cxdetxdh8tn6y"]
+
+[ext_resource type="Texture2D" uid="uid://g0w1txprjcgn" path="res://6twelve/textures/Tiles.jpg" id="1_pr0tn"]
+
+[resource]
+resource_name = "Tiles"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_pr0tn")
+emission_enabled = true
