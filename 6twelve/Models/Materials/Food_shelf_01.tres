@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://d3rx2wt16yrab"]
-
-[ext_resource type="Texture2D" uid="uid://cjcfs2iavvahh" path="res://6twelve/textures/Food_shelf_01.jpg" id="1_0qx8m"]
-
-[resource]
-resource_name = "Food_shelf_01"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_0qx8m")
-emission_enabled = true

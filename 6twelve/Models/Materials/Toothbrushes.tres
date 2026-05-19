@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://tlfrvrxlioet"]
-
-[ext_resource type="Texture2D" uid="uid://dimi5cawc4g3h" path="res://6twelve/textures/Toothbrushes.jpg" id="1_agets"]
-
-[resource]
-resource_name = "Toothbrushes"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_agets")
-emission_enabled = true

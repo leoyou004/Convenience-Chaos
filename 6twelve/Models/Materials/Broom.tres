@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bvlgb8ricwwej"]
-
-[ext_resource type="Texture2D" uid="uid://bka2ewm1kjn30" path="res://6twelve/textures/Broom.png" id="1_rqust"]
-
-[resource]
-resource_name = "Broom"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_rqust")
-emission_enabled = true

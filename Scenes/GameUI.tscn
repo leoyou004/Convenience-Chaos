@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b4j1n4w3cj2bg"]
 
-[ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items/main_menu.gdshader" id="1_d8tla"]
-[ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://icon.svg" id="1_tyage"]
+[ext_resource type="Shader" path="res://items/main_menu.gdshader" id="1_d8tla"]
+[ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://assets/textures/icon.svg" id="1_tyage"]
 [ext_resource type="Script" uid="uid://dobsby5ih2xbg" path="res://scripts/objectives_ui.gd" id="1_wjrrg"]
 [ext_resource type="Script" uid="uid://n5rrsdaw1u4b" path="res://scripts/noise_indicator.gd" id="2_37hul"]
-[ext_resource type="Script" uid="uid://d4gog80y88bix" path="res://Scenes/timer.gd" id="2_wjrrg"]
+[ext_resource type="Script" uid="uid://d4gog80y88bix" path="res://scripts/timer.gd" id="2_d8tla"]
 [ext_resource type="Script" uid="uid://c7f2kulywtk7n" path="res://scripts/alert_icon.gd" id="3_po7eo"]
 [ext_resource type="Script" uid="uid://oo8x31t8njh2" path="res://scripts/hotbar_ui.gd" id="5_hotbarui"]
 
@@ -106,7 +106,7 @@ offset_bottom = 245.0
 text = "TIMER"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("2_wjrrg")
+script = ExtResource("2_d8tla")
 metadata/_edit_use_anchors_ = true
 
 [node name="Hotbar" type="HBoxContainer" parent="." unique_id=1223707221]

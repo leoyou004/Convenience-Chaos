@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cafmrr72kbqi2"]
 
-[ext_resource type="PackedScene" uid="uid://c13auolk35wwt" path="res://6twelve/Models/6twelve.fbx" id="1_81p7u"]
+[ext_resource type="PackedScene" uid="uid://c13auolk35wwt" path="res://assets/models/6twelve/Models/6twelve.fbx" id="1_81p7u"]
 [ext_resource type="PackedScene" uid="uid://c7hs8c3plf0rd" path="res://Scenes/Player.tscn" id="2_22afj"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_22afj"]

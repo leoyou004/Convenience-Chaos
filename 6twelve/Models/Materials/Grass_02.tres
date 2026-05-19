@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://b4cp8hxnrobdf"]
-
-[ext_resource type="Texture2D" uid="uid://cqvrpjaavspw5" path="res://6twelve/textures/Grass_02.jpg" id="1_trf8f"]
-
-[resource]
-resource_name = "Grass_02"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_trf8f")
-emission_enabled = true

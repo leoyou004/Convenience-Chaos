@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://8med6fc6a06w"]
-
-[ext_resource type="Texture2D" uid="uid://tu3itxdfm16t" path="res://6twelve/textures/SoilSand.jpg" id="1_spttr"]
-
-[resource]
-resource_name = "SoilSand"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_spttr")
-emission_enabled = true

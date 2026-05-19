@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dpcfmhawvihbt"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Fabric.jpg" id="1_kb735"]
+
+[resource]
+resource_name = "Fabric"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_kb735")
+emission_enabled = true

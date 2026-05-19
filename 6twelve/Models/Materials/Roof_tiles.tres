@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://djcvii8knwe6k"]
-
-[ext_resource type="Texture2D" uid="uid://dqnr5ws662yxa" path="res://6twelve/textures/Roof_tiles.jpg" id="1_6pm83"]
-
-[resource]
-resource_name = "Roof_tiles"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_6pm83")
-emission_enabled = true

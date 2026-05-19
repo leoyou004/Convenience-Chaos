@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b1vomcj4ju6oi"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Branches.png" id="1_xn7wp"]
+
+[resource]
+resource_name = "Branches"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_xn7wp")
+emission_enabled = true

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://mp6gaks7mrbe"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Cigars.png" id="1_5ilys"]
+
+[resource]
+resource_name = "Cigars"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_5ilys")
+emission_enabled = true

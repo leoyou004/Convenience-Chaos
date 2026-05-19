@@ -22,10 +22,14 @@ const CROUCH_CAMERA_HEIGHT := 0.2
 const PRONE_CAMERA_HEIGHT := 0.001
 const SPRINT_MAX_SECONDS := 7.0
 const SPRINT_RECHARGE_SECONDS := 10.0
+const JUMP_VELOCITY := 3.0
+const BHOP_MULTIPLIER := 1.08
+const BHOP_MAX := 14.0
 
 var is_crouching = false
 var is_prone = false
 var is_exhausted = false
+var bhop_speed: float = 0.0
 
 var base_collision_position_y: float
 var base_collision_half_height: float = 0.0
@@ -97,10 +101,25 @@ func _physics_process(delta):
 
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
+	# Jumping and bhop
+	if is_on_floor():
+		if Input.is_action_just_pressed("ui_accept"):
+			velocity.y = JUMP_VELOCITY
+			# Build bhop speed if landing and jumping quickly
+			if bhop_speed < BHOP_MAX:
+				bhop_speed = minf(bhop_speed * BHOP_MULTIPLIER, BHOP_MAX)
+			else:
+				bhop_speed = BHOP_MAX
+		else:
+			# Reset bhop speed when not jumping
+			bhop_speed = move_toward(bhop_speed, 0.0, 2.0 * delta)
+
 	if direction:
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
+		var effective_speed = current_speed + bhop_speed
+		velocity.x = direction.x * effective_speed
+		velocity.z = direction.z * effective_speed
 	else:
+		bhop_speed = move_toward(bhop_speed, 0.0, 5.0 * delta)
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 

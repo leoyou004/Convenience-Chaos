@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cmdx2hhj6urd3"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Scattered.png" id="1_01th6"]
+
+[resource]
+resource_name = "Scattered"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_01th6")
+emission_enabled = true

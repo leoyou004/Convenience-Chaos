@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d2j6gpqe6kqwj"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Mop.png" id="1_splih"]
+
+[resource]
+resource_name = "Mop"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_splih")
+emission_enabled = true

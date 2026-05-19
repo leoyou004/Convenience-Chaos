@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cpbbsj5mfr1jt"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Control.jpg" id="1_edutv"]
+
+[resource]
+resource_name = "Control"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_edutv")
+emission_enabled = true

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://pcdrgb7wcn1l"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Prices.jpg" id="1_3v6du"]
+
+[resource]
+resource_name = "Prices"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_3v6du")
+emission_enabled = true

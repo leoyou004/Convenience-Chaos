@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnaxy0w6sdd3w"]
+
+[ext_resource type="Texture2D" path="res://6twelve/textures/Plastic_04.jpg" id="1_f2a2c"]
+
+[resource]
+resource_name = "Plastic_04"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_f2a2c")
+emission_enabled = true

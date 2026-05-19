@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://chuf3w808merj"]
-
-[ext_resource type="Texture2D" uid="uid://bnyc65gs8xbyh" path="res://6twelve/textures/Candys.png" id="1_ueik6"]
-
-[resource]
-resource_name = "Candys"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_ueik6")
-emission_enabled = true

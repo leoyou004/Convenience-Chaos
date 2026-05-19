@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bn03ccjse1ox0"]
-
-[ext_resource type="Texture2D" uid="uid://bkadt18ms52nl" path="res://6twelve/textures/Metal_10.jpg" id="1_j0xkg"]
-
-[resource]
-resource_name = "Metal_10"
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_j0xkg")
-emission_enabled = true
