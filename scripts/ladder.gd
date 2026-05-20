@@ -12,7 +12,6 @@ func _physics_process(_delta: float) -> void:
 	for body in bodies_on_ladder:
 		if not is_instance_valid(body):
 			continue
-
 		if body.is_in_group("player"):
 			_handle_player(body)
 		elif body is CharacterBody3D:
@@ -36,12 +35,12 @@ func _handle_player(player: CharacterBody3D) -> void:
 		player.velocity.z = 0
 
 func _handle_enemy(enemy: CharacterBody3D) -> void:
-	# Enemy always climbs up the ladder when touching it
 	enemy.velocity.y = LADDER_SPEED * 0.6
 	enemy.velocity.x = 0
 	enemy.velocity.z = 0
 
 func _on_body_entered(body: Node) -> void:
+	print("LADDER BODY ENTERED: ", body.name)
 	if body is CharacterBody3D:
 		bodies_on_ladder.append(body)
 
