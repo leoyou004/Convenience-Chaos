@@ -25,6 +25,8 @@ const SPRINT_RECHARGE_SECONDS := 10.0
 const JUMP_VELOCITY := 3.0
 const BHOP_MULTIPLIER := 1.08
 const BHOP_MAX := 14.0
+const STEP_HEIGHT := 0.4
+const STEP_CHECK_DISTANCE := 0.3
 
 var is_crouching = false
 var is_prone = false
@@ -73,7 +75,6 @@ func _unhandled_input(event):
 			HotBarManager.cycle_slot(-1)
 
 func _physics_process(delta):
-	# Slot selection
 	if Input.is_action_just_pressed("slot_1"):
 		HotBarManager.set_active_slot(0)
 	if Input.is_action_just_pressed("slot_2"):
@@ -81,13 +82,11 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("slot_3"):
 		HotBarManager.set_active_slot(2)
 
-	# Item actions
 	if Input.is_action_just_pressed("drop_item"):
 		HotBarManager.drop_active_item(self)
 	if Input.is_action_just_pressed("throw_item"):
 		HotBarManager.throw_active_item(self)
 
-	# Movement
 	var input_dir = Vector2.ZERO
 	if Input.is_key_pressed(KEY_W):
 		input_dir.y -= 1
@@ -101,17 +100,14 @@ func _physics_process(delta):
 
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	# Jumping and bhop
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_accept"):
 			velocity.y = JUMP_VELOCITY
-			# Build bhop speed if landing and jumping quickly
 			if bhop_speed < BHOP_MAX:
 				bhop_speed = minf(bhop_speed * BHOP_MULTIPLIER, BHOP_MAX)
 			else:
 				bhop_speed = BHOP_MAX
 		else:
-			# Reset bhop speed when not jumping
 			bhop_speed = move_toward(bhop_speed, 0.0, 2.0 * delta)
 
 	if direction:
@@ -128,7 +124,6 @@ func _physics_process(delta):
 	elif velocity.y < 0.0:
 		velocity.y = 0.0
 
-	# Sprinting
 	var is_standing := not is_crouching and not is_prone
 	var wants_to_sprint := Input.is_action_pressed("sprint") and is_standing
 
@@ -151,7 +146,6 @@ func _physics_process(delta):
 
 	SignalBus.sprint_stamina_changed.emit(sprint_stamina, SPRINT_MAX_SECONDS)
 
-	# Posture
 	if Input.is_action_just_pressed("crouch"):
 		if is_prone:
 			is_prone = false
@@ -176,7 +170,36 @@ func _physics_process(delta):
 			is_prone = true
 			_apply_posture_height(PRONE_HEIGHT)
 
+	_handle_step_up()
 	move_and_slide()
+
+func _handle_step_up() -> void:
+	if is_on_floor() and velocity.length() > 0.1:
+		var space = get_world_3d().direct_space_state
+		var forward = Vector3(velocity.x, 0, velocity.z).normalized()
+
+		var foot_origin = global_position
+		var foot_query = PhysicsRayQueryParameters3D.create(
+			foot_origin,
+			foot_origin + forward * STEP_CHECK_DISTANCE,
+			collision_mask
+		)
+		foot_query.exclude = [self]
+		var foot_hit = space.intersect_ray(foot_query)
+
+		if foot_hit:
+			var step_origin = global_position + Vector3(0, STEP_HEIGHT, 0)
+			var step_query = PhysicsRayQueryParameters3D.create(
+				step_origin,
+				step_origin + forward * STEP_CHECK_DISTANCE,
+				collision_mask
+			)
+			step_query.exclude = [self]
+			var step_hit = space.intersect_ray(step_query)
+
+			if not step_hit:
+				global_position.y += STEP_HEIGHT
+				velocity.y = 0.0
 
 func _apply_posture_height(height: float) -> void:
 	var multiplier = height / base_capsule_height

@@ -17,6 +17,8 @@ const PATROL_SPEED := 5.0
 const CHASE_SPEED := 6.5
 const CATCH_DISTANCE := 1.2
 const HEARING_RANGE_SPRINT := 12.0
+const STEP_HEIGHT := 0.4
+const STEP_CHECK_DISTANCE := 0.3
 
 func _ready() -> void:
 	nav_agent = $NavigationAgent3D
@@ -38,6 +40,7 @@ func _physics_process(delta: float) -> void:
 			_investigate(delta)
 		State.CHASE:
 			_chase(delta)
+	_handle_step_up()
 	_check_catch()
 
 func _patrol(delta: float) -> void:
@@ -75,6 +78,32 @@ func _move_along_path(speed: float) -> void:
 	if direction.length() > 0.1:
 		look_at(global_position + direction, Vector3.UP)
 
+func _handle_step_up() -> void:
+	if is_on_floor() and velocity.length() > 0.1:
+		var space = get_world_3d().direct_space_state
+		var forward = Vector3(velocity.x, 0, velocity.z).normalized()
+
+		var foot_origin = global_position
+		var foot_query = PhysicsRayQueryParameters3D.create(
+			foot_origin,
+			foot_origin + forward * STEP_CHECK_DISTANCE,
+			1
+		)
+		var foot_hit = space.intersect_ray(foot_query)
+
+		if foot_hit:
+			var step_origin = global_position + Vector3(0, STEP_HEIGHT, 0)
+			var step_query = PhysicsRayQueryParameters3D.create(
+				step_origin,
+				step_origin + forward * STEP_CHECK_DISTANCE,
+				1
+			)
+			var step_hit = space.intersect_ray(step_query)
+
+			if not step_hit:
+				global_position.y += STEP_HEIGHT
+				velocity.y = 0.0
+
 func _set_state(new_state: State) -> void:
 	state = new_state
 	match new_state:
@@ -111,7 +140,7 @@ func _pick_random_patrol_point() -> void:
 func _check_catch() -> void:
 	if player == null:
 		return
-	if global_position.distance_to(player.global_position) <= CATCH_DISTANCE:
+	if global_position.distance_to(player.global_position) <= 1.2:
 		SignalBus.player_caught.emit()
 
 func _on_distraction_thrown(position: Vector3) -> void:
