@@ -10,6 +10,7 @@ var investigate_timer: float = 0.0
 var investigate_center: Vector3 = Vector3.ZERO
 var investigate_wander_timer: float = 0.0
 var _distraction_handled: bool = false
+var _boost_timer: float = 0.0
 const INVESTIGATE_TIME := 8.0
 const WANDER_INTERVAL := 2.0
 const WANDER_RADIUS := 5.0
@@ -33,6 +34,12 @@ func _ready() -> void:
 	_pick_random_patrol_point()
 
 func _physics_process(delta: float) -> void:
+	if _boost_timer > 0.0:
+		_boost_timer -= delta
+		velocity.y = 3.5
+		move_and_slide()
+		return
+
 	match state:
 		State.PATROL:
 			_patrol(delta)
@@ -77,6 +84,10 @@ func _move_along_path(speed: float) -> void:
 	move_and_slide()
 	if direction.length() > 0.1:
 		look_at(global_position + direction, Vector3.UP)
+
+func apply_ledge_boost() -> void:
+	_boost_timer = 0.3
+	velocity.y = 3.5
 
 func _handle_step_up() -> void:
 	if is_on_floor() and velocity.length() > 0.1:
