@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dacvqw5g61lxj"]
 
 [ext_resource type="Script" uid="uid://dmo7f8t5h4fqw" path="res://scripts/enemy.gd" id="1_m1htj"]
+[ext_resource type="PackedScene" uid="uid://nm2og7saqneo" path="res://Characters_psx/Characters_psx/Models/Killers/Running (2).fbx" id="3_xeo28"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqquq"]
-radius = 0.4189453
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tt7e2"]
+radius = 0.38964844
+height = 2.5213623
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s7bn3"]
 size = Vector3(7.150238, 1, 27.35939)
@@ -19,10 +19,10 @@ radius = 8.03375
 script = ExtResource("1_m1htj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=22295864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26068115, 0)
 shape = SubResource("CapsuleShape3D_gqquq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=376030638]
-mesh = SubResource("CapsuleMesh_tt7e2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy" unique_id=1503617085]
 
@@ -36,3 +36,39 @@ shape = SubResource("BoxShape3D_s7bn3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/HearingRange" unique_id=997895092]
 shape = SubResource("SphereShape3D_gqquq")
+
+[node name="Running (2)" parent="Enemy" unique_id=2132411608 instance=ExtResource("3_xeo28")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.022500813, -0.8954044, 0.008252203)
+
+[node name="Skeleton3D" parent="Enemy/Running (2)" index="0" unique_id=713416742]
+bones/0/position = Vector3(-0.03972851, 2.689931, -0.028356405)
+bones/0/rotation = Quaternion(0.10253895, -0.7293712, -0.0392041, 0.6752529)
+bones/1/rotation = Quaternion(-0.062418826, 0.07555073, -0.10120985, 0.9900266)
+bones/2/rotation = Quaternion(-0.014684104, 0.0104689915, -0.024396542, 0.9995397)
+bones/3/rotation = Quaternion(-0.014538377, 0.010391082, -0.024445046, 0.99954146)
+bones/4/rotation = Quaternion(0.005298559, -0.006219119, -0.28623793, 0.95812374)
+bones/5/rotation = Quaternion(0.050179902, -0.03627483, 0.21243696, 0.9752111)
+bones/7/rotation = Quaternion(-0.071020775, -0.5555188, 0.8281158, -0.024068113)
+bones/8/rotation = Quaternion(0.3209751, 0.1503883, -0.1415027, 0.92430264)
+bones/9/rotation = Quaternion(-0.026115041, 0.007674237, 0.55139625, 0.8337994)
+bones/10/rotation = Quaternion(-0.07460177, -0.28074273, -0.16018665, 0.94337606)
+bones/11/rotation = Quaternion(0.0826296, -0.0074236803, 0.039163355, 0.9957829)
+bones/12/rotation = Quaternion(0.037820667, 0.015080183, -0.09581924, 0.99456567)
+bones/13/rotation = Quaternion(-0.021429777, 0.0061399024, -0.037005868, 0.9990665)
+bones/15/rotation = Quaternion(0.8091331, 0.014049673, -0.038597304, 0.5861881)
+bones/16/rotation = Quaternion(0.30525315, 0.866793, 0.29488668, -0.26178664)
+bones/17/rotation = Quaternion(0.02473541, -0.007352229, 0.5685677, 0.8222317)
+bones/18/rotation = Quaternion(0.14719027, 0.18687846, 0.014282327, 0.97118866)
+bones/19/rotation = Quaternion(-0.0334323, 0.0038863386, 0.030091707, 0.99898034)
+bones/20/rotation = Quaternion(0.014365773, -0.014707067, -0.13376327, 0.99080014)
+bones/21/rotation = Quaternion(-0.09831423, 0.010888519, 0.11777967, 0.98810107)
+bones/23/rotation = Quaternion(0.088757835, -0.17442088, 0.84721816, -0.49388328)
+bones/24/rotation = Quaternion(0.104205, -0.0013538692, -0.8242843, 0.55650234)
+bones/25/rotation = Quaternion(0.081704944, -0.6752041, -0.10660924, 0.7252987)
+bones/26/rotation = Quaternion(0.22674112, 0.008677798, -0.0016626158, 0.973915)
+bones/28/rotation = Quaternion(0.08237122, 0.017140355, 0.9910988, -0.10317176)
+bones/29/rotation = Quaternion(-0.021236025, 0.036858775, -0.33947867, 0.9396514)
+bones/30/rotation = Quaternion(0.5206029, -0.53086233, 0.4203026, 0.52009964)
+bones/31/rotation = Quaternion(0.44938082, 0.0048029786, 0.0016397211, 0.89332587)
+
+[editable path="Enemy/Running (2)"]

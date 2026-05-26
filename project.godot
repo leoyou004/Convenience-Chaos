@@ -27,6 +27,10 @@ HotBarManager="*uid://dly8agh4d7cq2"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 crouch={

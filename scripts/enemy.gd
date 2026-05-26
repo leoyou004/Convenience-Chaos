@@ -83,7 +83,9 @@ func _move_along_path(speed: float) -> void:
 	velocity = direction * speed
 	move_and_slide()
 	if direction.length() > 0.1:
-		look_at(global_position + direction, Vector3.UP)
+		var flat_direction = Vector3(direction.x, 0, direction.z).normalized()
+		var look_target = global_position + flat_direction
+		look_at(look_target, Vector3.UP)
 
 func apply_ledge_boost() -> void:
 	_boost_timer = 0.3
