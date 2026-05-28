@@ -11,6 +11,8 @@ var investigate_center: Vector3 = Vector3.ZERO
 var investigate_wander_timer: float = 0.0
 var _distraction_handled: bool = false
 var _boost_timer: float = 0.0
+var _last_position: Vector3 = Vector3.ZERO
+var _stuck_timer: float = 0.0
 const INVESTIGATE_TIME := 8.0
 const WANDER_INTERVAL := 2.0
 const WANDER_RADIUS := 5.0
@@ -20,6 +22,10 @@ const CATCH_DISTANCE := 1.2
 const HEARING_RANGE_SPRINT := 12.0
 const STEP_HEIGHT := 0.4
 const STEP_CHECK_DISTANCE := 0.3
+const STUCK_TIME := 3.0
+const STUCK_DISTANCE := 0.3
+
+@onready var anim_player = $"Running (2)/AnimationPlayer"
 
 func _ready() -> void:
 	nav_agent = $NavigationAgent3D
@@ -32,6 +38,9 @@ func _ready() -> void:
 	$VisionCone.body_entered.connect(_on_vision_body_entered)
 	$VisionCone.body_exited.connect(_on_vision_body_exited)
 	_pick_random_patrol_point()
+	if anim_player.has_animation("mixamo_com"):
+		anim_player.get_animation("mixamo_com").loop_mode = Animation.LOOP_LINEAR
+		anim_player.play("mixamo_com")
 
 func _physics_process(delta: float) -> void:
 	if _boost_timer > 0.0:
@@ -53,6 +62,15 @@ func _physics_process(delta: float) -> void:
 func _patrol(delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		_pick_random_patrol_point()
+
+	# Stuck detection
+	_stuck_timer += delta
+	if _stuck_timer >= STUCK_TIME:
+		_stuck_timer = 0.0
+		if global_position.distance_to(_last_position) < STUCK_DISTANCE:
+			_pick_random_patrol_point()
+		_last_position = global_position
+
 	_move_along_path(PATROL_SPEED)
 
 func _investigate(delta: float) -> void:
@@ -148,7 +166,12 @@ func _pick_wander_point() -> void:
 func _pick_random_patrol_point() -> void:
 	var map_rid = NavigationServer3D.get_maps()[0]
 	var random_point = NavigationServer3D.map_get_random_point(map_rid, 1, false)
-	nav_agent.target_position = random_point
+	var nearest = NavigationServer3D.map_get_closest_point(map_rid, random_point)
+	if nearest.distance_to(random_point) < 1.0:
+		nav_agent.target_position = random_point
+	else:
+		await get_tree().create_timer(0.5).timeout
+		_pick_random_patrol_point()
 
 func _check_catch() -> void:
 	if player == null:

@@ -71,4 +71,7 @@ bones/29/rotation = Quaternion(-0.021236025, 0.036858775, -0.33947867, 0.9396514
 bones/30/rotation = Quaternion(0.5206029, -0.53086233, 0.4203026, 0.52009964)
 bones/31/rotation = Quaternion(0.44938082, 0.0048029786, 0.0016397211, 0.89332587)
 
+[node name="AnimationPlayer" parent="Enemy/Running (2)" index="1" unique_id=667896959]
+autoplay = &"mixamo_com"
+
 [editable path="Enemy/Running (2)"]
