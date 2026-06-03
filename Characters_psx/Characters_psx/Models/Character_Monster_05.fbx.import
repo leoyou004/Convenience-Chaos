@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://tupi3nh4ue4t"
-path="res://.godot/imported/Character_Monster_05.fbx-0e94f17fa528481f760d46b2913896a8.scn"
+path="res://.godot/imported/Character_Monster_05.fbx-01d0f642701c19486e56e8bc17236156.scn"
 
 [deps]
 
-source_file="res://Characters_psx/Characters_psx/Models/Killers/Character_Monster_05.fbx"
-dest_files=["res://.godot/imported/Character_Monster_05.fbx-0e94f17fa528481f760d46b2913896a8.scn"]
+source_file="res://Characters_psx/Characters_psx/Models/Character_Monster_05.fbx"
+dest_files=["res://.godot/imported/Character_Monster_05.fbx-01d0f642701c19486e56e8bc17236156.scn"]
 
 [params]
 

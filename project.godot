@@ -31,6 +31,10 @@ window/size/viewport_height=1080
 
 import/blender/enabled=false
 
+[global_group]
+
+Player=""
+
 [input]
 
 crouch={

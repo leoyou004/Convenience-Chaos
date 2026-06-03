@@ -2,34 +2,41 @@ extends CharacterBody3D
 
 enum State { PATROL, INVESTIGATE, CHASE }
 
-var state: State = State.PATROL
-var nav_agent: NavigationAgent3D
-var player: Node3D = null
-var last_noise_position: Vector3 = Vector3.ZERO
-var investigate_timer: float = 0.0
-var investigate_center: Vector3 = Vector3.ZERO
-var investigate_wander_timer: float = 0.0
-var _distraction_handled: bool = false
-var _boost_timer: float = 0.0
-var _last_position: Vector3 = Vector3.ZERO
-var _stuck_timer: float = 0.0
-const INVESTIGATE_TIME := 8.0
-const WANDER_INTERVAL := 2.0
-const WANDER_RADIUS := 5.0
-const PATROL_SPEED := 5.0
-const CHASE_SPEED := 6.5
-const CATCH_DISTANCE := 1.2
-const HEARING_RANGE_SPRINT := 12.0
-const STEP_HEIGHT := 0.4
-const STEP_CHECK_DISTANCE := 0.3
-const STUCK_TIME := 3.0
-const STUCK_DISTANCE := 0.3
+const INVESTIGATE_TIME  := 8.0
+const WANDER_INTERVAL   := 2.0
+const WANDER_RADIUS     := 5.0
+const PATROL_SPEED      := 5.0
+const CHASE_SPEED       := 6.5
+const CATCH_DISTANCE    := 1.2
+const HEARING_RANGE     := 12.0
+const STEP_HEIGHT       := 0.4
+const STEP_DIST         := 0.3
+const STUCK_TIME        := 3.0
+const STUCK_DISTANCE    := 0.3
+const GRAVITY           := 9.8
+
+var state               := State.PATROL
+var nav_agent           : NavigationAgent3D
+var player              : Node3D
+var investigate_center  := Vector3.ZERO
+var investigate_timer   := 0.0
+var wander_timer        := 0.0
+var boost_timer         := 0.0
+var stuck_timer         := 0.0
+var last_position       := Vector3.ZERO
+var distraction_used    := false
+var chase_update_timer  := 0.0
+
+const CHASE_UPDATE_INTERVAL := 0.1
 
 @onready var anim_player = $"Running (2)/AnimationPlayer"
+@onready var audio = $CollisionShape3D/Scream
+
 
 func _ready() -> void:
 	nav_agent = $NavigationAgent3D
-	player = get_tree().get_first_node_in_group("player")
+	player    = get_tree().get_first_node_in_group("Player")
+
 	SignalBus.noise_level_changed.connect(_on_noise)
 	SignalBus.distraction_thrown.connect(_on_distraction_thrown)
 	HotBarManager.hotbar_updated.connect(_on_hotbar_updated)
@@ -37,187 +44,194 @@ func _ready() -> void:
 	$HearingRange.body_exited.connect(_on_hearing_body_exited)
 	$VisionCone.body_entered.connect(_on_vision_body_entered)
 	$VisionCone.body_exited.connect(_on_vision_body_exited)
-	_pick_random_patrol_point()
+
+	_pick_patrol_point()
+
 	if anim_player.has_animation("mixamo_com"):
 		anim_player.get_animation("mixamo_com").loop_mode = Animation.LOOP_LINEAR
 		anim_player.play("mixamo_com")
 
+
 func _physics_process(delta: float) -> void:
-	if _boost_timer > 0.0:
-		_boost_timer -= delta
+	if boost_timer > 0.0:
+		boost_timer -= delta
 		velocity.y = 3.5
 		move_and_slide()
 		return
 
+	if not is_on_floor():
+		velocity.y -= GRAVITY * delta
+
 	match state:
-		State.PATROL:
-			_patrol(delta)
-		State.INVESTIGATE:
-			_investigate(delta)
-		State.CHASE:
-			_chase(delta)
+		State.PATROL:      _patrol(delta)
+		State.INVESTIGATE: _investigate(delta)
+		State.CHASE:       _chase(delta)
+
 	_handle_step_up()
 	_check_catch()
 
+
+# ── States ────────────────────────────────────────────────────────────────────
+
 func _patrol(delta: float) -> void:
+	stuck_timer += delta
+	if stuck_timer >= STUCK_TIME:
+		stuck_timer = 0.0
+		if global_position.distance_to(last_position) < STUCK_DISTANCE:
+			_pick_patrol_point()
+		last_position = global_position
+
 	if nav_agent.is_navigation_finished():
-		_pick_random_patrol_point()
+		_pick_patrol_point()
 
-	# Stuck detection
-	_stuck_timer += delta
-	if _stuck_timer >= STUCK_TIME:
-		_stuck_timer = 0.0
-		if global_position.distance_to(_last_position) < STUCK_DISTANCE:
-			_pick_random_patrol_point()
-		_last_position = global_position
+	_move(PATROL_SPEED)
 
-	_move_along_path(PATROL_SPEED)
 
 func _investigate(delta: float) -> void:
-	if not nav_agent.is_navigation_finished():
-		_move_along_path(PATROL_SPEED)
+	_move(PATROL_SPEED)
 
 	investigate_timer -= delta
 	if investigate_timer <= 0.0:
 		_set_state(State.PATROL)
-		_pick_random_patrol_point()
+		_pick_patrol_point()
 		return
 
-	investigate_wander_timer -= delta
-	if investigate_wander_timer <= 0.0:
-		investigate_wander_timer = WANDER_INTERVAL
+	wander_timer -= delta
+	if wander_timer <= 0.0:
+		wander_timer = WANDER_INTERVAL
 		_pick_wander_point()
 
-func _chase(_delta: float) -> void:
+
+func _chase(delta: float) -> void:
 	if player == null:
 		_set_state(State.PATROL)
 		return
-	nav_agent.target_position = player.global_position
-	_move_along_path(CHASE_SPEED)
 
-func _move_along_path(speed: float) -> void:
-	var next = nav_agent.get_next_path_position()
+	chase_update_timer -= delta
+	if chase_update_timer <= 0.0:
+		chase_update_timer = CHASE_UPDATE_INTERVAL
+		nav_agent.target_position = player.global_position
+
+	_move(CHASE_SPEED)
+
+
+# ── Movement ──────────────────────────────────────────────────────────────────
+
+func _move(speed: float) -> void:
+	var next      = nav_agent.get_next_path_position()
 	var direction = (next - global_position).normalized()
-	velocity = direction * speed
+	velocity.x    = direction.x * speed
+	velocity.z    = direction.z * speed
 	move_and_slide()
-	if direction.length() > 0.1:
-		var flat_direction = Vector3(direction.x, 0, direction.z).normalized()
-		var look_target = global_position + flat_direction
-		look_at(look_target, Vector3.UP)
 
-func apply_ledge_boost() -> void:
-	_boost_timer = 0.3
-	velocity.y = 3.5
+	var flat = Vector3(direction.x, 0, direction.z)
+	if flat.length_squared() > 0.01:
+		look_at(global_position + flat.normalized(), Vector3.UP)
+
 
 func _handle_step_up() -> void:
-	if is_on_floor() and velocity.length() > 0.1:
-		var space = get_world_3d().direct_space_state
-		var forward = Vector3(velocity.x, 0, velocity.z).normalized()
+	if not is_on_floor() or velocity.length() < 0.1:
+		return
 
-		var foot_origin = global_position
-		var foot_query = PhysicsRayQueryParameters3D.create(
-			foot_origin,
-			foot_origin + forward * STEP_CHECK_DISTANCE,
-			1
-		)
-		var foot_hit = space.intersect_ray(foot_query)
+	var space   = get_world_3d().direct_space_state
+	var forward = Vector3(velocity.x, 0, velocity.z).normalized()
 
-		if foot_hit:
-			var step_origin = global_position + Vector3(0, STEP_HEIGHT, 0)
-			var step_query = PhysicsRayQueryParameters3D.create(
-				step_origin,
-				step_origin + forward * STEP_CHECK_DISTANCE,
-				1
-			)
-			var step_hit = space.intersect_ray(step_query)
+	var foot_start = global_position + Vector3(0, 0.05, 0)
+	var foot_end   = foot_start + forward * STEP_DIST
+	if not space.intersect_ray(PhysicsRayQueryParameters3D.create(foot_start, foot_end)):
+		return
 
-			if not step_hit:
-				global_position.y += STEP_HEIGHT
-				velocity.y = 0.0
+	var step_start = global_position + Vector3(0, STEP_HEIGHT, 0)
+	var step_end   = step_start + forward * STEP_DIST
+	if not space.intersect_ray(PhysicsRayQueryParameters3D.create(step_start, step_end)):
+		global_position.y += STEP_HEIGHT
+
+
+func apply_ledge_boost() -> void:
+	boost_timer = 0.3
+	velocity.y  = 3.5
+
+
+# ── State helpers ─────────────────────────────────────────────────────────────
 
 func _set_state(new_state: State) -> void:
 	state = new_state
-	match new_state:
-		State.PATROL:
-			SignalBus.enemy_calm.emit()
-		State.INVESTIGATE:
-			SignalBus.enemy_alerted.emit()
-		State.CHASE:
-			SignalBus.enemy_alerted.emit()
-
-func _start_investigate(position: Vector3) -> void:
-	investigate_center = position
-	investigate_timer = INVESTIGATE_TIME
-	investigate_wander_timer = 0.0
-	_set_state(State.INVESTIGATE)
-	nav_agent.target_position = position
-
-func _pick_wander_point() -> void:
-	var offset = Vector3(
-		randf_range(-WANDER_RADIUS, WANDER_RADIUS),
-		0,
-		randf_range(-WANDER_RADIUS, WANDER_RADIUS)
-	)
-	var wander_target = investigate_center + offset
-	var map_rid = NavigationServer3D.get_maps()[0]
-	var nearest = NavigationServer3D.map_get_closest_point(map_rid, wander_target)
-	nav_agent.target_position = nearest
-
-func _pick_random_patrol_point() -> void:
-	var map_rid = NavigationServer3D.get_maps()[0]
-	var random_point = NavigationServer3D.map_get_random_point(map_rid, 1, false)
-	var nearest = NavigationServer3D.map_get_closest_point(map_rid, random_point)
-	if nearest.distance_to(random_point) < 1.0:
-		nav_agent.target_position = random_point
+	if new_state == State.PATROL:
+		SignalBus.enemy_calm.emit()
+	elif new_state == State.CHASE:
+		SignalBus.enemy_alerted.emit()
+		if not audio.playing:
+			audio.play()
 	else:
-		await get_tree().create_timer(0.5).timeout
-		_pick_random_patrol_point()
+		SignalBus.enemy_alerted.emit()
+
+
+func _start_investigate(pos: Vector3) -> void:
+	investigate_center        = pos
+	investigate_timer         = INVESTIGATE_TIME
+	wander_timer              = 0.0
+	_set_state(State.INVESTIGATE)
+	nav_agent.target_position = pos
+
 
 func _check_catch() -> void:
-	if player == null:
-		return
-	if global_position.distance_to(player.global_position) <= 1.2:
+	if player and global_position.distance_to(player.global_position) <= CATCH_DISTANCE:
 		SignalBus.player_caught.emit()
 
-func _on_distraction_thrown(position: Vector3) -> void:
-	if state == State.CHASE:
-		return
-	if _distraction_handled:
-		return
-	_distraction_handled = true
-	_start_investigate(position)
 
-func _on_hotbar_updated(slots: Array, _active_slot: int) -> void:
-	for slot in slots:
-		if slot != null:
-			_distraction_handled = false
-			return
+# ── Navigation ────────────────────────────────────────────────────────────────
+
+func _pick_patrol_point() -> void:
+	var map   = NavigationServer3D.get_maps()[0]
+	var point = NavigationServer3D.map_get_random_point(map, 1, false)
+	if NavigationServer3D.map_get_closest_point(map, point).distance_to(point) < 1.0:
+		nav_agent.target_position = point
+	else:
+		await get_tree().create_timer(0.5).timeout
+		_pick_patrol_point()
+
+
+func _pick_wander_point() -> void:
+	var offset = Vector3(randf_range(-WANDER_RADIUS, WANDER_RADIUS), 0,
+		randf_range(-WANDER_RADIUS, WANDER_RADIUS))
+	var map    = NavigationServer3D.get_maps()[0]
+	nav_agent.target_position = NavigationServer3D.map_get_closest_point(map, investigate_center + offset)
+
+
+# ── Signal handlers ───────────────────────────────────────────────────────────
 
 func _on_noise(level: float) -> void:
-	if player == null:
-		return
-	var dist = global_position.distance_to(player.global_position)
-	if level > 0.5 and dist <= HEARING_RANGE_SPRINT:
-		if state != State.CHASE:
+	if player and level > 0.5 and state != State.CHASE:
+		if global_position.distance_to(player.global_position) <= HEARING_RANGE:
 			_start_investigate(player.global_position)
+
+
+func _on_distraction_thrown(pos: Vector3) -> void:
+	if state != State.CHASE and not distraction_used:
+		distraction_used = true
+		_start_investigate(pos)
+
+
+func _on_hotbar_updated(slots: Array, _active_slot: int) -> void:
+	if slots.any(func(s): return s != null):
+		distraction_used = false
+
 
 func _on_hearing_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		var is_crouching = body.get("is_crouching") if body.get("is_crouching") != null else false
-		var is_prone = body.get("is_prone") if body.get("is_prone") != null else false
-		if not is_crouching and not is_prone:
-			_set_state(State.CHASE)
+	if body.is_in_group("player") and not body.get("is_crouching") and not body.get("is_prone"):
+		_set_state(State.CHASE)
+
 
 func _on_hearing_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
-		if state == State.CHASE:
-			_start_investigate(player.global_position)
+	if body.is_in_group("player") and state == State.CHASE:
+		_start_investigate(player.global_position)
+
 
 func _on_vision_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		_set_state(State.CHASE)
 
+
 func _on_vision_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
-		if state == State.CHASE:
-			_start_investigate(player.global_position)
+	if body.is_in_group("player") and state == State.CHASE:
+		_start_investigate(player.global_position)
