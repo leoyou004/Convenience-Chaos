@@ -3,6 +3,8 @@ extends CharacterBody3D
 @onready var camera_mount = %CameraMount
 @onready var camera = %CameraMount/Camera3D
 @onready var collision_shape = $CollisionShape3D
+@onready var stamina_audio = $"CollisionShape3D/Stamina Breathing"
+@onready var chase_music = $"CollisionShape3D/Chase music"
 
 var speed = 5.0
 var sprint_speed = 8.0
@@ -60,6 +62,8 @@ func _ready():
 	_apply_posture_height(STANDING_HEIGHT)
 	_setup_hand_display()
 	HotBarManager.hotbar_updated.connect(_on_hotbar_updated)
+	SignalBus.enemy_alerted.connect(_on_enemy_alerted)
+	SignalBus.enemy_calm.connect(_on_enemy_calm)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -141,8 +145,12 @@ func _physics_process(delta):
 
 	if sprint_stamina <= 0.0:
 		is_exhausted = true
+		if not stamina_audio.playing:
+			stamina_audio.play()
 	elif sprint_stamina >= SPRINT_MAX_SECONDS:
 		is_exhausted = false
+		if stamina_audio.playing:
+			stamina_audio.stop()
 
 	SignalBus.sprint_stamina_changed.emit(sprint_stamina, SPRINT_MAX_SECONDS)
 
@@ -172,6 +180,14 @@ func _physics_process(delta):
 
 	_handle_step_up()
 	move_and_slide()
+
+func _on_enemy_alerted() -> void:
+	if not chase_music.playing:
+		chase_music.play()
+
+func _on_enemy_calm() -> void:
+	if chase_music.playing:
+		chase_music.stop()
 
 func _handle_step_up() -> void:
 	if is_on_floor() and velocity.length() > 0.1:
