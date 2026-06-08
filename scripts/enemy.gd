@@ -235,3 +235,4 @@ func _on_vision_body_entered(body: Node) -> void:
 func _on_vision_body_exited(body: Node) -> void:
 	if body.is_in_group("player") and state == State.CHASE:
 		_start_investigate(player.global_position)
+		

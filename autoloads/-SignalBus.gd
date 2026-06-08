@@ -12,3 +12,6 @@ signal interactable_unfocused
 signal interact_progress(progress: float)
 signal enemy_alerted
 signal enemy_calm
+signal mop_started()
+signal mop_progress(amount: float)
+signal mop_finished()

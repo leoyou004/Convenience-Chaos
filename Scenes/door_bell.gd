@@ -7,3 +7,5 @@ func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		$"Door Bell".play()
 		SignalBus.distraction_thrown.emit(global_position)
+	elif body.is_in_group("enemy"):
+		$"Door Bell".play()
