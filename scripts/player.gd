@@ -34,6 +34,9 @@ var is_crouching = false
 var is_prone = false
 var is_exhausted = false
 var bhop_speed: float = 0.0
+var is_dead: bool = false
+var _death_timer: float = 0.0
+var _death_duration: float = 1.5  # how long the fall animation takes
 
 var base_collision_position_y: float
 var base_collision_half_height: float = 0.0
@@ -64,14 +67,19 @@ func _ready():
 	HotBarManager.hotbar_updated.connect(_on_hotbar_updated)
 	SignalBus.enemy_alerted.connect(_on_enemy_alerted)
 	SignalBus.enemy_calm.connect(_on_enemy_calm)
+	SignalBus.player_caught.connect(_on_player_caught)
 
 func _input(event):
+	if is_dead:
+		return
 	if event is InputEventMouseMotion:
 		camera_mount.rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI / 2, PI / 2)
 
 func _unhandled_input(event):
+	if is_dead:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			HotBarManager.cycle_slot(1)
@@ -79,6 +87,16 @@ func _unhandled_input(event):
 			HotBarManager.cycle_slot(-1)
 
 func _physics_process(delta):
+	if is_dead:
+		_death_timer += delta
+		# Tilt camera to the ground like falling over
+		camera.rotation.x = lerp(camera.rotation.x, deg_to_rad(80.0), delta * 3.0)
+		# Sink camera down to floor level
+		camera_mount.position.y = lerp(camera_mount.position.y, 0.1, delta * 3.0)
+		if _death_timer >= _death_duration:
+			SignalBus.player_died.emit()
+		return
+
 	if Input.is_action_just_pressed("slot_1"):
 		HotBarManager.set_active_slot(0)
 	if Input.is_action_just_pressed("slot_2"):
@@ -180,6 +198,12 @@ func _physics_process(delta):
 
 	_handle_step_up()
 	move_and_slide()
+
+func _on_player_caught() -> void:
+	if is_dead:
+		return
+	is_dead = true
+	velocity = Vector3.ZERO
 
 func _on_enemy_alerted() -> void:
 	if not chase_music.playing:

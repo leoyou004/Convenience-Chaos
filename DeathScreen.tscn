@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bgeqj7ax8la8u"]
+
+[ext_resource type="Script" uid="uid://csjx1rqa5084o" path="res://death.gd" id="1_58ct5"]
+[ext_resource type="Script" uid="uid://blcr8wacri8b" path="res://RestartButton.gd" id="2_80igo"]
+
+[node name="Node2D" type="Node2D" unique_id=676895497]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2128965885]
+script = ExtResource("1_58ct5")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=2125861761]
+offset_right = 2025.0
+offset_bottom = 1152.0
+color = Color(0.63525105, 0, 0.11140802, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect" unique_id=849636898]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button" type="Button" parent="CanvasLayer/ColorRect" unique_id=1910893811]
+layout_mode = 0
+offset_left = 729.0
+offset_top = 658.0
+offset_right = 1293.0
+offset_bottom = 828.0
+script = ExtResource("2_80igo")
+
+[connection signal="pressed" from="CanvasLayer/ColorRect/Button" to="CanvasLayer/ColorRect/Button" method="_on_pressed"]

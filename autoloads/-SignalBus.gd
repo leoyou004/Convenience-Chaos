@@ -3,7 +3,6 @@ extends Node
 signal game_state_changed(new_state)
 signal objective_completed(objective_id)
 signal all_objectives_completed
-signal player_caught
 signal distraction_thrown(position)
 signal noise_level_changed(level)
 signal sprint_stamina_changed(current_stamina, max_stamina)
@@ -15,3 +14,6 @@ signal enemy_calm
 signal mop_started()
 signal mop_progress(amount: float)
 signal mop_finished()
+signal restock_progress(amount: float)
+signal player_caught()
+signal player_died()

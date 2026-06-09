@@ -2,17 +2,17 @@ extends CharacterBody3D
 
 enum State { PATROL, INVESTIGATE, CHASE }
 
-const INVESTIGATE_TIME  := 8.0
-const WANDER_INTERVAL   := 2.0
+const INVESTIGATE_TIME  := 5.0
+const WANDER_INTERVAL   := 0.5
 const WANDER_RADIUS     := 5.0
-const PATROL_SPEED      := 5.0
-const CHASE_SPEED       := 6.5
+const PATROL_SPEED      := 6.5
+const CHASE_SPEED       := 7.5
 const CATCH_DISTANCE    := 1.2
 const HEARING_RANGE     := 12.0
 const STEP_HEIGHT       := 0.4
 const STEP_DIST         := 0.3
-const STUCK_TIME        := 3.0
-const STUCK_DISTANCE    := 0.3
+const STUCK_TIME        := 0
+const STUCK_DISTANCE    := 0
 const GRAVITY           := 9.8
 
 var state               := State.PATROL
