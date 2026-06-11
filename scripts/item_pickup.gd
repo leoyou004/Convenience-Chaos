@@ -4,6 +4,7 @@ extends Area3D
 @export var player_layer_bit: int = 0
 const DEFAULT_ITEM_RESOURCE_PATH := "res://items/test_item.tres"
 var _picked_up: bool = false
+var _has_landed: bool = false
 
 func _ready() -> void:
 	monitoring = false
@@ -15,7 +16,6 @@ func _ready() -> void:
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 	_update_label()
-
 	await get_tree().create_timer(0.5).timeout
 	monitoring = true
 	monitorable = true
@@ -25,7 +25,13 @@ func _process(_delta: float) -> void:
 	if has_meta("linked_body"):
 		var body = get_meta("linked_body")
 		if is_instance_valid(body):
+			var was_moving = not _has_landed
 			global_position = body.global_position
+			# Detect when the thrown item has landed by checking if body stopped
+			if was_moving and body is RigidBody3D:
+				if body.linear_velocity.length() < 0.5:
+					_has_landed = true
+					SignalBus.distraction_thrown.emit(global_position)
 
 func _on_body_entered(body: Node) -> void:
 	print("PICKUP TRIGGERED: ", body.name)

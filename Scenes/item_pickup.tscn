@@ -3,8 +3,11 @@
 [ext_resource type="Script" uid="uid://c6840liospf1k" path="res://scripts/item_pickup.gd" id="1_im1t2"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_im1t2"]
+radius = 0.1
+height = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lpngd"]
+radius = 0.1
 
 [node name="ItemPickup" type="Node3D" unique_id=1440671623]
 

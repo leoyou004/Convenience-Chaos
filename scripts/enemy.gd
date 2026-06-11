@@ -32,7 +32,6 @@ const CHASE_UPDATE_INTERVAL := 0.1
 @onready var anim_player = $"Running (2)/AnimationPlayer"
 @onready var audio = $CollisionShape3D/Scream
 
-
 func _ready() -> void:
 	nav_agent = $NavigationAgent3D
 	player    = get_tree().get_first_node_in_group("Player")
@@ -50,7 +49,6 @@ func _ready() -> void:
 	if anim_player.has_animation("mixamo_com"):
 		anim_player.get_animation("mixamo_com").loop_mode = Animation.LOOP_LINEAR
 		anim_player.play("mixamo_com")
-
 
 func _physics_process(delta: float) -> void:
 	if boost_timer > 0.0:
@@ -70,9 +68,6 @@ func _physics_process(delta: float) -> void:
 	_handle_step_up()
 	_check_catch()
 
-
-# ── States ────────────────────────────────────────────────────────────────────
-
 func _patrol(delta: float) -> void:
 	stuck_timer += delta
 	if stuck_timer >= STUCK_TIME:
@@ -85,7 +80,6 @@ func _patrol(delta: float) -> void:
 		_pick_patrol_point()
 
 	_move(PATROL_SPEED)
-
 
 func _investigate(delta: float) -> void:
 	_move(PATROL_SPEED)
@@ -101,7 +95,6 @@ func _investigate(delta: float) -> void:
 		wander_timer = WANDER_INTERVAL
 		_pick_wander_point()
 
-
 func _chase(delta: float) -> void:
 	if player == null:
 		_set_state(State.PATROL)
@@ -114,9 +107,6 @@ func _chase(delta: float) -> void:
 
 	_move(CHASE_SPEED)
 
-
-# ── Movement ──────────────────────────────────────────────────────────────────
-
 func _move(speed: float) -> void:
 	var next      = nav_agent.get_next_path_position()
 	var direction = (next - global_position).normalized()
@@ -127,7 +117,6 @@ func _move(speed: float) -> void:
 	var flat = Vector3(direction.x, 0, direction.z)
 	if flat.length_squared() > 0.01:
 		look_at(global_position + flat.normalized(), Vector3.UP)
-
 
 func _handle_step_up() -> void:
 	if not is_on_floor() or velocity.length() < 0.1:
@@ -146,13 +135,9 @@ func _handle_step_up() -> void:
 	if not space.intersect_ray(PhysicsRayQueryParameters3D.create(step_start, step_end)):
 		global_position.y += STEP_HEIGHT
 
-
 func apply_ledge_boost() -> void:
 	boost_timer = 0.3
 	velocity.y  = 3.5
-
-
-# ── State helpers ─────────────────────────────────────────────────────────────
 
 func _set_state(new_state: State) -> void:
 	state = new_state
@@ -165,7 +150,6 @@ func _set_state(new_state: State) -> void:
 	else:
 		SignalBus.enemy_alerted.emit()
 
-
 func _start_investigate(pos: Vector3) -> void:
 	investigate_center        = pos
 	investigate_timer         = INVESTIGATE_TIME
@@ -173,13 +157,9 @@ func _start_investigate(pos: Vector3) -> void:
 	_set_state(State.INVESTIGATE)
 	nav_agent.target_position = pos
 
-
 func _check_catch() -> void:
 	if player and global_position.distance_to(player.global_position) <= CATCH_DISTANCE:
 		SignalBus.player_caught.emit()
-
-
-# ── Navigation ────────────────────────────────────────────────────────────────
 
 func _pick_patrol_point() -> void:
 	var map   = NavigationServer3D.get_maps()[0]
@@ -190,49 +170,16 @@ func _pick_patrol_point() -> void:
 		await get_tree().create_timer(0.5).timeout
 		_pick_patrol_point()
 
-
 func _pick_wander_point() -> void:
 	var offset = Vector3(randf_range(-WANDER_RADIUS, WANDER_RADIUS), 0,
 		randf_range(-WANDER_RADIUS, WANDER_RADIUS))
 	var map    = NavigationServer3D.get_maps()[0]
 	nav_agent.target_position = NavigationServer3D.map_get_closest_point(map, investigate_center + offset)
 
-
-# ── Signal handlers ───────────────────────────────────────────────────────────
-
 func _on_noise(level: float) -> void:
 	if player and level > 0.5 and state != State.CHASE:
 		if global_position.distance_to(player.global_position) <= HEARING_RANGE:
 			_start_investigate(player.global_position)
-
-
-func _on_distraction_thrown(pos: Vector3) -> void:
-	if state != State.CHASE and not distraction_used:
-		distraction_used = true
-		_start_investigate(pos)
-
-
-func _on_hotbar_updated(slots: Array, _active_slot: int) -> void:
-	if slots.any(func(s): return s != null):
-		distraction_used = false
-
-
-func _on_hearing_body_entered(body: Node) -> void:
-	if body.is_in_group("player") and not body.get("is_crouching") and not body.get("is_prone"):
-		_set_state(State.CHASE)
-
-
-func _on_hearing_body_exited(body: Node) -> void:
-	if body.is_in_group("player") and state == State.CHASE:
-		_start_investigate(player.global_position)
-
-
-func _on_vision_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		_set_state(State.CHASE)
-
-
-func _on_vision_body_exited(body: Node) -> void:
-	if body.is_in_group("player") and state == State.CHASE:
-		_start_investigate(player.global_position)
-		
+	
+	func _on_distraction_thrown(pos: Vector3) -> void:
+	# Now triggers ever
