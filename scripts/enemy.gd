@@ -44,6 +44,8 @@ func _ready() -> void:
 	$VisionCone.body_entered.connect(_on_vision_body_entered)
 	$VisionCone.body_exited.connect(_on_vision_body_exited)
 
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	_pick_patrol_point()
 
 	if anim_player.has_animation("mixamo_com"):
@@ -180,6 +182,25 @@ func _on_noise(level: float) -> void:
 	if player and level > 0.5 and state != State.CHASE:
 		if global_position.distance_to(player.global_position) <= HEARING_RANGE:
 			_start_investigate(player.global_position)
-	
-	func _on_distraction_thrown(pos: Vector3) -> void:
-	# Now triggers ever
+
+func _on_distraction_thrown(pos: Vector3) -> void:
+	if state != State.CHASE:
+		_start_investigate(pos)
+
+func _on_hotbar_updated() -> void:
+	pass
+
+func _on_hearing_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Player") and state != State.CHASE:
+		_start_investigate(body.global_position)
+
+func _on_hearing_body_exited(_body: Node3D) -> void:
+	pass
+
+func _on_vision_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Player"):
+		_set_state(State.CHASE)
+
+func _on_vision_body_exited(body: Node3D) -> void:
+	if body.is_in_group("Player") and state == State.CHASE:
+		_start_investigate(body.global_position)

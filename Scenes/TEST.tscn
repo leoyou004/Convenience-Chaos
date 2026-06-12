@@ -815,7 +815,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.217229, -0.35545897, -5.74
 shape = SubResource("BoxShape3D_kes0n")
 
 [node name="enemy" parent="NavigationRegion3D/6twelve" unique_id=1703061241 instance=ExtResource("4_1jv68")]
-transform = Transform3D(-0.99961257, 0, 0.02783431, 0, 1, 0, -0.02783431, 0, -0.99961257, 12.932402, 0.7203542, -28.07064)
+transform = Transform3D(-0.99961257, 0, 0.02783431, 0, 1, 0, -0.02783431, 0, -0.99961257, 11.979165, 0.7203542, -28.07064)
 
 [node name="Mop" type="Area3D" parent="NavigationRegion3D/6twelve" unique_id=478981302]
 transform = Transform3D(0.56225395, 0, 0, 0, 0.46093518, 0, 0, 0, 0.5296279, -4.1252856, 0.16528821, -18.659761)
