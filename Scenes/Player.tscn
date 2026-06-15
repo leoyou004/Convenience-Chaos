@@ -22,6 +22,8 @@ shader_parameter/glitch_interval = 20.0
 shader_parameter/glitch_duration = 0.4
 
 [node name="Player" type="CharacterBody3D" unique_id=1048298426 groups=["Player"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_kyqiw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=363727796]
@@ -52,6 +54,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007494092, 0)
 transform = Transform3D(1, 0, 0, 0, -0.04951217, -0.99877363, 0, 0.99877363, -0.04951217, 0.0032610893, -0.41693527, -0.28117222)
 debug_shape_thickness = 3
 script = ExtResource("2_gntrk")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraMount/Camera3D" unique_id=1475733171]
+transform = Transform3D(0.99878556, 0, -0.049268145, -0.0021395967, 0.9990566, -0.043374844, 0.049221665, 0.04342758, 0.99784327, -0.42348704, -0.6511569, 0)
+light_color = Color(1, 0.81960785, 0.28627452, 1)
+light_energy = 3.891
+spot_range = 12.736554
+spot_angle = 20.922075
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=422502178]
 

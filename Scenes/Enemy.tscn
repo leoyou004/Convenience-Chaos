@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://nm2og7saqneo" path="res://Characters_psx/Characters_psx/Models/Killers/Running (2).fbx" id="3_xeo28"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqquq"]
-radius = 0.38964844
+margin = 0.0
+radius = 0.25
 height = 2.5213623
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_xeo28"]
@@ -18,16 +19,14 @@ size = Vector3(7.150238, 1, 27.35939)
 [sub_resource type="SphereShape3D" id="SphereShape3D_gqquq"]
 radius = 8.03375
 
-[node name="enemy" type="Node3D" unique_id=1703061241]
-
-[node name="Enemy" type="CharacterBody3D" parent="." unique_id=879150185]
+[node name="Enemy" type="CharacterBody3D" unique_id=879150185]
 script = ExtResource("1_m1htj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=22295864]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22295864]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26068115, 0)
 shape = SubResource("CapsuleShape3D_gqquq")
 
-[node name="Breath" type="AudioStreamPlayer3D" parent="Enemy/CollisionShape3D" unique_id=1163543107]
+[node name="Breath" type="AudioStreamPlayer3D" parent="CollisionShape3D" unique_id=1163543107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26068115, 0)
 stream = SubResource("AudioStreamMP3_xeo28")
 volume_db = 5.514
@@ -35,30 +34,30 @@ pitch_scale = 0.7
 autoplay = true
 max_distance = 10.0
 
-[node name="Scream" type="AudioStreamPlayer3D" parent="Enemy/CollisionShape3D" unique_id=2077098236]
+[node name="Scream" type="AudioStreamPlayer3D" parent="CollisionShape3D" unique_id=2077098236]
 stream = ExtResource("2_xeo28")
 volume_db = -5.0
 pitch_scale = 0.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=376030638]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=376030638]
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy" unique_id=1503617085]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1503617085]
 
-[node name="VisionCone" type="Area3D" parent="Enemy" unique_id=2009105021]
+[node name="VisionCone" type="Area3D" parent="." unique_id=2009105021]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/VisionCone" unique_id=1424281663]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone" unique_id=1424281663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006210327, 0, 14.0283165)
 shape = SubResource("BoxShape3D_s7bn3")
 
-[node name="HearingRange" type="Area3D" parent="Enemy" unique_id=1354780125]
+[node name="HearingRange" type="Area3D" parent="." unique_id=1354780125]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/HearingRange" unique_id=997895092]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HearingRange" unique_id=997895092]
 shape = SubResource("SphereShape3D_gqquq")
 
-[node name="Running (2)" parent="Enemy" unique_id=2132411608 instance=ExtResource("3_xeo28")]
+[node name="Running (2)" parent="." unique_id=2132411608 instance=ExtResource("3_xeo28")]
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.022500813, -0.8954044, 0.008252203)
 
-[node name="Skeleton3D" parent="Enemy/Running (2)" index="0" unique_id=713416742]
+[node name="Skeleton3D" parent="Running (2)" index="0" unique_id=713416742]
 bones/0/position = Vector3(-0.039728556, 2.6899326, -0.028365128)
 bones/0/rotation = Quaternion(0.10253869, -0.7293719, -0.03920451, 0.6752522)
 bones/1/rotation = Quaternion(-0.062418316, 0.07555165, -0.10120943, 0.9900266)
@@ -89,7 +88,7 @@ bones/29/rotation = Quaternion(-0.0212442, 0.036856093, -0.33950874, 0.93964046)
 bones/30/rotation = Quaternion(0.5206157, -0.53085315, 0.42031193, 0.5200886)
 bones/31/rotation = Quaternion(0.44936022, 0.00480166, 0.0016397375, 0.8933363)
 
-[node name="AnimationPlayer" parent="Enemy/Running (2)" index="1" unique_id=667896959]
+[node name="AnimationPlayer" parent="Running (2)" index="1" unique_id=667896959]
 autoplay = &"mixamo_com"
 
-[editable path="Enemy/Running (2)"]
+[editable path="Running (2)"]

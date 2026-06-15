@@ -6,9 +6,11 @@ extends Area3D
 
 var _progress: float = 0.0
 var _player_inside: bool = false
+var _player: Node3D = null
 
 func _ready() -> void:
 	set_process(true)
+	_player = get_tree().get_first_node_in_group("Player")
 	print("INTERACTABLE READY - layer: ", collision_layer, " mask: ", collision_mask, " monitoring: ", monitoring, " id: ", objective_id)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
@@ -33,20 +35,19 @@ func _complete() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	print("INTERACTABLE BODY ENTERED: ", body.name)
-	if body.is_in_group("player"):
+	if body == _player:
 		_player_inside = true
 		SignalBus.interactable_focused.emit(objective_id, hold_time)
 
 func _on_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
+	if body == _player:
 		_player_inside = false
 		_progress = 0.0
 		SignalBus.interactable_unfocused.emit()
 		SignalBus.interact_progress.emit(0.0)
 
-func _on_area_entered(area: Area3D) -> void:
-	pass # Replace with function body.
+func _on_area_entered(_area: Area3D) -> void:
+	pass
 
-
-func _on_area_exited(area: Area3D) -> void:
-	pass # Replace with function body.
+func _on_area_exited(_area: Area3D) -> void:
+	pass
