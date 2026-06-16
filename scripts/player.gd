@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var collision_shape = $CollisionShape3D
 @onready var stamina_audio = $"CollisionShape3D/Stamina Breathing"
 @onready var chase_music = $"CollisionShape3D/Chase music"
+@onready var footsteps = $"CollisionShape3D/Footsteps"
 
 var speed = 5.0
 var sprint_speed = 8.0
@@ -30,13 +31,20 @@ const BHOP_MAX := 14.0
 const STEP_HEIGHT := 0.4
 const STEP_CHECK_DISTANCE := 0.3
 
+# footstep intervals per movement state
+const STEP_INTERVAL_WALK   := 0.45
+const STEP_INTERVAL_SPRINT := 0.28
+const STEP_INTERVAL_CROUCH := 0.6
+const STEP_INTERVAL_PRONE  := 0.8
+
 var is_crouching = false
 var is_prone = false
 var is_exhausted = false
 var bhop_speed: float = 0.0
 var is_dead: bool = false
 var _death_timer: float = 0.0
-var _death_duration: float = 1.5  # how long the fall animation takes
+var _death_duration: float = 1.5
+var step_timer: float = 0.0
 
 var base_collision_position_y: float
 var base_collision_half_height: float = 0.0
@@ -89,9 +97,7 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	if is_dead:
 		_death_timer += delta
-		# Tilt camera to the ground like falling over
 		camera.rotation.x = lerp(camera.rotation.x, deg_to_rad(80.0), delta * 3.0)
-		# Sink camera down to floor level
 		camera_mount.position.y = lerp(camera_mount.position.y, 0.1, delta * 3.0)
 		if _death_timer >= _death_duration:
 			SignalBus.player_died.emit()
@@ -110,14 +116,10 @@ func _physics_process(delta):
 		HotBarManager.throw_active_item(self)
 
 	var input_dir = Vector2.ZERO
-	if Input.is_key_pressed(KEY_W):
-		input_dir.y -= 1
-	if Input.is_key_pressed(KEY_S):
-		input_dir.y += 1
-	if Input.is_key_pressed(KEY_A):
-		input_dir.x -= 1
-	if Input.is_key_pressed(KEY_D):
-		input_dir.x += 1
+	if Input.is_key_pressed(KEY_W): input_dir.y -= 1
+	if Input.is_key_pressed(KEY_S): input_dir.y += 1
+	if Input.is_key_pressed(KEY_A): input_dir.x -= 1
+	if Input.is_key_pressed(KEY_D): input_dir.x += 1
 	input_dir = input_dir.normalized()
 
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -195,6 +197,26 @@ func _physics_process(delta):
 		else:
 			is_prone = true
 			_apply_posture_height(PRONE_HEIGHT)
+
+	# --- Footsteps ---
+	var is_moving = Vector2(velocity.x, velocity.z).length() > 0.5
+	if is_moving and is_on_floor():
+		var interval: float
+		if wants_to_sprint and not is_exhausted:
+			interval = STEP_INTERVAL_SPRINT
+		elif is_prone:
+			interval = STEP_INTERVAL_PRONE
+		elif is_crouching:
+			interval = STEP_INTERVAL_CROUCH
+		else:
+			interval = STEP_INTERVAL_WALK
+
+		step_timer -= delta
+		if step_timer <= 0.0:
+			step_timer = interval
+			footsteps.play()
+	else:
+		step_timer = 0.0  # reset so first step is immediate when moving again
 
 	_handle_step_up()
 	move_and_slide()

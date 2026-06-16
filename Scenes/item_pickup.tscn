@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c6840liospf1k" path="res://scripts/item_pickup.gd" id="1_im1t2"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_im1t2"]
-radius = 0.1
-height = 0.2
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_lpngd"]
-radius = 0.1
+radius = 0.15
 
 [node name="ItemPickup" type="Node3D" unique_id=1440671623]
 
@@ -16,9 +12,6 @@ collision_layer = 3
 script = ExtResource("1_im1t2")
 
 [node name="Label3D" type="Label3D" parent="Area3D" unique_id=370605202]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D" unique_id=1939421947]
-mesh = SubResource("SphereMesh_im1t2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=831944787]
 shape = SubResource("SphereShape3D_lpngd")
