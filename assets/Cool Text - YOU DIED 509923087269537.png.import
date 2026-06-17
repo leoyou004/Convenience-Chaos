@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnyy565pj661q"
-path="res://.godot/imported/Cool Text - YOU DIED 509923087269537.png-2129abd872d2074c4b191b3b6a38df36.ctex"
+path="res://.godot/imported/Cool Text - YOU DIED 509923087269537.png-2fd0b50497c3a2e6063d5f6751950db6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cool Text - YOU DIED 509923087269537.png"
-dest_files=["res://.godot/imported/Cool Text - YOU DIED 509923087269537.png-2129abd872d2074c4b191b3b6a38df36.ctex"]
+source_file="res://assets/Cool Text - YOU DIED 509923087269537.png"
+dest_files=["res://.godot/imported/Cool Text - YOU DIED 509923087269537.png-2fd0b50497c3a2e6063d5f6751950db6.ctex"]
 
 [params]
 
