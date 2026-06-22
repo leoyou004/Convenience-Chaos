@@ -1015,7 +1015,7 @@ autoplay = true
 max_distance = 9.0
 
 [node name="Car3" type="MeshInstance3D" parent="." unique_id=1865239850]
-transform = Transform3D(0.963719, 0, 0.2669188, 0, 1, 0, -0.2669188, 0, 0.963719, -13.747745, -0.14167325, -0.99534184)
+transform = Transform3D(0.963719, 0, 0.2669188, 0, 1, 0, -0.2669188, 0, 0.963719, -14.251749, -0.14167325, -2.0234485)
 material_override = SubResource("StandardMaterial3D_5c74x")
 mesh = ExtResource("19_5ltgo")
 
