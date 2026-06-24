@@ -751,6 +751,7 @@ shape = SubResource("ConcavePolygonShape3D_kttmh")
 
 [node name="Food" parent="NavigationRegion3D/6twelve" index="108" unique_id=1592600140]
 transform = Transform3D(17.902733, -1.5651066e-06, -6.841298e-14, 1.5651066e-06, 17.902733, 7.825533e-07, 0, 7.825533e-07, -17.902733, -7.4878354, 1.2181547, -11.540494)
+layers = 3
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food" index="0" unique_id=177630115]
 
@@ -759,12 +760,14 @@ shape = SubResource("ConcavePolygonShape3D_3w3pq")
 
 [node name="Food" type="MeshInstance3D" parent="NavigationRegion3D/6twelve/Food" index="1" unique_id=701654544]
 transform = Transform3D(-0.69220895, 2.471616e-07, -0.0035530073, 1.8165287e-07, 0.94240427, -4.3309175e-08, -0.0024646197, 4.178046e-08, 0.9979055, 0.33068013, -0.006726943, 0.004970491)
+layers = 3
 mesh = SubResource("ArrayMesh_l0xp5")
 script = ExtResource("4_r8wsu")
 
 [node name="Food_03" parent="NavigationRegion3D/6twelve" index="109" unique_id=37886760]
 transform = Transform3D(17.902733, -1.5651066e-06, -6.841298e-14, 1.5651066e-06, 17.902733, 7.825533e-07, 0, 7.825533e-07, -17.902733, -1.0588105, 14.035369, -11.619318)
 visible = false
+layers = 3
 mesh = SubResource("ArrayMesh_lwewk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_03" index="0" unique_id=1539324646]

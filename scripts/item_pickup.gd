@@ -15,7 +15,7 @@ func _ready() -> void:
 	if item_resource == null and ResourceLoader.exists(DEFAULT_ITEM_RESOURCE_PATH):
 		item_resource = load(DEFAULT_ITEM_RESOURCE_PATH)
 
-	collision_layer = 1 << 1
+	collision_layer = 1 << 4
 	collision_mask = 1 << 0
 
 	if not body_entered.is_connected(_on_body_entered):
@@ -71,8 +71,13 @@ func _update_label() -> void:
 		label.text = "Item"
 
 func _free_pickup_root() -> void:
+	# If this pickup area is nested inside a thrown/dropped RigidBody3D,
+	# freeing that body also frees this node (since it's a child) — so don't double-free.
 	if has_meta("linked_body"):
 		var body = get_meta("linked_body")
 		if is_instance_valid(body):
 			body.queue_free()
+			return
+
+	# Standalone pickup (not nested in a thrown body) — free itself directly.
 	queue_free()
