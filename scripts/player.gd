@@ -3,79 +3,35 @@ extends CharacterBody3D
 @onready var camera_mount = %CameraMount
 @onready var camera = %CameraMount/Camera3D
 @onready var collision_shape = $CollisionShape3D
-@onready var stamina_audio = $"CollisionShape3D/Stamina Breathing"
-@onready var chase_music = $"CollisionShape3D/Chase music"
 @onready var footsteps = $"CollisionShape3D/Footsteps"
+@onready var pickup_area: Area3D = $PickupArea
 
 var speed = 5.0
 var sprint_speed = 8.0
 var crouch_speed = 2.5
-var prone_speed = 1.0
 var current_speed = speed
 var mouse_sensitivity = 0.002
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var hand_display: Node3D = null
+var is_crouching = false
+var is_dead = false
+var step_timer = 0.0
 
-const STANDING_HEIGHT := 0.7
-const CROUCH_HEIGHT := 0.3
-const PRONE_HEIGHT := 0.001
-const STANDING_CAMERA_HEIGHT := 1
-const CROUCH_CAMERA_HEIGHT := 0.2
-const PRONE_CAMERA_HEIGHT := 0.001
-const SPRINT_MAX_SECONDS := 7.0
-const SPRINT_RECHARGE_SECONDS := 10.0
-const JUMP_VELOCITY := 3.0
-const BHOP_MULTIPLIER := 1.08
-const BHOP_MAX := 14.0
-const STEP_HEIGHT := 0.4
-const STEP_CHECK_DISTANCE := 0.3
+var nearby_item: Node = null  # currently overlapping pickup item
 
-# footstep intervals per movement state
-const STEP_INTERVAL_WALK   := 0.45
+const STEP_INTERVAL_WALK := 0.45
 const STEP_INTERVAL_SPRINT := 0.28
 const STEP_INTERVAL_CROUCH := 0.6
-const STEP_INTERVAL_PRONE  := 0.8
-
-var is_crouching = false
-var is_prone = false
-var is_exhausted = false
-var bhop_speed: float = 0.0
-var is_dead: bool = false
-var _death_timer: float = 0.0
-var _death_duration: float = 1.5
-var step_timer: float = 0.0
-
-var base_collision_position_y: float
-var base_collision_half_height: float = 0.0
-var base_capsule_height: float = 1.0
-var base_capsule_radius: float = 0.0
-var base_camera_height: float = 0.9
-var crouch_camera_height: float = 0.5
-var prone_camera_height: float = 0.15
-var sprint_stamina: float = SPRINT_MAX_SECONDS
+const JUMP_VELOCITY := 3.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
-	collision_shape.scale = Vector3.ONE
 
-	if collision_shape.shape is CapsuleShape3D:
-		collision_shape.shape = collision_shape.shape.duplicate()
-		var capsule := collision_shape.shape as CapsuleShape3D
-		base_capsule_height = capsule.height
-		base_capsule_radius = capsule.radius
-		base_collision_half_height = (base_capsule_height / 2.0) + base_capsule_radius
-
-	base_collision_position_y = collision_shape.position.y
-	base_camera_height = camera_mount.position.y
-
-	_apply_posture_height(STANDING_HEIGHT)
-	_setup_hand_display()
-	HotBarManager.hotbar_updated.connect(_on_hotbar_updated)
-	SignalBus.enemy_alerted.connect(_on_enemy_alerted)
-	SignalBus.enemy_calm.connect(_on_enemy_calm)
 	SignalBus.player_caught.connect(_on_player_caught)
+
+	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
+	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
 
 func _input(event):
 	if is_dead:
@@ -88,19 +44,19 @@ func _input(event):
 func _unhandled_input(event):
 	if is_dead:
 		return
+
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			HotBarManager.cycle_slot(1)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			HotBarManager.cycle_slot(-1)
 
+	if event.is_action_pressed("interact") and nearby_item:
+		HotBarManager.pick_up_item(nearby_item)
+		nearby_item = null
+
 func _physics_process(delta):
 	if is_dead:
-		_death_timer += delta
-		camera.rotation.x = lerp(camera.rotation.x, deg_to_rad(80.0), delta * 3.0)
-		camera_mount.position.y = lerp(camera_mount.position.y, 0.1, delta * 3.0)
-		if _death_timer >= _death_duration:
-			SignalBus.player_died.emit()
 		return
 
 	if Input.is_action_just_pressed("slot_1"):
@@ -124,187 +80,56 @@ func _physics_process(delta):
 
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if is_on_floor():
-		if Input.is_action_just_pressed("ui_accept"):
-			velocity.y = JUMP_VELOCITY
-			if bhop_speed < BHOP_MAX:
-				bhop_speed = minf(bhop_speed * BHOP_MULTIPLIER, BHOP_MAX)
-			else:
-				bhop_speed = BHOP_MAX
-		else:
-			bhop_speed = move_toward(bhop_speed, 0.0, 2.0 * delta)
-
 	if direction:
-		var effective_speed = current_speed + bhop_speed
-		velocity.x = direction.x * effective_speed
-		velocity.z = direction.z * effective_speed
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 	else:
-		bhop_speed = move_toward(bhop_speed, 0.0, 5.0 * delta)
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif velocity.y < 0.0:
-		velocity.y = 0.0
+	elif Input.is_action_just_pressed("ui_accept"):
+		velocity.y = JUMP_VELOCITY
 
-	var is_standing := not is_crouching and not is_prone
-	var wants_to_sprint := Input.is_action_pressed("sprint") and is_standing
-
-	if wants_to_sprint and sprint_stamina > 0.0 and not is_exhausted:
-		sprint_stamina = maxf(0.0, sprint_stamina - delta)
+	var wants_to_sprint = Input.is_action_pressed("sprint") and not is_crouching
+	if wants_to_sprint:
 		current_speed = sprint_speed
+	elif is_crouching:
+		current_speed = crouch_speed
 	else:
-		sprint_stamina = minf(SPRINT_MAX_SECONDS, sprint_stamina + (SPRINT_MAX_SECONDS / SPRINT_RECHARGE_SECONDS) * delta)
-		if is_prone:
-			current_speed = prone_speed
-		elif is_crouching:
-			current_speed = crouch_speed
-		else:
-			current_speed = speed
-
-	if sprint_stamina <= 0.0:
-		is_exhausted = true
-		if not stamina_audio.playing:
-			stamina_audio.play()
-	elif sprint_stamina >= SPRINT_MAX_SECONDS:
-		is_exhausted = false
-		if stamina_audio.playing:
-			stamina_audio.stop()
-
-	SignalBus.sprint_stamina_changed.emit(sprint_stamina, SPRINT_MAX_SECONDS)
+		current_speed = speed
 
 	if Input.is_action_just_pressed("crouch"):
-		if is_prone:
-			is_prone = false
-			is_crouching = true
-			_apply_posture_height(CROUCH_HEIGHT)
-		elif is_crouching:
-			is_crouching = false
-			_apply_posture_height(STANDING_HEIGHT)
-		else:
-			is_crouching = true
-			_apply_posture_height(CROUCH_HEIGHT)
+		is_crouching = not is_crouching
 
-	if Input.is_action_just_pressed("prone"):
-		if is_crouching:
-			is_crouching = false
-			is_prone = true
-			_apply_posture_height(PRONE_HEIGHT)
-		elif is_prone:
-			is_prone = false
-			_apply_posture_height(STANDING_HEIGHT)
-		else:
-			is_prone = true
-			_apply_posture_height(PRONE_HEIGHT)
+	_handle_footsteps(wants_to_sprint, delta)
+	move_and_slide()
 
-	# --- Footsteps ---
+func _handle_footsteps(sprinting: bool, delta: float) -> void:
 	var is_moving = Vector2(velocity.x, velocity.z).length() > 0.5
 	if is_moving and is_on_floor():
-		var interval: float
-		if wants_to_sprint and not is_exhausted:
+		var interval = STEP_INTERVAL_WALK
+		if sprinting:
 			interval = STEP_INTERVAL_SPRINT
-		elif is_prone:
-			interval = STEP_INTERVAL_PRONE
 		elif is_crouching:
 			interval = STEP_INTERVAL_CROUCH
-		else:
-			interval = STEP_INTERVAL_WALK
 
 		step_timer -= delta
 		if step_timer <= 0.0:
 			step_timer = interval
 			footsteps.play()
 	else:
-		step_timer = 0.0  # reset so first step is immediate when moving again
+		step_timer = 0.0
 
-	_handle_step_up()
-	move_and_slide()
+func _on_pickup_area_body_entered(body: Node) -> void:
+	if body.is_in_group("item"):
+		nearby_item = body
+
+func _on_pickup_area_body_exited(body: Node) -> void:
+	if body == nearby_item:
+		nearby_item = null
 
 func _on_player_caught() -> void:
-	if is_dead:
-		return
 	is_dead = true
 	velocity = Vector3.ZERO
-
-func _on_enemy_alerted() -> void:
-	if not chase_music.playing:
-		chase_music.play()
-
-func _on_enemy_calm() -> void:
-	if chase_music.playing:
-		chase_music.stop()
-
-func _handle_step_up() -> void:
-	if is_on_floor() and velocity.length() > 0.1:
-		var space = get_world_3d().direct_space_state
-		var forward = Vector3(velocity.x, 0, velocity.z).normalized()
-
-		var foot_origin = global_position
-		var foot_query = PhysicsRayQueryParameters3D.create(
-			foot_origin,
-			foot_origin + forward * STEP_CHECK_DISTANCE,
-			collision_mask
-		)
-		foot_query.exclude = [self]
-		var foot_hit = space.intersect_ray(foot_query)
-
-		if foot_hit:
-			var step_origin = global_position + Vector3(0, STEP_HEIGHT, 0)
-			var step_query = PhysicsRayQueryParameters3D.create(
-				step_origin,
-				step_origin + forward * STEP_CHECK_DISTANCE,
-				collision_mask
-			)
-			step_query.exclude = [self]
-			var step_hit = space.intersect_ray(step_query)
-
-			if not step_hit:
-				global_position.y += STEP_HEIGHT
-				velocity.y = 0.0
-
-func _apply_posture_height(height: float) -> void:
-	var multiplier = height / base_capsule_height
-
-	if collision_shape.shape is CapsuleShape3D:
-		var capsule := collision_shape.shape as CapsuleShape3D
-		capsule.height = base_capsule_height * multiplier
-		capsule.radius = base_capsule_radius
-		var new_half_height := (capsule.height / 2.0) + base_capsule_radius
-		var height_delta := base_collision_half_height - new_half_height
-		collision_shape.position.y = base_collision_position_y - height_delta
-
-	if is_prone:
-		camera_mount.position.y = PRONE_CAMERA_HEIGHT
-	elif is_crouching:
-		camera_mount.position.y = CROUCH_CAMERA_HEIGHT
-	else:
-		camera_mount.position.y = STANDING_CAMERA_HEIGHT
-
-func _setup_hand_display() -> void:
-	hand_display = Node3D.new()
-	hand_display.name = "HandDisplay"
-	camera_mount.add_child(hand_display)
-	hand_display.position = Vector3(0.15, -0.1, -0.3)
-
-func _on_hotbar_updated(slots: Array, active_slot: int) -> void:
-	if hand_display == null:
-		return
-
-	for child in hand_display.get_children():
-		child.queue_free()
-
-	var active_item = slots[active_slot]
-	if active_item == null:
-		return
-
-	var icon = null
-	if typeof(active_item) == TYPE_OBJECT:
-		icon = active_item.get("icon") if active_item.has_method("get") else null
-
-	if icon and icon is Texture2D:
-		var sprite = Sprite3D.new()
-		sprite.texture = icon
-		sprite.pixel_size = 0.002
-		sprite.scale = Vector3(0.3, 0.3, 1)
-		hand_display.add_child(sprite)
