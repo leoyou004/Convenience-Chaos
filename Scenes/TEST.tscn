@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://p6puvg0vtt34"]
 
+[ext_resource type="PackedScene" uid="uid://bxtgwe6o0js3l" path="res://Scenes/item_beer.tscn" id="1_lgo25"]
 [ext_resource type="PackedScene" uid="uid://cafmrr72kbqi2" path="res://Scenes/6_twelve.tscn" id="2_30rdv"]
 [ext_resource type="PackedScene" uid="uid://c7hs8c3plf0rd" path="res://Scenes/Player.tscn" id="2_3503q"]
 [ext_resource type="Material" uid="uid://bwvihsa5uquje" path="res://6twelve/Models/Materials/Food_shelf_03.tres" id="3_lwewk"]
@@ -14,7 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://b43310cwccl1" path="res://Characters_psx/Characters_psx/Models/freesound_community-conveniencestorering-96090.mp3" id="8_f03e8"]
 [ext_resource type="Script" uid="uid://b1mhnkyccug05" path="res://Scenes/restock_shelf.gd" id="14_gduu2"]
 [ext_resource type="PackedScene" uid="uid://bgeqj7ax8la8u" path="res://DeathScreen.tscn" id="15_gduu2"]
-[ext_resource type="PackedScene" uid="uid://bldpxovo52jyb" path="res://Scenes/item_pickup.tscn" id="16_mpccf"]
 [ext_resource type="Texture2D" uid="uid://dm7u86cnjmyks" path="res://assets/Car 02/car2_red.png" id="17_lgo25"]
 [ext_resource type="ArrayMesh" uid="uid://cfccj6leihn2p" path="res://assets/Car 02/Car2.obj" id="18_o1gvc"]
 [ext_resource type="ArrayMesh" uid="uid://311bhkqa253p" path="res://assets/Car 03/Car3.obj" id="19_5ltgo"]
@@ -488,6 +488,8 @@ size = Vector3(22.762085, 5.978821, 17.853271)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=625555004]
 environment = SubResource("Environment_kbp8u")
+
+[node name="Item_Beer" parent="WorldEnvironment" unique_id=1239160344 groups=["item"] instance=ExtResource("1_lgo25")]
 
 [node name="Player" parent="." unique_id=1048298426 instance=ExtResource("2_3503q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.128235, 0.94495904, -6.2643366)
@@ -1163,7 +1165,7 @@ shape = SubResource("BoxShape3D_kbp8u")
 
 [node name="Node2D" parent="." unique_id=676895497 instance=ExtResource("15_gduu2")]
 
-[node name="ItemPickup" parent="." unique_id=1440671623 instance=ExtResource("16_mpccf")]
+[node name="ItemPickup" parent="." unique_id=1440671623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0065846, 0, 0)
 
 [node name="Car2" type="MeshInstance3D" parent="." unique_id=2140265973]

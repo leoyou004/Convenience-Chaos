@@ -16,8 +16,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var is_crouching = false
 var is_dead = false
 var step_timer = 0.0
-
-var nearby_item: Node = null  # currently overlapping pickup item
+var nearby_item: Node = null
 
 const STEP_INTERVAL_WALK := 0.45
 const STEP_INTERVAL_SPRINT := 0.28
@@ -27,9 +26,7 @@ const JUMP_VELOCITY := 3.0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
-
 	SignalBus.player_caught.connect(_on_player_caught)
-
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
 
@@ -44,13 +41,11 @@ func _input(event):
 func _unhandled_input(event):
 	if is_dead:
 		return
-
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			HotBarManager.cycle_slot(1)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			HotBarManager.cycle_slot(-1)
-
 	if event.is_action_pressed("interact") and nearby_item:
 		HotBarManager.pick_up_item(nearby_item)
 		nearby_item = null
@@ -114,7 +109,6 @@ func _handle_footsteps(sprinting: bool, delta: float) -> void:
 			interval = STEP_INTERVAL_SPRINT
 		elif is_crouching:
 			interval = STEP_INTERVAL_CROUCH
-
 		step_timer -= delta
 		if step_timer <= 0.0:
 			step_timer = interval

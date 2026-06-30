@@ -22,6 +22,9 @@ shader_parameter/noise_intensity = 0.1
 shader_parameter/glitch_interval = 20.0
 shader_parameter/glitch_duration = 0.4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(1, 0.7788086, 1.4355469)
+
 [node name="Player" type="CharacterBody3D" unique_id=1048298426 groups=["Player"]]
 collision_layer = 5
 collision_mask = 5
@@ -74,5 +77,13 @@ material = SubResource("ShaderMaterial_dewec")
 offset_right = 1930.0
 offset_bottom = 1091.0
 color = Color(1, 1, 1, 0)
+
+[node name="PickupArea" type="Area3D" parent="." unique_id=1538305789]
+collision_layer = 0
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea" unique_id=512797033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1105957, -0.21777344)
+shape = SubResource("BoxShape3D_g4v7s")
 
 [connection signal="body_entered" from="NoiseEmitter" to="NoiseEmitter" method="_on_body_entered"]
