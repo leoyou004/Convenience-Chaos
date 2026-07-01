@@ -29,6 +29,7 @@ func _ready():
 	SignalBus.player_caught.connect(_on_player_caught)
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
+	print("PickupArea mask: ", pickup_area.collision_mask)
 
 func _input(event):
 	if is_dead:
@@ -47,8 +48,11 @@ func _unhandled_input(event):
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			HotBarManager.cycle_slot(-1)
 	if event.is_action_pressed("interact") and nearby_item:
+		print("picking up: ", nearby_item.name)
 		HotBarManager.pick_up_item(nearby_item)
 		nearby_item = null
+	elif event.is_action_pressed("interact"):
+		print("interact pressed but no nearby_item")
 
 func _physics_process(delta):
 	if is_dead:
@@ -117,8 +121,12 @@ func _handle_footsteps(sprinting: bool, delta: float) -> void:
 		step_timer = 0.0
 
 func _on_pickup_area_body_entered(body: Node) -> void:
+	print("body entered pickup area: ", body.name)
 	if body.is_in_group("item"):
 		nearby_item = body
+		print("nearby_item set: ", body.name)
+	else:
+		print("body not in item group: ", body.get_groups())
 
 func _on_pickup_area_body_exited(body: Node) -> void:
 	if body == nearby_item:

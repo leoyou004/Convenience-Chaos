@@ -20,7 +20,7 @@ config/icon="res://assets/textures/icon.svg"
 GameManager="*uid://vjyqpb2h2hbs"
 SignalBus="*uid://cjcyla6y7b6pr"
 ObjectiveManager="*uid://nb6hrb0ws4hc"
-HotBarManager="*uid://dly8agh4d7cq2"
+HotBarManager="*uid://dwsxe0lj0nx6a"
 
 [display]
 

@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://bxtgwe6o0js3l"]
 
+[ext_resource type="Script" uid="uid://qelmuk8if5k6" path="res://Scenes/item.gd" id="1_rp8b8"]
+[ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://assets/textures/icon.svg" id="2_g4n5x"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 
 [node name="Item_Beer" type="RigidBody3D" unique_id=1239160344]
 collision_layer = 8
+script = ExtResource("1_rp8b8")
+icon = ExtResource("2_g4n5x")
+scene_file = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=905854815]
 mesh = SubResource("BoxMesh_g4v7s")
