@@ -499,15 +499,15 @@ navigation_mesh = SubResource("NavigationMesh_3503q")
 
 [node name="6twelve" parent="NavigationRegion3D" unique_id=473798683 instance=ExtResource("2_30rdv")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Glasses" parent_id_path=PackedInt32Array(473798683, 1525545365) index="0" unique_id=71336046]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Glasses" parent_id_path=PackedInt32Array(473798683, 976187837) index="0" unique_id=71336046]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Glasses/StaticBody3D" unique_id=891237745]
 shape = SubResource("ConcavePolygonShape3D_mpccf")
 
-[node name="Door_01" parent="NavigationRegion3D/6twelve" index="6" unique_id=227946454]
+[node name="Door_01" parent="NavigationRegion3D/6twelve" index="6" unique_id=555096204]
 transform = Transform3D(101.85362, 0, 0, 0, -1.2141898e-05, 101.853615, 0, -101.853615, -1.2141898e-05, -7.8277097, 1.450011, -8.274813)
 
-[node name="6twelve" parent="NavigationRegion3D/6twelve" index="7" unique_id=1957431938]
+[node name="6twelve" parent="NavigationRegion3D/6twelve" index="7" unique_id=199439514]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -5.576513, 3.7905717, -17.418434)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/6twelve" index="0" unique_id=1399390146]
@@ -515,10 +515,10 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/6twelve/StaticBody3D" unique_id=1647795225]
 shape = SubResource("ConcavePolygonShape3D_30rdv")
 
-[node name="Payment_Terminal" parent="NavigationRegion3D/6twelve" index="8" unique_id=1898240159]
+[node name="Payment_Terminal" parent="NavigationRegion3D/6twelve" index="8" unique_id=52694120]
 transform = Transform3D(-7.501431, 2.921165e-06, -2.1320349e-13, 0, 4.4712013e-07, 7.501431, 2.921165e-06, 7.501431, -8.9424026e-07, -13.605182, 1.3223519, -12.169559)
 
-[node name="Mostrator" parent="NavigationRegion3D/6twelve" index="9" unique_id=1530406761]
+[node name="Mostrator" parent="NavigationRegion3D/6twelve" index="9" unique_id=1440835691]
 transform = Transform3D(100, 0, 0, 0, -1.1254565e-05, 99.99999, 0, -94.410126, -1.1920929e-05, -13.191012, 0.6616543, -11.336905)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Mostrator" index="0" unique_id=502648014]
@@ -526,7 +526,7 @@ transform = Transform3D(100, 0, 0, 0, -1.1254565e-05, 99.99999, 0, -94.410126, -
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Mostrator/StaticBody3D" unique_id=1327293470]
 shape = SubResource("ConcavePolygonShape3D_3503q")
 
-[node name="Grass_" parent="NavigationRegion3D/6twelve" index="11" unique_id=595988963]
+[node name="Grass_" parent="NavigationRegion3D/6twelve" index="11" unique_id=232800936]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -5.641124, 0.10417017, -17.036726)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_" index="0" unique_id=563692189]
@@ -534,67 +534,67 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Grass_/StaticBody3D" unique_id=228064650]
 shape = SubResource("ConcavePolygonShape3D_kut0f")
 
-[node name="Door_Mostrator" parent="NavigationRegion3D/6twelve" index="12" unique_id=169988344]
+[node name="Door_Mostrator" parent="NavigationRegion3D/6twelve" index="12" unique_id=237509784]
 visible = false
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_05" parent_id_path=PackedInt32Array(473798683, 1121242053) index="0" unique_id=130854177]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_05" parent_id_path=PackedInt32Array(473798683, 760556364) index="0" unique_id=130854177]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_05/StaticBody3D" unique_id=384351880]
 shape = SubResource("ConcavePolygonShape3D_nvnhk")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Wall" parent_id_path=PackedInt32Array(473798683, 1628538055) index="0" unique_id=572129773]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Wall" parent_id_path=PackedInt32Array(473798683, 501397395) index="0" unique_id=572129773]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Wall/StaticBody3D" unique_id=542469275]
 shape = SubResource("ConcavePolygonShape3D_ecng0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Alcohol_Cigars" parent_id_path=PackedInt32Array(473798683, 884320024) index="0" unique_id=863815891]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Alcohol_Cigars" parent_id_path=PackedInt32Array(473798683, 34553799) index="0" unique_id=863815891]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Alcohol_Cigars/StaticBody3D" unique_id=436643536]
 shape = SubResource("ConcavePolygonShape3D_v5x5n")
 
-[node name="Cabinet" parent="NavigationRegion3D/6twelve" index="24" unique_id=1955083012]
+[node name="Cabinet" parent="NavigationRegion3D/6twelve" index="24" unique_id=874052515]
 transform = Transform3D(13.401839, 0, 0, 0, -2.0776338e-06, 10.265911, 0, -17.428453, -1.2237921e-06, -13.301898, 1.6599127, -13.879491)
 
-[node name="Candys_02" parent="NavigationRegion3D/6twelve" index="25" unique_id=1067767112]
+[node name="Candys_02" parent="NavigationRegion3D/6twelve" index="25" unique_id=1522578283]
 transform = Transform3D(106.880424, 0, 0, 0, -1.27411395e-05, 106.88042, 0, -106.88042, -1.27411395e-05, -12.975619, 1.5827557, -13.161167)
 
-[node name="Monitor" parent="NavigationRegion3D/6twelve" index="26" unique_id=1297564796]
+[node name="Monitor" parent="NavigationRegion3D/6twelve" index="26" unique_id=1229141433]
 transform = Transform3D(15.962441, -3.5250146, 2.4069763e-07, 0, 1.3720962e-06, 16.152945, -2.4734786, -22.748463, 9.627905e-07, -13.383441, 1.6407101, -12.81257)
 
-[node name="Keyboard" parent="NavigationRegion3D/6twelve" index="27" unique_id=1318136834]
+[node name="Keyboard" parent="NavigationRegion3D/6twelve" index="27" unique_id=273778723]
 transform = Transform3D(0, 10.172492, 3.031639e-07, 3.031639e-07, 0, 10.172492, 10.172492, 3.031639e-07, 0, -13.660541, 1.4789006, -12.820741)
 
-[node name="Cash_register" parent="NavigationRegion3D/6twelve" index="28" unique_id=1408015341]
+[node name="Cash_register" parent="NavigationRegion3D/6twelve" index="28" unique_id=306131406]
 transform = Transform3D(15.375233, 0, 0, 0, -1.8328706e-06, 15.375232, 0, -15.375232, -1.8328706e-06, -13.660541, 1.4525042, -12.872107)
 
-[node name="Coffee_maker" parent="NavigationRegion3D/6twelve" index="29" unique_id=390462680]
+[node name="Coffee_maker" parent="NavigationRegion3D/6twelve" index="29" unique_id=1019675431]
 transform = Transform3D(36.386375, 0, 0, 0, -4.337594e-06, 36.38637, 0, -36.38637, -4.337594e-06, -13.227084, 1.7991805, -14.448497)
 
-[node name="Napkins" parent="NavigationRegion3D/6twelve" index="30" unique_id=1315744669]
+[node name="Napkins" parent="NavigationRegion3D/6twelve" index="30" unique_id=1963775707]
 transform = Transform3D(15.082087, 0, 0, 0, -1.7979248e-06, 15.082086, 0, -15.082086, -1.7979248e-06, -13.009208, 1.4675633, -15.127416)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_shelf" parent_id_path=PackedInt32Array(473798683, 151690553) index="0" unique_id=638468720]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_shelf" parent_id_path=PackedInt32Array(473798683, 11076506) index="0" unique_id=638468720]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Food_shelf/StaticBody3D" unique_id=2119955782]
 shape = SubResource("ConcavePolygonShape3D_ebe5b")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator/IceCream_Refrigerator_Door" parent_id_path=PackedInt32Array(473798683, 138740499) index="0" unique_id=1424835765]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator/IceCream_Refrigerator_Door" parent_id_path=PackedInt32Array(473798683, 1881010765) index="0" unique_id=1424835765]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator/IceCream_Refrigerator_Door/StaticBody3D" unique_id=132507528]
 transform = Transform3D(0.009391528, 0, 0, 0, -1.1195573e-09, -0.009391526, 0, 0.009391526, -1.1195573e-09, 0.0002875775, 0.0036840588, 0.0018103113)
 shape = SubResource("BoxShape3D_u5tym")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator" parent_id_path=PackedInt32Array(473798683, 1397964860) index="2" unique_id=563629952]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator" parent_id_path=PackedInt32Array(473798683, 1675576497) index="2" unique_id=563629952]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator/StaticBody3D" unique_id=391693601]
 shape = SubResource("ConcavePolygonShape3D_8wcx4")
 
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator" parent_id_path=PackedInt32Array(473798683, 1397964860) index="3" unique_id=470248822]
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D/6twelve/IceCream_Refrigerator" parent_id_path=PackedInt32Array(473798683, 1675576497) index="3" unique_id=470248822]
 transform = Transform3D(1.0000005, 0, 0, 0, 1.0000006, -2.842171e-14, 0, 2.842171e-14, 1.0000006, -0.0029591098, 0.001178652, -0.002270646)
 vertices = PackedVector3Array(0.008953176, 0, -0.008284226, 0.008166954, 0, 0.010423347, -0.0013726428, 0, 0.010736629, -0.0013226718, 0, -0.0091700405)
 affect_navigation_mesh = true
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights" parent_id_path=PackedInt32Array(473798683, 1888113591) index="0" unique_id=1172796779]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights" parent_id_path=PackedInt32Array(473798683, 634808868) index="0" unique_id=1172796779]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -602,7 +602,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_01" parent_id_path=PackedInt32Array(473798683, 2037009070) index="0" unique_id=1024879989]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_01" parent_id_path=PackedInt32Array(473798683, 1707437481) index="0" unique_id=1024879989]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -610,7 +610,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_02" parent_id_path=PackedInt32Array(473798683, 559538552) index="0" unique_id=2113706262]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_02" parent_id_path=PackedInt32Array(473798683, 423948962) index="0" unique_id=2113706262]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -618,7 +618,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_03" parent_id_path=PackedInt32Array(473798683, 241046568) index="0" unique_id=643412589]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_03" parent_id_path=PackedInt32Array(473798683, 545012636) index="0" unique_id=643412589]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -626,7 +626,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_04" parent_id_path=PackedInt32Array(473798683, 39119023) index="0" unique_id=1520703604]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_04" parent_id_path=PackedInt32Array(473798683, 1143699239) index="0" unique_id=1520703604]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191036)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -634,7 +634,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_05" parent_id_path=PackedInt32Array(473798683, 652686982) index="0" unique_id=100837402]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_05" parent_id_path=PackedInt32Array(473798683, 427302118) index="0" unique_id=100837402]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191036)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -642,7 +642,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_06" parent_id_path=PackedInt32Array(473798683, 364561107) index="0" unique_id=1294716930]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_06" parent_id_path=PackedInt32Array(473798683, 916570741) index="0" unique_id=1294716930]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191036)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -650,7 +650,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_07" parent_id_path=PackedInt32Array(473798683, 1065484718) index="0" unique_id=1134526970]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_07" parent_id_path=PackedInt32Array(473798683, 60027106) index="0" unique_id=1134526970]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191036)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -658,7 +658,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_08" parent_id_path=PackedInt32Array(473798683, 1198719055) index="0" unique_id=37779863]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_08" parent_id_path=PackedInt32Array(473798683, 1841977260) index="0" unique_id=37779863]
 transform = Transform3D(0.014031073, 4.1815856e-10, 4.1815856e-10, 0, 0.014031073, -4.1815856e-10, 0, 0, 0.014031073, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -666,7 +666,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_09" parent_id_path=PackedInt32Array(473798683, 1363070682) index="0" unique_id=1117294571]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_09" parent_id_path=PackedInt32Array(473798683, 1531976458) index="0" unique_id=1117294571]
 transform = Transform3D(0.014031073, 4.1815856e-10, 4.1815856e-10, 0, 0.014031073, -4.1815856e-10, 0, 0, 0.014031073, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -674,7 +674,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_10" parent_id_path=PackedInt32Array(473798683, 167990359) index="0" unique_id=208234589]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_10" parent_id_path=PackedInt32Array(473798683, 52082734) index="0" unique_id=208234589]
 transform = Transform3D(0.014031073, 0, 2.5256074e-16, 0, 0.014031073, 8.363171e-10, 0, 0, 0.014031073, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -682,7 +682,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_11" parent_id_path=PackedInt32Array(473798683, 1539509790) index="0" unique_id=2083815552]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_11" parent_id_path=PackedInt32Array(473798683, 811944724) index="0" unique_id=2083815552]
 transform = Transform3D(0.014031073, 0, 2.5256074e-16, 0, 0.014031073, 8.363171e-10, 0, 0, 0.014031073, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -690,7 +690,7 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_13" parent_id_path=PackedInt32Array(473798683, 791742069) index="0" unique_id=1131156930]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_13" parent_id_path=PackedInt32Array(473798683, 840486240) index="0" unique_id=1131156930]
 transform = Transform3D(0.014031072, 0, 0, 0, 0.014031074, 1.110223e-16, 0, -1.110223e-16, 0.014031074, 0, 0, -0.0031191036)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -698,27 +698,27 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_06" parent_id_path=PackedInt32Array(473798683, 1141771648) index="0" unique_id=797908555]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_06" parent_id_path=PackedInt32Array(473798683, 1269912687) index="0" unique_id=797908555]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_06/StaticBody3D" unique_id=555750807]
 shape = SubResource("ConcavePolygonShape3D_crs7q")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_07" parent_id_path=PackedInt32Array(473798683, 571632870) index="0" unique_id=937994514]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_07" parent_id_path=PackedInt32Array(473798683, 728925055) index="0" unique_id=937994514]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_07/StaticBody3D" unique_id=2060307588]
 shape = SubResource("ConcavePolygonShape3D_kbp8u")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_08" parent_id_path=PackedInt32Array(473798683, 586938405) index="0" unique_id=2003873640]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_08" parent_id_path=PackedInt32Array(473798683, 363283300) index="0" unique_id=2003873640]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_08/StaticBody3D" unique_id=1128317595]
 shape = SubResource("ConcavePolygonShape3D_lgo25")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_09" parent_id_path=PackedInt32Array(473798683, 1987476541) index="0" unique_id=443379319]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_09" parent_id_path=PackedInt32Array(473798683, 1596084045) index="0" unique_id=443379319]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_09/StaticBody3D" unique_id=691951312]
 shape = SubResource("ConcavePolygonShape3D_6rofe")
 
-[node name="Shelf_10" parent="NavigationRegion3D/6twelve" index="53" unique_id=1564331674]
+[node name="Shelf_10" parent="NavigationRegion3D/6twelve" index="53" unique_id=1445151850]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -2.3705628, 1.1145408, -22.772774)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_10" index="0" unique_id=1449676352]
@@ -726,17 +726,17 @@ transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_10/StaticBody3D" unique_id=190775873]
 shape = SubResource("ConcavePolygonShape3D_u5tym")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_11" parent_id_path=PackedInt32Array(473798683, 1667882004) index="0" unique_id=1599430427]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_11" parent_id_path=PackedInt32Array(473798683, 791640306) index="0" unique_id=1599430427]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_11/StaticBody3D" unique_id=1036881475]
 shape = SubResource("ConcavePolygonShape3D_lwewk")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_12" parent_id_path=PackedInt32Array(473798683, 1102812323) index="0" unique_id=395725404]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Shelf_12" parent_id_path=PackedInt32Array(473798683, 635063320) index="0" unique_id=395725404]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Shelf_12/StaticBody3D" unique_id=1909652093]
 shape = SubResource("ConcavePolygonShape3D_5ltgo")
 
-[node name="Fuse_Boxes" parent="NavigationRegion3D/6twelve" index="57" unique_id=947559987]
+[node name="Fuse_Boxes" parent="NavigationRegion3D/6twelve" index="57" unique_id=1080222446]
 transform = Transform3D(49.07482, 0, 0, 0, -5.8501746e-06, 51.995827, 0, -49.074818, -6.198386e-06, 6.121127, 0.5047575, -20.137518)
 layers = 2
 
@@ -746,29 +746,29 @@ layers = 2
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 7.1054274e-15, 1, 0, 0, 0.0007422501)
 shape = SubResource("ConcavePolygonShape3D_1yp27")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Fuse_Boxes_01" parent_id_path=PackedInt32Array(473798683, 1977231582) index="0" unique_id=977825381]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Fuse_Boxes_01" parent_id_path=PackedInt32Array(473798683, 268661603) index="0" unique_id=977825381]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Fuse_Boxes_01/StaticBody3D" unique_id=1369749866]
 shape = SubResource("ConcavePolygonShape3D_r8wsu")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Fuse_Boxes_02" parent_id_path=PackedInt32Array(473798683, 970374449) index="0" unique_id=277937804]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Fuse_Boxes_02" parent_id_path=PackedInt32Array(473798683, 1034641046) index="0" unique_id=277937804]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Fuse_Boxes_02/StaticBody3D" unique_id=1822646775]
 shape = SubResource("ConcavePolygonShape3D_gduu2")
 
-[node name="Boxs_04" parent="NavigationRegion3D/6twelve" index="65" unique_id=378231459]
+[node name="Boxs_04" parent="NavigationRegion3D/6twelve" index="65" unique_id=1039724581]
 transform = Transform3D(-32.26366, 1.25639335e-05, -9.169884e-13, 0, 1.923064e-06, 32.26366, 1.25639335e-05, 32.26366, -3.846128e-06, -2.4033139, 1.3727081, -22.779398)
 
-[node name="Boxs_01" parent="NavigationRegion3D/6twelve" index="66" unique_id=846844863]
+[node name="Boxs_01" parent="NavigationRegion3D/6twelve" index="66" unique_id=1252802256]
 transform = Transform3D(32.26366, 1.25639335e-05, 9.169884e-13, 0, -1.923064e-06, 32.26366, -1.25639335e-05, 32.26366, 3.846128e-06, -9.130824, 1.3727081, -25.278717)
 
-[node name="Door_frame_01" parent="NavigationRegion3D/6twelve" index="70" unique_id=2128715223]
+[node name="Door_frame_01" parent="NavigationRegion3D/6twelve" index="70" unique_id=1170446286]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -14.878318, 1.6721165, -25.79436)
 
-[node name="Door_03" parent="NavigationRegion3D/6twelve" index="71" unique_id=1918231922]
+[node name="Door_03" parent="NavigationRegion3D/6twelve" index="71" unique_id=1157434946]
 transform = Transform3D(-27.70464, -53.76881, -6.409742e-06, 0, -7.210567e-06, 60.486618, -53.768806, 27.704634, 3.30265e-06, -14.194824, 1.4569167, -25.617035)
 
-[node name="Sink" parent="NavigationRegion3D/6twelve" index="72" unique_id=903174895]
+[node name="Sink" parent="NavigationRegion3D/6twelve" index="72" unique_id=864608668]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -12.303796, 0.59398067, -25.183372)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Sink" index="0" unique_id=124528970]
@@ -782,7 +782,7 @@ transform = Transform3D(1.0000005, 0, 0, 0, 1.0000007, -2.842171e-14, 0, 2.84217
 vertices = PackedVector3Array(0.007171124, 0, 0.0010540485, -0.013534568, 0, 0.004714459, -0.022345789, 0, -0.008220613)
 affect_navigation_mesh = true
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_12" parent_id_path=PackedInt32Array(473798683, 328470368) index="0" unique_id=580867089]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_12" parent_id_path=PackedInt32Array(473798683, 439714712) index="0" unique_id=580867089]
 transform = Transform3D(0.021233035, -4.1264583e-09, -9.249276e-09, -7.684104e-09, 0.006068516, -0.020347355, 6.597828e-09, 0.020347355, 0.0060685184, 0, 0, -0.003119111)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -791,7 +791,7 @@ light_volumetric_fog_energy = 5.61
 spot_range = 4.1275005
 spot_angle = 75.3
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_14" parent_id_path=PackedInt32Array(473798683, 2072725984) index="0" unique_id=2061833192]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Lights_14" parent_id_path=PackedInt32Array(473798683, 1150811146) index="0" unique_id=2061833192]
 transform = Transform3D(0.014031073, 0, 2.5256074e-16, 0, 0.014031073, 8.363171e-10, 0, 0, 0.014031073, 0, 0, -0.0031191)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -799,48 +799,48 @@ light_indirect_energy = 9.135
 light_volumetric_fog_energy = 5.61
 spot_angle = 75.3
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Dump" parent_id_path=PackedInt32Array(473798683, 1583954665) index="0" unique_id=535686154]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Dump" parent_id_path=PackedInt32Array(473798683, 394186041) index="0" unique_id=535686154]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Dump/StaticBody3D" unique_id=242802991]
 shape = SubResource("ConcavePolygonShape3D_o1gvc")
 
-[node name="trash_can_lid_01" parent="NavigationRegion3D/6twelve" index="82" unique_id=862600537]
+[node name="trash_can_lid_01" parent="NavigationRegion3D/6twelve" index="82" unique_id=1710006524]
 transform = Transform3D(16.7142, 0, 0, 0, 1.6993799, -1.4587069, 0, 1.4587069, 1.6993799, 4.181592, 1.3603034, -26.069557)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/trash_can_lid_01" index="0" unique_id=1559727364]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree_01" parent_id_path=PackedInt32Array(473798683, 1972130827) index="0" unique_id=1680525970]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree_01" parent_id_path=PackedInt32Array(473798683, 1937093893) index="0" unique_id=1680525970]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Tree_01/StaticBody3D" unique_id=817726481]
 shape = SubResource("ConcavePolygonShape3D_qvf4i")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree_02" parent_id_path=PackedInt32Array(473798683, 134626083) index="0" unique_id=1577744304]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree_02" parent_id_path=PackedInt32Array(473798683, 1543954978) index="0" unique_id=1577744304]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Tree_02/StaticBody3D" unique_id=524670584]
 shape = SubResource("ConcavePolygonShape3D_7jvxu")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree_03" parent_id_path=PackedInt32Array(473798683, 1270105581) index="0" unique_id=309220472]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree_03" parent_id_path=PackedInt32Array(473798683, 1738736987) index="0" unique_id=309220472]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Tree_03/StaticBody3D" unique_id=1497017398]
 shape = SubResource("ConcavePolygonShape3D_o3ev2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree" parent_id_path=PackedInt32Array(473798683, 170733595) index="0" unique_id=1091027985]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tree" parent_id_path=PackedInt32Array(473798683, 479573465) index="0" unique_id=1091027985]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Tree/StaticBody3D" unique_id=198004542]
 shape = SubResource("ConcavePolygonShape3D_snt3j")
 
-[node name="tumblers" parent="NavigationRegion3D/6twelve" index="87" unique_id=198606703]
+[node name="tumblers" parent="NavigationRegion3D/6twelve" index="87" unique_id=230219592]
 transform = Transform3D(10.419243, 0, 0, 0, -1.2420705e-06, 10.419242, 0, -10.419242, -1.2420705e-06, -13.419314, 1.395969, -14.970565)
 
-[node name="tumblers_01" parent="NavigationRegion3D/6twelve" index="88" unique_id=1613909169]
+[node name="tumblers_01" parent="NavigationRegion3D/6twelve" index="88" unique_id=225146900]
 transform = Transform3D(10.419243, 0, 0, 0, -1.2420705e-06, 10.419242, 0, -10.419242, -1.2420705e-06, -13.419314, 1.395969, -15.240207)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Post_light" parent_id_path=PackedInt32Array(473798683, 332277406) index="0" unique_id=2008365366]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Post_light" parent_id_path=PackedInt32Array(473798683, 989851800) index="0" unique_id=2008365366]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Post_light/StaticBody3D" unique_id=890640726]
 shape = SubResource("ConcavePolygonShape3D_qm4eu")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Post_light" parent_id_path=PackedInt32Array(473798683, 332277406) index="1" unique_id=400457531]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Post_light" parent_id_path=PackedInt32Array(473798683, 989851800) index="1" unique_id=400457531]
 transform = Transform3D(0.010000001, 0, 0, 0, 0.010000002, -2.220446e-16, 0, 2.220446e-16, 0.010000002, 0.012052834, -7.450581e-09, 0.06712352)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -849,12 +849,12 @@ light_volumetric_fog_energy = 5.61
 spot_range = 10.19016
 spot_angle = 75.3
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Post_light_01" parent_id_path=PackedInt32Array(473798683, 590428340) index="0" unique_id=1817127037]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Post_light_01" parent_id_path=PackedInt32Array(473798683, 650674176) index="0" unique_id=1817127037]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Post_light_01/StaticBody3D" unique_id=1328279757]
 shape = SubResource("ConcavePolygonShape3D_i6qyn")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Post_light_01" parent_id_path=PackedInt32Array(473798683, 590428340) index="1" unique_id=211016491]
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/6twelve/Post_light_01" parent_id_path=PackedInt32Array(473798683, 650674176) index="1" unique_id=211016491]
 transform = Transform3D(0.01, 2.9802322e-10, 2.9802322e-10, 0, 0.01, -2.9802322e-10, 0, -7.888609e-33, 0.01, 0.012988418, -3.7252903e-09, 0.068554245)
 light_color = Color(1, 0.9254902, 0.5372549, 1)
 light_energy = 10.275
@@ -872,7 +872,7 @@ light_volumetric_fog_energy = 5.61
 spot_range = 9.402518
 spot_angle = 75.3
 
-[node name="trash_can" parent="NavigationRegion3D/6twelve" index="98" unique_id=1911517522]
+[node name="trash_can" parent="NavigationRegion3D/6twelve" index="98" unique_id=583719371]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -7.822192, 0.33445352, -7.643622)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/trash_can" index="0" unique_id=240511973]
@@ -886,7 +886,7 @@ transform = Transform3D(0.9999997, 0, 0, 0, 0.99999917, 4.2632564e-14, 0, -4.263
 vertices = PackedVector3Array(0.0059694164, 0, -0.0007976964, 0.00027675927, 0, 0.005037591, -0.0053454638, 0, 0.0004536733)
 affect_navigation_mesh = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/trash_can_01" parent_id_path=PackedInt32Array(473798683, 254212217) index="0" unique_id=1906354866]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/trash_can_01" parent_id_path=PackedInt32Array(473798683, 1251841045) index="0" unique_id=1906354866]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/trash_can_01/StaticBody3D" unique_id=422349379]
 transform = Transform3D(1.0000005, 0, 0, 0, 1.0000007, -2.842171e-14, 0, 2.842171e-14, 1.0000007, -0.00012045354, -0.0003651902, 0.003389029)
@@ -896,28 +896,28 @@ shape = SubResource("BoxShape3D_6rofe")
 vertices = PackedVector3Array(0.0059694164, 0, -0.0007976964, 0.00027675927, 0, 0.005037591, -0.0053454638, 0, 0.0004536733)
 affect_navigation_mesh = true
 
-[node name="Door_02" parent="NavigationRegion3D/6twelve" index="100" unique_id=617866881]
+[node name="Door_02" parent="NavigationRegion3D/6twelve" index="100" unique_id=771963896]
 transform = Transform3D(-12.21648, 106.79147, 1.2730537e-05, 0, -6.406781e-06, 107.487946, -106.79147, -12.21648, -1.4563163e-06, -15.543124, 1.441605, -17.643673)
 
-[node name="Door_04" parent="NavigationRegion3D/6twelve" index="101" unique_id=658930600]
+[node name="Door_04" parent="NavigationRegion3D/6twelve" index="101" unique_id=1686409111]
 transform = Transform3D(6.299849, 107.303185, -1.2791536e-05, 0, 6.4067813e-06, 107.48795, 107.303185, -6.299849, 7.509986e-07, 4.482114, 1.441605, -13.32493)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_01" parent_id_path=PackedInt32Array(473798683, 1935912282) index="0" unique_id=2065423219]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_01" parent_id_path=PackedInt32Array(473798683, 1722413164) index="0" unique_id=2065423219]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Food_01/StaticBody3D" unique_id=1012854015]
 shape = SubResource("ConcavePolygonShape3D_1jv68")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_02" parent_id_path=PackedInt32Array(473798683, 1068861513) index="0" unique_id=964402625]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_02" parent_id_path=PackedInt32Array(473798683, 347781262) index="0" unique_id=964402625]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Food_02/StaticBody3D" unique_id=923708628]
 shape = SubResource("ConcavePolygonShape3D_kes0n")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_05" parent_id_path=PackedInt32Array(473798683, 307978923) index="0" unique_id=2033227334]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_05" parent_id_path=PackedInt32Array(473798683, 781348863) index="0" unique_id=2033227334]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Food_05/StaticBody3D" unique_id=1232692844]
 shape = SubResource("ConcavePolygonShape3D_kttmh")
 
-[node name="Food" parent="NavigationRegion3D/6twelve" index="108" unique_id=1592600140]
+[node name="Food" parent="NavigationRegion3D/6twelve" index="108" unique_id=1185414003]
 transform = Transform3D(17.902733, -1.5651066e-06, -6.841298e-14, 1.5651066e-06, 17.902733, 7.825533e-07, 0, 7.825533e-07, -17.902733, -7.4878354, 1.2181547, -11.540494)
 layers = 3
 
@@ -932,7 +932,7 @@ layers = 3
 mesh = SubResource("ArrayMesh_l0xp5")
 script = ExtResource("4_r8wsu")
 
-[node name="Food_03" parent="NavigationRegion3D/6twelve" index="109" unique_id=37886760]
+[node name="Food_03" parent="NavigationRegion3D/6twelve" index="109" unique_id=377772798]
 transform = Transform3D(17.902733, -1.5651066e-06, -6.841298e-14, 1.5651066e-06, 17.902733, 7.825533e-07, 0, 7.825533e-07, -17.902733, -1.0588105, 14.035369, -11.619318)
 visible = false
 layers = 3
@@ -943,32 +943,32 @@ mesh = SubResource("ArrayMesh_lwewk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Food_03/StaticBody3D" unique_id=1891324615]
 shape = SubResource("ConcavePolygonShape3D_nqjej")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_04" parent_id_path=PackedInt32Array(473798683, 171437360) index="0" unique_id=1045688973]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Food_04" parent_id_path=PackedInt32Array(473798683, 841706976) index="0" unique_id=1045688973]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Food_04/StaticBody3D" unique_id=228091250]
 shape = SubResource("ConcavePolygonShape3D_f03e8")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_02" parent_id_path=PackedInt32Array(473798683, 857197554) index="0" unique_id=630306767]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_02" parent_id_path=PackedInt32Array(473798683, 862898095) index="0" unique_id=630306767]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Grass_02/StaticBody3D" unique_id=1109316669]
 shape = SubResource("ConcavePolygonShape3D_xrjnm")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass" parent_id_path=PackedInt32Array(473798683, 607019251) index="0" unique_id=1919679465]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass" parent_id_path=PackedInt32Array(473798683, 1763933102) index="0" unique_id=1919679465]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Grass/StaticBody3D" unique_id=1096634757]
 shape = SubResource("ConcavePolygonShape3D_ptmvr")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_03" parent_id_path=PackedInt32Array(473798683, 622053018) index="0" unique_id=1320901589]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_03" parent_id_path=PackedInt32Array(473798683, 1804010203) index="0" unique_id=1320901589]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Grass_03/StaticBody3D" unique_id=1866020637]
 shape = SubResource("ConcavePolygonShape3D_kv0bh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/guard_rails" parent_id_path=PackedInt32Array(473798683, 483082249) index="0" unique_id=430087230]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/guard_rails" parent_id_path=PackedInt32Array(473798683, 889964434) index="0" unique_id=430087230]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/guard_rails/StaticBody3D" unique_id=1416143337]
 shape = SubResource("ConcavePolygonShape3D_tr06n")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_01" parent_id_path=PackedInt32Array(473798683, 1937760337) index="0" unique_id=1628243490]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Grass_01" parent_id_path=PackedInt32Array(473798683, 1403577870) index="0" unique_id=1628243490]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Grass_01/StaticBody3D" unique_id=1574453258]
 shape = SubResource("ConcavePolygonShape3D_a7v66")
@@ -977,12 +977,12 @@ shape = SubResource("ConcavePolygonShape3D_a7v66")
 transform = Transform3D(-0.9528628, 1.036909, 1.8516516e-07, 1.2514894e-07, -2.468404e-07, 2.0263045, 1.492004, 1.371071, 7.487169e-08, 0.40439522, 0.09404335, -0.272642)
 shape = SubResource("BoxShape3D_i6qyn")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Plants" parent_id_path=PackedInt32Array(473798683, 1321006011) index="0" unique_id=1590177301]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Plants" parent_id_path=PackedInt32Array(473798683, 2042728256) index="0" unique_id=1590177301]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Plants/StaticBody3D" unique_id=1551058047]
 shape = SubResource("ConcavePolygonShape3D_o6jd8")
 
-[node name="Table_01_002" parent="NavigationRegion3D/6twelve" index="125" unique_id=1197086120]
+[node name="Table_01_002" parent="NavigationRegion3D/6twelve" index="125" unique_id=688922797]
 transform = Transform3D(106.3516, 0, 0, 0, -1.2678099e-05, 106.35159, 0, -106.35159, -1.2678099e-05, 4.348915, 0.07610574, -24.3034)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Table_01_002" index="0" unique_id=149103890]
@@ -990,7 +990,7 @@ transform = Transform3D(106.3516, 0, 0, 0, -1.2678099e-05, 106.35159, 0, -106.35
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Table_01_002/StaticBody3D" unique_id=1824962446]
 shape = SubResource("ConcavePolygonShape3D_wv57q")
 
-[node name="Ladders" parent="NavigationRegion3D/6twelve" index="128" unique_id=1628248875]
+[node name="Ladders" parent="NavigationRegion3D/6twelve" index="128" unique_id=1786569148]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -16.528698, 2.8332222, -57.006496)
 layers = 3
 
@@ -1001,10 +1001,10 @@ collision_layer = 2
 transform = Transform3D(1, 0, 0, 0, 1.0000001, -7.1054274e-15, 0, 1.4210855e-14, 0.99999994, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_msyk2")
 
-[node name="Door" parent="NavigationRegion3D/6twelve" index="129" unique_id=329900685]
+[node name="Door" parent="NavigationRegion3D/6twelve" index="129" unique_id=1373792224]
 transform = Transform3D(-101.85362, 0, 0, 0, 1.2141898e-05, 101.853615, 0, -101.853615, 1.2141898e-05, -3.8029835, 1.450011, -8.274813)
 
-[node name="Tiles" parent="NavigationRegion3D/6twelve" index="132" unique_id=1765549076]
+[node name="Tiles" parent="NavigationRegion3D/6twelve" index="132" unique_id=1285289991]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -7.092984, 0.09107198, -16.58289)
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/6twelve/Tiles" index="1" unique_id=838591358]
@@ -1164,9 +1164,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5765746, 0.7972851, 0.5517
 shape = SubResource("BoxShape3D_kbp8u")
 
 [node name="Node2D" parent="." unique_id=676895497 instance=ExtResource("15_gduu2")]
-
-[node name="ItemPickup" parent="." unique_id=1440671623]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0065846, 0, 0)
 
 [node name="Car2" type="MeshInstance3D" parent="." unique_id=2140265973]
 transform = Transform3D(0.52349526, 0, -0.85202855, -0.069873236, 0.9966317, -0.042930845, 0.84915864, 0.08200808, 0.521732, 17.38978, -0.30094773, -29.92982)

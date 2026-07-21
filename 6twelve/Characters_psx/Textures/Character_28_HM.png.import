@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dboheg3jdkrce"
-path.s3tc="res://.godot/imported/Character_28_HM.png-c75bd9ec85ca80d4d0755d349d1ccaf0.s3tc.ctex"
+path.s3tc="res://.godot/imported/Character_28_HM.png-2edec87180acd4e9ec7f1c7dca97a035.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://6twelve/Characters_psx/textures/Character_28_HM.png"
-dest_files=["res://.godot/imported/Character_28_HM.png-c75bd9ec85ca80d4d0755d349d1ccaf0.s3tc.ctex"]
+source_file="res://6twelve/Characters_psx/Textures/Character_28_HM.png"
+dest_files=["res://.godot/imported/Character_28_HM.png-2edec87180acd4e9ec7f1c7dca97a035.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4x2cupoxdpi"
-path.s3tc="res://.godot/imported/Character_22_Female_Firefighter.png-72764567ed3b85ec9afac83a3da6de3a.s3tc.ctex"
+path.s3tc="res://.godot/imported/Character_22_Female_Firefighter.png-09e4e55475afc662e6a5a667406285f0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://6twelve/Characters_psx/textures/Character_22_Female_Firefighter.png"
-dest_files=["res://.godot/imported/Character_22_Female_Firefighter.png-72764567ed3b85ec9afac83a3da6de3a.s3tc.ctex"]
+source_file="res://6twelve/Characters_psx/Textures/Character_22_Female_Firefighter.png"
+dest_files=["res://.godot/imported/Character_22_Female_Firefighter.png-09e4e55475afc662e6a5a667406285f0.s3tc.ctex"]
 
 [params]
 

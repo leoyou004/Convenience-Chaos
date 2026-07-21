@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Convenience-Chaos"
-run/main_scene="uid://cbo6wei1h0wms"
+run/main_scene="uid://p6puvg0vtt34"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://assets/textures/icon.svg"
 

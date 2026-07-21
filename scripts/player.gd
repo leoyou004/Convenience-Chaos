@@ -42,34 +42,43 @@ func _input(event):
 func _unhandled_input(event):
 	if is_dead:
 		return
+		
+	# Mouse Wheel Scrolling
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			HotBarManager.cycle_slot(1)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			HotBarManager.cycle_slot(-1)
-	if event.is_action_pressed("interact") and nearby_item:
-		print("picking up: ", nearby_item.name)
-		HotBarManager.pick_up_item(nearby_item)
-		nearby_item = null
-	elif event.is_action_pressed("interact"):
-		print("interact pressed but no nearby_item")
+			
+	# Interacting / Picking up items
+	if event.is_action_pressed("interact"):
+		if nearby_item:
+			print("picking up: ", nearby_item.name)
+			HotBarManager.pick_up_item(nearby_item)
+			nearby_item = null
+		else:
+			print("interact pressed but no nearby_item")
+			
+	# Dropping / Throwing
+	if event.is_action_pressed("drop_item"):
+		HotBarManager.drop_active_item(self)
+		
+	if event.is_action_pressed("throw_item"):
+		HotBarManager.throw_active_item(self)
+		
+	# Hotbar Selection
+	if event.is_action_pressed("slot_1"):
+		HotBarManager.set_active_slot(0)
+	if event.is_action_pressed("slot_2"):
+		HotBarManager.set_active_slot(1)
+	if event.is_action_pressed("slot_3"):
+		HotBarManager.set_active_slot(2)
 
 func _physics_process(delta):
 	if is_dead:
 		return
 
-	if Input.is_action_just_pressed("slot_1"):
-		HotBarManager.set_active_slot(0)
-	if Input.is_action_just_pressed("slot_2"):
-		HotBarManager.set_active_slot(1)
-	if Input.is_action_just_pressed("slot_3"):
-		HotBarManager.set_active_slot(2)
-
-	if Input.is_action_just_pressed("drop_item"):
-		HotBarManager.drop_active_item(self)
-	if Input.is_action_just_pressed("throw_item"):
-		HotBarManager.throw_active_item(self)
-
+	# Movement direction
 	var input_dir = Vector2.ZERO
 	if Input.is_key_pressed(KEY_W): input_dir.y -= 1
 	if Input.is_key_pressed(KEY_S): input_dir.y += 1
@@ -86,11 +95,13 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
+	# Gravity and Jumping
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	elif Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 
+	# Stance and Speed
 	var wants_to_sprint = Input.is_action_pressed("sprint") and not is_crouching
 	if wants_to_sprint:
 		current_speed = sprint_speed
