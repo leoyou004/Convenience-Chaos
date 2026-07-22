@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b4wu6acr8uvy4" path="res://Characters_psx/Characters_psx/Models/fnaf-doom-2-chase-3.mp3" id="2_5ixxa"]
 [ext_resource type="Script" uid="uid://hvf27n5wefnr" path="res://scripts/interact.gd" id="2_gntrk"]
 [ext_resource type="AudioStream" uid="uid://kt0706swhj1h" path="res://Characters_psx/Characters_psx/Models/freesound_community-concrete-footsteps-6752.mp3" id="3_nn08x"]
-[ext_resource type="Shader" path="res://items/Player.gdshader" id="4_dewec"]
+[ext_resource type="Shader" uid="uid://b2bih4d0syls" path="res://items/Player.gdshader" id="4_dewec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rwas"]
 height = 1.6713257
@@ -56,7 +56,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6481617, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraMount" unique_id=183495084]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007494092, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3354951, 0)
 
 [node name="InteractRay" type="RayCast3D" parent="CameraMount/Camera3D" unique_id=1772735213]
 transform = Transform3D(1, 0, 0, 0, -0.04951217, -0.99877363, 0, 0.99877363, -0.04951217, 0.0032610893, -0.41693527, -0.28117222)
