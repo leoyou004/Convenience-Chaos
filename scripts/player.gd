@@ -146,3 +146,14 @@ func _on_pickup_area_body_exited(body: Node) -> void:
 func _on_player_caught() -> void:
 	is_dead = true
 	velocity = Vector3.ZERO
+	
+	# Play falling over animation
+	var tween = create_tween()
+	tween.set_parallel(false)
+	
+	# Tilt camera to simulate falling over
+	tween.tween_property(camera, "rotation:z", PI / 2, 0.5)
+	tween.tween_property(camera_mount, "rotation:x", PI / 4, 0.3)
+	
+	# After falling animation, show death screen
+	tween.tween_callback(func(): SignalBus.player_died.emit())

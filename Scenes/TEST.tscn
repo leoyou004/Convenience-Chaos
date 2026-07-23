@@ -1164,6 +1164,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5765746, 0.7972851, 0.5517
 shape = SubResource("BoxShape3D_kbp8u")
 
 [node name="Node2D" parent="." unique_id=676895497 instance=ExtResource("15_gduu2")]
+position = Vector2(3, 3)
 
 [node name="Car2" type="MeshInstance3D" parent="." unique_id=2140265973]
 transform = Transform3D(0.52349526, 0, -0.85202855, -0.069873236, 0.9966317, -0.042930845, 0.84915864, 0.08200808, 0.521732, 17.38978, -0.30094773, -29.92982)

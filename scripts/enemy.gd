@@ -12,6 +12,8 @@ var path_timer     := 0.0
 var patrol_timer   := 0.0
 var can_see_player := false
 var has_screamed   := false   # so it only plays once per spot
+var item_target_position : Vector3 = Vector3.ZERO
+var has_item_target := false
 
 @onready var anim_player = $"Running (2)/AnimationPlayer"
 @onready var audio       = $CollisionShape3D/Scream
@@ -25,6 +27,7 @@ func _ready() -> void:
 
 	$VisionCone.body_entered.connect(_on_vision_entered)
 	$VisionCone.body_exited.connect(_on_vision_exited)
+	SignalBus.item_landed.connect(_on_item_landed)
 
 	path_mesh = ImmediateMesh.new()
 	path_mesh_instance = MeshInstance3D.new()
@@ -58,6 +61,11 @@ func _on_vision_exited(body: Node3D) -> void:
 	can_see_player = false
 	has_screamed = false   # reset so it screams again next time it spots the player
 
+func _on_item_landed(position: Vector3) -> void:
+	item_target_position = position
+	has_item_target = true
+	print("Enemy detected item at: ", position)
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
@@ -67,12 +75,18 @@ func _physics_process(delta: float) -> void:
 		path_timer = PATH_UPDATE
 		if can_see_player and player:
 			nav_agent.target_position = player.global_position
+		elif has_item_target:
+			nav_agent.target_position = item_target_position
 		_draw_path()
 
-	if not can_see_player:
+	if not can_see_player and not has_item_target:
 		patrol_timer -= delta
 		if patrol_timer <= 0.0 or nav_agent.is_navigation_finished():
 			_pick_patrol_point()
+	elif has_item_target and global_position.distance_to(item_target_position) < 1.0:
+		# Reached the item
+		has_item_target = false
+		_pick_patrol_point()
 
 	var next      = nav_agent.get_next_path_position()
 	var direction = (next - global_position).normalized()
