@@ -144,6 +144,7 @@ func throw_active_item(player: Node3D) -> void:
 	# Set item position
 	if item is Node3D:
 		item.global_position = spawn_position
+		SignalBus.distraction_thrown.emit(item.global_position)
 
 		print("ITEM POSITION: ", item.global_position)
 

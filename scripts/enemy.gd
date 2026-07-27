@@ -1,45 +1,33 @@
 extends CharacterBody3D
 
-const SPEED          := 7.0
+const SPEED := 7.0
 const CATCH_DISTANCE := 1.2
-const GRAVITY        := 9.8
-const PATH_UPDATE    := 0.1
+const GRAVITY := 9.8
+const PATH_UPDATE := 0.1
 const PATROL_INTERVAL := 3.0
+const DISTRACTION_DURATION := 5.0
 
-var nav_agent      : NavigationAgent3D
-var player         : Node3D
-var path_timer     := 0.0
-var patrol_timer   := 0.0
+var nav_agent: NavigationAgent3D
+var player: Node3D
+var path_timer := 0.0
+var patrol_timer := 0.0
 var can_see_player := false
-var has_screamed   := false   # so it only plays once per spot
-var item_target_position : Vector3 = Vector3.ZERO
+var has_screamed := false
+var item_target_position: Vector3 = Vector3.ZERO
 var has_item_target := false
+var distraction_timer := 0.0
 
 @onready var anim_player = $"Running (2)/AnimationPlayer"
-@onready var audio       = $CollisionShape3D/Scream
-
-var path_mesh_instance : MeshInstance3D
-var path_mesh          : ImmediateMesh
+@onready var audio = $CollisionShape3D/Scream
 
 func _ready() -> void:
 	nav_agent = $NavigationAgent3D
-	player    = get_tree().get_first_node_in_group("Player")
+	player = get_tree().get_first_node_in_group("Player")
 
 	$VisionCone.body_entered.connect(_on_vision_entered)
 	$VisionCone.body_exited.connect(_on_vision_exited)
+	SignalBus.distraction_thrown.connect(_on_distraction_thrown)
 	SignalBus.item_landed.connect(_on_item_landed)
-
-	path_mesh = ImmediateMesh.new()
-	path_mesh_instance = MeshInstance3D.new()
-	path_mesh_instance.mesh = path_mesh
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color.RED
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	path_mesh_instance.material_override = mat
-	get_parent().add_child(path_mesh_instance)
-
-	await get_tree().physics_frame
-	await get_tree().physics_frame
 
 	if anim_player.has_animation("mixamo_com"):
 		anim_player.get_animation("mixamo_com").loop_mode = Animation.LOOP_LINEAR
@@ -59,16 +47,27 @@ func _on_vision_exited(body: Node3D) -> void:
 	if not body.is_in_group("Player"):
 		return
 	can_see_player = false
-	has_screamed = false   # reset so it screams again next time it spots the player
+	has_screamed = false
 
-func _on_item_landed(position: Vector3) -> void:
+func _set_item_target(position: Vector3) -> void:
 	item_target_position = position
 	has_item_target = true
-	print("Enemy detected item at: ", position)
+	distraction_timer = DISTRACTION_DURATION
+
+func _on_distraction_thrown(position: Vector3) -> void:
+	_set_item_target(position)
+
+func _on_item_landed(position: Vector3) -> void:
+	_set_item_target(position)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
+
+	if has_item_target:
+		distraction_timer -= delta
+		if distraction_timer <= 0.0:
+			has_item_target = false
 
 	path_timer -= delta
 	if path_timer <= 0.0:
@@ -84,11 +83,10 @@ func _physics_process(delta: float) -> void:
 		if patrol_timer <= 0.0 or nav_agent.is_navigation_finished():
 			_pick_patrol_point()
 	elif has_item_target and global_position.distance_to(item_target_position) < 1.0:
-		# Reached the item
 		has_item_target = false
 		_pick_patrol_point()
 
-	var next      = nav_agent.get_next_path_position()
+	var next = nav_agent.get_next_path_position()
 	var direction = (next - global_position).normalized()
 	velocity.x = direction.x * SPEED
 	velocity.z = direction.z * SPEED
@@ -103,16 +101,13 @@ func _physics_process(delta: float) -> void:
 
 func _pick_patrol_point() -> void:
 	patrol_timer = PATROL_INTERVAL
-	var map   = NavigationServer3D.get_maps()[0]
+	var map = NavigationServer3D.get_maps()[0]
 	var point = NavigationServer3D.map_get_random_point(map, 1, false)
 	nav_agent.target_position = point
 
 func _draw_path() -> void:
-	path_mesh.clear_surfaces()
 	var points = nav_agent.get_current_navigation_path()
 	if points.size() < 2:
 		return
-	path_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for p in points:
-		path_mesh.surface_add_vertex(p + Vector3(0, 0.1, 0))
-	path_mesh.surface_end()
+		pass
