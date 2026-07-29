@@ -21,6 +21,7 @@ GameManager="*uid://vjyqpb2h2hbs"
 SignalBus="*uid://cjcyla6y7b6pr"
 ObjectiveManager="*uid://nb6hrb0ws4hc"
 HotBarManager="*uid://dwsxe0lj0nx6a"
+ObjectiveQTE="*res://scripts/objective_qte.gd"
 
 [display]
 

@@ -12,6 +12,8 @@ var crouch_speed = 2.5
 var current_speed = speed
 var mouse_sensitivity = 0.002
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var max_stamina: float = 1.0
+var stamina: float = max_stamina
 
 var is_crouching = false
 var is_dead = false
@@ -22,13 +24,17 @@ const STEP_INTERVAL_WALK := 0.45
 const STEP_INTERVAL_SPRINT := 0.28
 const STEP_INTERVAL_CROUCH := 0.6
 const JUMP_VELOCITY := 3.0
+const STAMINA_DRAIN := 0.35
+const STAMINA_REGEN := 0.22
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
+	add_to_group("Player")
 	SignalBus.player_caught.connect(_on_player_caught)
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
+	SignalBus.sprint_stamina_changed.emit(stamina, max_stamina)
 	print("PickupArea mask: ", pickup_area.collision_mask)
 
 func _input(event):
@@ -42,15 +48,13 @@ func _input(event):
 func _unhandled_input(event):
 	if is_dead:
 		return
-		
-	# Mouse Wheel Scrolling
+
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			HotBarManager.cycle_slot(1)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			HotBarManager.cycle_slot(-1)
-			
-	# Interacting / Picking up items
+
 	if event.is_action_pressed("interact"):
 		if nearby_item:
 			print("picking up: ", nearby_item.name)
@@ -58,15 +62,13 @@ func _unhandled_input(event):
 			nearby_item = null
 		else:
 			print("interact pressed but no nearby_item")
-			
-	# Dropping / Throwing
+
 	if event.is_action_pressed("drop_item"):
 		HotBarManager.drop_active_item(self)
-		
+
 	if event.is_action_pressed("throw_item"):
 		HotBarManager.throw_active_item(self)
-		
-	# Hotbar Selection
+
 	if event.is_action_pressed("slot_1"):
 		HotBarManager.set_active_slot(0)
 	if event.is_action_pressed("slot_2"):
@@ -78,7 +80,6 @@ func _physics_process(delta):
 	if is_dead:
 		return
 
-	# Movement direction
 	var input_dir = Vector2.ZERO
 	if Input.is_key_pressed(KEY_W): input_dir.y -= 1
 	if Input.is_key_pressed(KEY_S): input_dir.y += 1
@@ -87,7 +88,6 @@ func _physics_process(delta):
 	input_dir = input_dir.normalized()
 
 	var direction = (camera_mount.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
@@ -95,25 +95,28 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
-	# Gravity and Jumping
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	elif Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 
-	# Stance and Speed
-	var wants_to_sprint = Input.is_action_pressed("sprint") and not is_crouching
-	if wants_to_sprint:
+	var is_moving = input_dir.length_squared() > 0.01
+	var wants_to_sprint = Input.is_action_pressed("sprint") and not is_crouching and is_moving
+	if wants_to_sprint and stamina > 0.0:
 		current_speed = sprint_speed
+		stamina = max(0.0, stamina - delta * STAMINA_DRAIN)
 	elif is_crouching:
 		current_speed = crouch_speed
+		stamina = min(max_stamina, stamina + delta * STAMINA_REGEN)
 	else:
 		current_speed = speed
+		stamina = min(max_stamina, stamina + delta * STAMINA_REGEN)
 
 	if Input.is_action_just_pressed("crouch"):
 		is_crouching = not is_crouching
 
-	_handle_footsteps(wants_to_sprint, delta)
+	SignalBus.sprint_stamina_changed.emit(stamina, max_stamina)
+	_handle_footsteps(wants_to_sprint and stamina > 0.0, delta)
 	move_and_slide()
 
 func _handle_footsteps(sprinting: bool, delta: float) -> void:
@@ -146,14 +149,12 @@ func _on_pickup_area_body_exited(body: Node) -> void:
 func _on_player_caught() -> void:
 	is_dead = true
 	velocity = Vector3.ZERO
-	
-	# Play falling over animation
+	if HotBarManager != null:
+		HotBarManager.clear_inventory()
+	SignalBus.sprint_stamina_changed.emit(0.0, max_stamina)
+
 	var tween = create_tween()
 	tween.set_parallel(false)
-	
-	# Tilt camera to simulate falling over
 	tween.tween_property(camera, "rotation:z", PI / 2, 0.5)
 	tween.tween_property(camera_mount, "rotation:x", PI / 4, 0.3)
-	
-	# After falling animation, show death screen
 	tween.tween_callback(func(): SignalBus.player_died.emit())

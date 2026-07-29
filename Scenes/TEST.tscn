@@ -19,6 +19,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cfccj6leihn2p" path="res://assets/Car 02/Car2.obj" id="18_o1gvc"]
 [ext_resource type="ArrayMesh" uid="uid://311bhkqa253p" path="res://assets/Car 03/Car3.obj" id="19_5ltgo"]
 [ext_resource type="Texture2D" uid="uid://d3hs32v3fwy4g" path="res://assets/Car 03/car3_yellow.png" id="19_o1gvc"]
+[ext_resource type="PackedScene" uid="uid://b2fo4sxwt8qfk" path="res://Scenes/Ramp3d.tscn" id="20_o1gvc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mpccf"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -473,7 +474,7 @@ loop = true
 size = Vector3(22.762085, 5.978821, 17.853271)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3w3pq"]
-size = Vector3(2.9244006, 5.105952, 4.578711)
+size = Vector3(2.6028042, 5.105952, 9.97732)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nqjej"]
 size = Vector3(3.7832747, 5.2441354, 10.377874)
@@ -482,7 +483,7 @@ size = Vector3(3.7832747, 5.2441354, 10.377874)
 size = Vector3(3.720358, 4.9193063, 18.334864)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f03e8"]
-size = Vector3(2.5410366, 6.3895235, 17.807913)
+size = Vector3(2.5903373, 6.3895235, 17.807913)
 
 [node name="Node3D" type="Node3D" unique_id=677206795]
 
@@ -490,9 +491,11 @@ size = Vector3(2.5410366, 6.3895235, 17.807913)
 environment = SubResource("Environment_kbp8u")
 
 [node name="Item_Beer" parent="WorldEnvironment" unique_id=1239160344 groups=["item"] instance=ExtResource("1_lgo25")]
+visible = false
 
 [node name="Player" parent="." unique_id=1048298426 instance=ExtResource("2_3503q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.128235, 0.94495904, -6.2643366)
+visible = false
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=552204288]
 navigation_mesh = SubResource("NavigationMesh_3503q")
@@ -1189,26 +1192,36 @@ max_distance = 50.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8727036, 2.4894104, -17.011528)
 shape = SubResource("BoxShape3D_msyk2")
 
-[node name="Area3D2" type="Area3D" parent="." unique_id=900164914]
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1201417853]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.059704, 1.7977699, 0.90719295)
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D2" unique_id=703216662]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D2" unique_id=703216662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0055036545, 0, -1.563098)
 shape = SubResource("BoxShape3D_3w3pq")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Area3D2" unique_id=146828063]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D2" unique_id=146828063]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3356953, -0.0728662, -1.512275)
 shape = SubResource("BoxShape3D_nqjej")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Area3D2" unique_id=707585050]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D2" unique_id=707585050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3018208, -0.17346752, -17.960386)
 shape = SubResource("BoxShape3D_1jv68")
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Area3D2" unique_id=43007284]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01579094, 0.5196644, -17.87362)
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="StaticBody3D2" unique_id=43007284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008859634, 0.5196644, -17.87362)
 shape = SubResource("BoxShape3D_f03e8")
+debug_color = Color(0.9785971, 0, 0.39868805, 0.41960785)
+
+[node name="Ramp" parent="." unique_id=1682521644 instance=ExtResource("20_o1gvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2713602, 1.1239638, -3.377171)
+
+[node name="CollisionPolygon3D" parent="Ramp/StaticBody3D" parent_id_path=PackedInt32Array(1682521644, 243581482) index="0" unique_id=1983405680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.463229, -1.5089967, -23.154696)
+polygon = PackedVector2Array(-0.5089493, 0.50526494, 1.8584185, -0.39840817, 0.5285816, -0.5175175, -0.4263258, -0.4344806)
 
 [connection signal="area_entered" from="NavigationRegion3D/6twelve/Mop" to="NavigationRegion3D/6twelve/Mop" method="_on_area_entered"]
 [connection signal="area_exited" from="NavigationRegion3D/6twelve/Mop" to="NavigationRegion3D/6twelve/Mop" method="_on_area_exited"]
 
 [editable path="NavigationRegion3D/6twelve"]
 [editable path="NavigationRegion3D/6twelve/Player"]
+[editable path="Ramp"]

@@ -2,7 +2,7 @@ extends VBoxContainer
 
 var _focused_id: String = ""
 var _progress: float = 0.0
-var _is_mopping: bool = false
+var _active_key: String = "E"
 
 func _ready() -> void:
 	SignalBus.objective_completed.connect(_on_objective_completed)
@@ -10,9 +10,6 @@ func _ready() -> void:
 	SignalBus.interactable_focused.connect(_on_interactable_focused)
 	SignalBus.interactable_unfocused.connect(_on_interactable_unfocused)
 	SignalBus.interact_progress.connect(_on_interact_progress)
-	SignalBus.mop_started.connect(_on_mop_started)
-	SignalBus.mop_progress.connect(_on_mop_progress)
-	SignalBus.mop_finished.connect(_on_mop_finished)
 	_update_ui()
 
 func _update_ui() -> void:
@@ -25,56 +22,35 @@ func _update_ui() -> void:
 			var label = labels[i] as Label
 			if label == null:
 				continue
+			var pct = int((obj["progress"] / float(obj["target"])) * 100)
 			if obj["complete"]:
-				label.text = "✓ " + obj["label"]
+				label.text = "✓ " + obj["label"] + " (Done)"
 				label.modulate = Color(0, 1, 0)
-			elif key == _focused_id and _is_mopping:
-				var pct = int(_progress * 100)
-				label.text = "⟳ " + obj["label"] + " [Move Mouse in Circles] " + str(pct) + "%"
-				label.modulate = Color(1, 0.6, 0)
 			elif key == _focused_id:
-				var pct = int(_progress * 100)
-				label.text = "⟳ " + obj["label"] + " [Hold E] " + str(pct) + "%"
+				label.text = "⟳ " + obj["label"] + " [Press " + obj["key"] + "] " + str(pct) + "%"
 				label.modulate = Color(1, 1, 0)
 			else:
-				label.text = "• " + obj["label"]
+				label.text = "• " + obj["label"] + " " + str(int(obj["progress"])) + "/" + str(obj["target"])
 				label.modulate = Color(1, 1, 1)
 
 func _on_interactable_focused(objective_id: String, _hold_time: float) -> void:
-	print("FOCUSED: ", objective_id)
 	_focused_id = objective_id
+	_active_key = ObjectiveManager.objectives[objective_id]["key"]
 	_update_ui()
 
 func _on_interactable_unfocused() -> void:
 	_focused_id = ""
 	_progress = 0.0
-	_is_mopping = false
 	_update_ui()
 
 func _on_interact_progress(progress: float) -> void:
 	_progress = progress
 	_update_ui()
 
-func _on_mop_started() -> void:
-	_is_mopping = true
-	_progress = 0.0
-	_update_ui()
-
-func _on_mop_progress(amount: float) -> void:
-	_progress = amount
-	_update_ui()
-
-func _on_mop_finished() -> void:
-	_is_mopping = false
-	_progress = 0.0
-	_update_ui()
-
 func _on_objective_completed(_id: String) -> void:
 	_focused_id = ""
 	_progress = 0.0
-	_is_mopping = false
 	_update_ui()
 
 func _on_all_completed() -> void:
 	_update_ui()
-	print("ALL OBJECTIVES COMPLETE!")

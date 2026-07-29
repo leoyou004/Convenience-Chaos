@@ -1,49 +1,46 @@
 extends Area3D
 
 @export var objective_id: String = "restock_shelves"
-@export var hold_time: float = 10.0
-@export var prompt_text: String = "Hold E to restock"
-@export var food_item: NodePath
+@export var prompt_text: String = "Press the shown key"
+@export var key_to_press: String = "F"
+@export var progress_per_press: float = 1.0
+@export var required_progress: int = 10
 
-var _progress: float = 0.0
 var _player_inside: bool = false
+var _player: Node3D = null
 
 func _ready() -> void:
-	set_process(true)
+	_player = get_tree().get_first_node_in_group("Player")
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	set_process(true)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not _player_inside:
 		return
-	if Input.is_action_pressed("interact"):
-		_progress += delta
-		var ratio: float = _progress / hold_time
-		SignalBus.interact_progress.emit(ratio)
-		SignalBus.restock_progress.emit(ratio)
-		if _progress >= hold_time:
-			_complete()
-	else:
-		_progress = 0.0
-		SignalBus.interact_progress.emit(0.0)
-		SignalBus.restock_progress.emit(0.0)
+	if Input.is_action_just_pressed("interact"):
+		if ObjectiveManager.objectives.has(objective_id):
+			ObjectiveManager.add_progress(objective_id, progress_per_press)
+			var ratio: float = ObjectiveManager.get_progress(objective_id) / float(ObjectiveManager.objectives[objective_id]["target"])
+			SignalBus.interact_progress.emit(ratio)
+			SignalBus.restock_progress.emit(ratio)
+			if ObjectiveManager.objectives[objective_id]["complete"]:
+				_complete()
 
 func _complete() -> void:
 	set_process(false)
 	SignalBus.interactable_unfocused.emit()
 	SignalBus.restock_progress.emit(1.0)
-	ObjectiveManager.complete_objective(objective_id)
 	queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
+	if body == _player:
 		_player_inside = true
-		SignalBus.interactable_focused.emit(objective_id, hold_time)
+		SignalBus.interactable_focused.emit(objective_id, 0.0)
 
 func _on_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
+	if body == _player:
 		_player_inside = false
-		_progress = 0.0
 		SignalBus.interact_progress.emit(0.0)
 		SignalBus.restock_progress.emit(0.0)
 		SignalBus.interactable_unfocused.emit()

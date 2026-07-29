@@ -2,23 +2,51 @@ extends Node
 
 var signal_bus: Node
 var objectives: Dictionary = {
-	"mop_floor":      { "label": "Mop the floor",         "complete": false },
-	"restock_shelves":{ "label": "Restock shelves",        "complete": false },
-	"take_out_trash": { "label": "Take out the trash",     "complete": false },
-	"count_register": { "label": "Count the register",     "complete": false },
-	"turn_off_lights":{ "label": "Turn off aisle lights",  "complete": false },
-	"clean_windows":  { "label": "Clean the windows",      "complete": false },
+	"mop_floor":      { "label": "Mop the floor",         "complete": false, "progress": 0.0, "target": 15, "key": "E" },
+	"restock_shelves":{ "label": "Restock shelves",        "complete": false, "progress": 0.0, "target": 10, "key": "F" },
+	"take_out_trash": { "label": "Take out the trash",     "complete": false, "progress": 0.0, "target": 12, "key": "Q" },
+	"count_register": { "label": "Count the register",     "complete": false, "progress": 0.0, "target": 8,  "key": "R" },
+	"turn_off_lights":{ "label": "Turn off aisle lights",  "complete": false, "progress": 0.0, "target": 6,  "key": "T" },
+	"clean_windows":  { "label": "Clean the windows",      "complete": false, "progress": 0.0, "target": 15, "key": "Y" },
 }
 
 func _ready():
 	signal_bus = get_node("/root/SignalBus")
 
-func complete_objective(id: String):
-	if objectives.has(id) and not objectives[id]["complete"]:
-		objectives[id]["complete"] = true
+func add_progress(id: String, amount: float) -> void:
+	if not objectives.has(id):
+		return
+	var objective = objectives[id]
+	if objective["complete"]:
+		return
+	objective["progress"] = clamp(objective["progress"] + amount, 0.0, float(objective["target"]))
+	if objective["progress"] >= float(objective["target"]):
+		objective["progress"] = float(objective["target"])
+		objective["complete"] = true
 		signal_bus.objective_completed.emit(id)
 		if all_complete():
 			signal_bus.all_objectives_completed.emit()
+	else:
+		signal_bus.interact_progress.emit(objective["progress"] / float(objective["target"]))
+
+func set_progress(id: String, amount: float) -> void:
+	if not objectives.has(id):
+		return
+	var objective = objectives[id]
+	objective["progress"] = clamp(amount, 0.0, float(objective["target"]))
+	if objective["progress"] >= float(objective["target"]):
+		objective["progress"] = float(objective["target"])
+		objective["complete"] = true
+		signal_bus.objective_completed.emit(id)
+		if all_complete():
+			signal_bus.all_objectives_completed.emit()
+	else:
+		signal_bus.interact_progress.emit(objective["progress"] / float(objective["target"]))
+
+func get_progress(id: String) -> float:
+	if objectives.has(id):
+		return objectives[id]["progress"]
+	return 0.0
 
 func all_complete() -> bool:
 	for key in objectives:
@@ -29,3 +57,4 @@ func all_complete() -> bool:
 func reset():
 	for key in objectives:
 		objectives[key]["complete"] = false
+		objectives[key]["progress"] = 0.0
