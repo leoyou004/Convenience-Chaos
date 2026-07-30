@@ -27,7 +27,7 @@ func _update_ui() -> void:
 				label.text = "✓ " + obj["label"] + " (Done)"
 				label.modulate = Color(0, 1, 0)
 			elif key == _focused_id:
-				label.text = "⟳ " + obj["label"] + " [Press " + obj["key"] + "] " + str(pct) + "%"
+				label.text = "⟳ " + obj["label"] + " [Hold " + obj["key"] + "] " + str(pct) + "%"
 				label.modulate = Color(1, 1, 0)
 			else:
 				label.text = "• " + obj["label"] + " " + str(int(obj["progress"])) + "/" + str(obj["target"])

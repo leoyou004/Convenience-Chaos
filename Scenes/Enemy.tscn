@@ -21,6 +21,16 @@ size = Vector3(7.150238, 1, 27.35939)
 [sub_resource type="SphereShape3D" id="SphereShape3D_gqquq"]
 radius = 8.03375
 
+[sub_resource type="Animation" id="Animation_wovta"]
+
+[sub_resource type="Animation" id="Animation_xeo28"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kpr8r"]
+_data = {
+&"Idle": SubResource("Animation_wovta"),
+&"Stun": SubResource("Animation_xeo28")
+}
+
 [node name="Enemy" type="CharacterBody3D" unique_id=879150185]
 script = ExtResource("1_m1htj")
 
@@ -91,6 +101,7 @@ bones/30/rotation = Quaternion(0.5206157, -0.53085315, 0.42031193, 0.5200886)
 bones/31/rotation = Quaternion(0.44936022, 0.00480166, 0.0016397375, 0.8933363)
 
 [node name="AnimationPlayer" parent="Running (2)" index="1" unique_id=1757985976]
+libraries/Enemy = SubResource("AnimationLibrary_kpr8r")
 autoplay = &"mixamo_com"
 
 [editable path="Running (2)"]

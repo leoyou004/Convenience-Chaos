@@ -1,5 +1,7 @@
 extends Node
 
+const SAVE_PATH := "user://objective_progress.save"
+
 var signal_bus: Node
 var objectives: Dictionary = {
 	"mop_floor":      { "label": "Mop the floor",         "complete": false, "progress": 0.0, "target": 15, "key": "E" },
@@ -12,6 +14,7 @@ var objectives: Dictionary = {
 
 func _ready():
 	signal_bus = get_node("/root/SignalBus")
+	load_progress()
 
 func add_progress(id: String, amount: float) -> void:
 	if not objectives.has(id):
@@ -28,6 +31,7 @@ func add_progress(id: String, amount: float) -> void:
 			signal_bus.all_objectives_completed.emit()
 	else:
 		signal_bus.interact_progress.emit(objective["progress"] / float(objective["target"]))
+	save_progress()
 
 func set_progress(id: String, amount: float) -> void:
 	if not objectives.has(id):
@@ -42,6 +46,7 @@ func set_progress(id: String, amount: float) -> void:
 			signal_bus.all_objectives_completed.emit()
 	else:
 		signal_bus.interact_progress.emit(objective["progress"] / float(objective["target"]))
+	save_progress()
 
 func get_progress(id: String) -> float:
 	if objectives.has(id):
@@ -58,3 +63,33 @@ func reset():
 	for key in objectives:
 		objectives[key]["complete"] = false
 		objectives[key]["progress"] = 0.0
+	save_progress()
+
+func save_progress() -> void:
+	var save_data: Dictionary = {}
+	for key in objectives:
+		var objective = objectives[key]
+		save_data[key] = {
+			"progress": objective["progress"],
+			"complete": objective["complete"]
+		}
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file != null:
+		file.store_var(save_data)
+		file.close()
+
+func load_progress() -> void:
+	if not FileAccess.file_exists(SAVE_PATH):
+		return
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file == null:
+		return
+	var save_data = file.get_var()
+	file.close()
+	if save_data is Dictionary:
+		for key in save_data:
+			if objectives.has(key):
+				var data = save_data[key]
+				if data is Dictionary:
+					objectives[key]["progress"] = float(data.get("progress", 0.0))
+					objectives[key]["complete"] = bool(data.get("complete", false))

@@ -1,7 +1,7 @@
 extends Area3D
 
 @export var objective_id: String = "restock_shelves"
-@export var prompt_text: String = "Press the shown key"
+@export var prompt_text: String = "Hold the shown key"
 @export var key_to_press: String = "F"
 @export var progress_per_press: float = 1.0
 @export var required_progress: int = 10
@@ -15,17 +15,16 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	set_process(true)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not _player_inside:
 		return
-	if Input.is_action_just_pressed("interact"):
-		if ObjectiveManager.objectives.has(objective_id):
-			ObjectiveManager.add_progress(objective_id, progress_per_press)
-			var ratio: float = ObjectiveManager.get_progress(objective_id) / float(ObjectiveManager.objectives[objective_id]["target"])
-			SignalBus.interact_progress.emit(ratio)
-			SignalBus.restock_progress.emit(ratio)
-			if ObjectiveManager.objectives[objective_id]["complete"]:
-				_complete()
+	if Input.is_action_pressed("interact") and ObjectiveManager.objectives.has(objective_id):
+		ObjectiveManager.add_progress(objective_id, progress_per_press * delta)
+		var ratio: float = ObjectiveManager.get_progress(objective_id) / float(ObjectiveManager.objectives[objective_id]["target"])
+		SignalBus.interact_progress.emit(ratio)
+		SignalBus.restock_progress.emit(ratio)
+		if ObjectiveManager.objectives[objective_id]["complete"]:
+			_complete()
 
 func _complete() -> void:
 	set_process(false)
@@ -41,6 +40,4 @@ func _on_body_entered(body: Node) -> void:
 func _on_body_exited(body: Node) -> void:
 	if body == _player:
 		_player_inside = false
-		SignalBus.interact_progress.emit(0.0)
-		SignalBus.restock_progress.emit(0.0)
 		SignalBus.interactable_unfocused.emit()
