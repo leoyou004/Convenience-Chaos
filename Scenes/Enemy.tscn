@@ -102,6 +102,5 @@ bones/31/rotation = Quaternion(0.44936022, 0.00480166, 0.0016397375, 0.8933363)
 
 [node name="AnimationPlayer" parent="Running (2)" index="1" unique_id=1757985976]
 libraries/Enemy = SubResource("AnimationLibrary_kpr8r")
-autoplay = &"mixamo_com"
 
 [editable path="Running (2)"]

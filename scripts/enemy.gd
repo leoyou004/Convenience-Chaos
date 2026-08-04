@@ -48,9 +48,11 @@ func _setup_animation_models() -> void:
 	run_model = $"Running (2)"
 	run_anim_player = _get_animation_player(run_model)
 
-	idle_model = _create_animation_model("IdleModel", "res://Scenes/Idle.fbx")
+	# Corrected path to match "Idle (1).fbx" in your FileSystem
+	idle_model = _create_animation_model("IdleModel", "res://Scenes/Idle (1).fbx")
 	idle_anim_player = _get_animation_player(idle_model)
 
+	# Path for Sweep Fall.fbx
 	sweep_model = _create_animation_model("SweepModel", "res://Scenes/Sweep Fall.fbx")
 	sweep_anim_player = _get_animation_player(sweep_model)
 
@@ -58,7 +60,11 @@ func _setup_animation_models() -> void:
 	_configure_animation_player(idle_anim_player, true)
 	_configure_animation_player(sweep_anim_player, false)
 
-func _create_animation_model(name: String, scene_path: String) -> Node3D:
+	# Connect animation finished signal for the stun/sweep animation
+	if sweep_anim_player != null:
+		sweep_anim_player.animation_finished.connect(_on_animation_finished)
+
+func _create_animation_model(model_name: String, scene_path: String) -> Node3D:
 	if scene_path == "":
 		return null
 
@@ -73,7 +79,7 @@ func _create_animation_model(name: String, scene_path: String) -> Node3D:
 	var instance = packed_scene.instantiate()
 	if instance is Node3D:
 		var model := instance as Node3D
-		model.name = name
+		model.name = model_name
 		model.transform = $"Running (2)".transform
 		add_child(model)
 		model.owner = self
@@ -86,22 +92,22 @@ func _get_animation_player(model: Node3D) -> AnimationPlayer:
 		return null
 	return model.get_node_or_null("AnimationPlayer") as AnimationPlayer
 
-func _configure_animation_player(player: AnimationPlayer, loop: bool) -> void:
-	if player == null:
+func _configure_animation_player(anim_player: AnimationPlayer, loop: bool) -> void:
+	if anim_player == null:
 		return
 	var animation_name: StringName = "mixamo_com"
-	if not player.has_animation(animation_name):
-		var list = player.get_animation_list()
+	if not anim_player.has_animation(animation_name):
+		var list = anim_player.get_animation_list()
 		if list.size() > 0:
 			animation_name = StringName(list[0])
-	if player.has_animation(animation_name):
-		var animation: Animation = player.get_animation(animation_name)
+	if anim_player.has_animation(animation_name):
+		var animation: Animation = anim_player.get_animation(animation_name)
 		animation.loop_mode = Animation.LOOP_LINEAR if loop else Animation.LOOP_NONE
 
 func _set_model_visibility(active_model: Node3D) -> void:
 	for model in [run_model, idle_model, sweep_model]:
 		if model != null:
-			model.visible = model == active_model
+			model.visible = (model == active_model)
 
 func _play_animation_state(state: String) -> void:
 	if state == current_anim_state and state != "stunned":
@@ -110,25 +116,25 @@ func _play_animation_state(state: String) -> void:
 	current_anim_state = state
 
 	if state == "idle":
-		_set_model_visibility(idle_model)
+		_set_model_visibility(idle_model if idle_model != null else run_model)
 		_play_animation_player(idle_anim_player)
 	elif state == "run":
 		_set_model_visibility(run_model)
 		_play_animation_player(run_anim_player)
 	elif state == "stunned":
-		_set_model_visibility(sweep_model)
+		_set_model_visibility(sweep_model if sweep_model != null else run_model)
 		_play_animation_player(sweep_anim_player)
 
-func _play_animation_player(player: AnimationPlayer) -> void:
-	if player == null:
+func _play_animation_player(anim_player: AnimationPlayer) -> void:
+	if anim_player == null:
 		return
 	var animation_name: StringName = "mixamo_com"
-	if not player.has_animation(animation_name):
-		var list = player.get_animation_list()
+	if not anim_player.has_animation(animation_name):
+		var list = anim_player.get_animation_list()
 		if list.size() > 0:
 			animation_name = StringName(list[0])
-	if player.has_animation(animation_name):
-		player.play(animation_name)
+	if anim_player.has_animation(animation_name):
+		anim_player.play(animation_name)
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	if current_anim_state == "stunned":
@@ -196,7 +202,8 @@ func _physics_process(delta: float) -> void:
 		direction.y = 0.0
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		look_at(global_position + direction, Vector3.UP)
+		if direction.length_squared() > 0.001:
+			look_at(global_position + direction, Vector3.UP)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, SPEED * delta)
 		velocity.z = move_toward(velocity.z, 0.0, SPEED * delta)

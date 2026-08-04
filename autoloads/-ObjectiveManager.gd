@@ -15,6 +15,7 @@ var objectives: Dictionary = {
 func _ready():
 	signal_bus = get_node("/root/SignalBus")
 	load_progress()
+	signal_bus.player_died.connect(_on_player_died)
 
 func add_progress(id: String, amount: float) -> void:
 	if not objectives.has(id):
@@ -64,6 +65,9 @@ func reset():
 		objectives[key]["complete"] = false
 		objectives[key]["progress"] = 0.0
 	save_progress()
+
+func _on_player_died() -> void:
+	reset()
 
 func save_progress() -> void:
 	var save_data: Dictionary = {}

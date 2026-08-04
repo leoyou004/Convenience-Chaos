@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://p6puvg0vtt34"]
 
+[ext_resource type="Script" uid="uid://85rjgyaswe5j" path="res://Scenes/test.gd" id="1_5ltgo"]
 [ext_resource type="PackedScene" uid="uid://bxtgwe6o0js3l" path="res://Scenes/item_beer.tscn" id="1_lgo25"]
 [ext_resource type="PackedScene" uid="uid://cafmrr72kbqi2" path="res://Scenes/6_twelve.tscn" id="2_30rdv"]
 [ext_resource type="PackedScene" uid="uid://c7hs8c3plf0rd" path="res://Scenes/Player.tscn" id="2_3503q"]
@@ -486,6 +487,7 @@ loop = true
 size = Vector3(22.762085, 5.978821, 17.853271)
 
 [node name="Node3D" type="Node3D" unique_id=677206795]
+script = ExtResource("1_5ltgo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=625555004]
 environment = SubResource("Environment_kbp8u")

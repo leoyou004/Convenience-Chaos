@@ -36,6 +36,8 @@ func _ready():
 	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
 	SignalBus.sprint_stamina_changed.emit(stamina, max_stamina)
 	print("PickupArea mask: ", pickup_area.collision_mask)
+	# Ensure mouse stays locked during gameplay
+	get_window().gui_focus_changed.connect(_on_gui_focus_changed)
 
 func _input(event):
 	if is_dead:
@@ -44,6 +46,11 @@ func _input(event):
 		camera_mount.rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, -PI / 2, PI / 2)
+
+func _process(_delta):
+	# Ensure mouse stays locked during active gameplay
+	if not is_dead and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
 	if is_dead:
@@ -158,3 +165,8 @@ func _on_player_caught() -> void:
 	tween.tween_property(camera, "rotation:z", PI / 2, 0.5)
 	tween.tween_property(camera_mount, "rotation:x", PI / 4, 0.3)
 	tween.tween_callback(func(): SignalBus.player_died.emit())
+
+func _on_gui_focus_changed(_new_focus: Control) -> void:
+	# Maintain mouse lock even when GUI focus changes
+	if not is_dead:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
