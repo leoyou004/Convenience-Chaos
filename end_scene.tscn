@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://60q2tktmuxj1"]
+
+[ext_resource type="Script" uid="uid://blcr8wacri8b" path="res://scripts/RestartButton.gd" id="2_taqub"]
+[ext_resource type="Texture2D" uid="uid://gx47bpuhfw0e" path="res://You Win text.png" id="3_tu0sp"]
+
+[node name="EndScene" type="Node2D" unique_id=1001323478]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1234953208]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -20.0
+offset_right = 1960.0
+offset_bottom = 1132.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0.65882355, 0.11372549, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="ColorRect" unique_id=1306877512]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.5
+offset_top = 59.0
+offset_right = 288.5
+offset_bottom = 229.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+script = ExtResource("2_taqub")
+
+[node name="YouWinText" type="Sprite2D" parent="ColorRect" unique_id=1473279678]
+position = Vector2(1033, 349.00003)
+scale = Vector2(1.8516874, 1.8559322)
+texture = ExtResource("3_tu0sp")
+
+[connection signal="pressed" from="ColorRect/Button" to="ColorRect/Button" method="_on_pressed"]

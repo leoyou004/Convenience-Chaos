@@ -6,6 +6,19 @@ var current_state: int = State.MENU
 var night_timer: float = 0.0
 var night_duration: float = 360.0
 
+# --- Objective Tracking Variables ---
+var total_objectives: int = 3
+var completed_objectives: int = 0
+
+# Reference to your UI CanvasLayer or Panel for the win/end screen
+# Replace "Path/To/WinScreen" with the actual path to your UI node
+@onready var win_screen = $CanvasLayer/WinScreen 
+
+func _ready():
+	# Ensure the win screen is hidden when the game starts up
+	if win_screen:
+		win_screen.hide()
+
 func _process(delta):
 	if current_state == State.PLAYING:
 		night_timer += delta
@@ -14,10 +27,40 @@ func _process(delta):
 
 func set_state(new_state: int):
 	current_state = new_state
+	
+	# Handle what happens when entering specific states
+	match current_state:
+		State.WIN:
+			trigger_win_screen()
+		State.GAME_OVER:
+			# You can handle your game over UI here too
+			pass
 
 func start_game():
 	night_timer = 0.0
+	completed_objectives = 0 # Reset objectives on game start
+	if win_screen:
+		win_screen.hide()
 	set_state(State.PLAYING)
+
+# --- Objective Logic ---
+
+# Call this function from your objective scripts whenever one is finished
+func complete_objective():
+	if current_state != State.PLAYING:
+		return
+		
+	completed_objectives += 1
+	
+	# Check if all objectives are done
+	if completed_objectives >= total_objectives:
+		set_state(State.WIN)
+
+func trigger_win_screen():
+	if win_screen:
+		win_screen.show()
+	# Optional: Pause the game scene tree so things stop moving
+	get_tree().paused = true 
 
 func get_time_remaining() -> float:
 	return max(0.0, night_duration - night_timer)

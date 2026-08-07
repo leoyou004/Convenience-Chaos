@@ -3,6 +3,7 @@ extends Node
 const SAVE_PATH := "user://objective_progress.save"
 
 var signal_bus: Node
+var has_won: bool = false
 var objectives: Dictionary = {
 	"mop_floor":      { "label": "Mop the floor",         "complete": false, "progress": 0.0, "target": 15, "key": "E" },
 	"restock_shelves":{ "label": "Restock shelves",        "complete": false, "progress": 0.0, "target": 10, "key": "F" },
@@ -16,6 +17,7 @@ func _ready():
 	signal_bus = get_node("/root/SignalBus")
 	load_progress()
 	signal_bus.player_died.connect(_on_player_died)
+	signal_bus.all_objectives_completed.connect(_on_all_objectives_completed)
 
 func add_progress(id: String, amount: float) -> void:
 	if not objectives.has(id):
@@ -68,6 +70,15 @@ func reset():
 
 func _on_player_died() -> void:
 	reset()
+
+func _on_all_objectives_completed() -> void:
+	if has_won:
+		return
+	has_won = true
+	call_deferred("_show_end_scene")
+
+func _show_end_scene() -> void:
+	get_tree().change_scene_to_file("res://end_scene.tscn")
 
 func save_progress() -> void:
 	var save_data: Dictionary = {}
