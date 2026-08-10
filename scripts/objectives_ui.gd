@@ -10,6 +10,7 @@ func _ready() -> void:
 	SignalBus.interactable_focused.connect(_on_interactable_focused)
 	SignalBus.interactable_unfocused.connect(_on_interactable_unfocused)
 	SignalBus.interact_progress.connect(_on_interact_progress)
+	ObjectiveManager.connect("objectives_reset", Callable(self, "_update_ui"))
 	_update_ui()
 
 func _update_ui() -> void:
@@ -23,14 +24,15 @@ func _update_ui() -> void:
 			if label == null:
 				continue
 			var pct = int((obj["progress"] / float(obj["target"])) * 100)
+			var progress_text = str(int(obj["progress"])) + "/" + str(obj["target"]) + " (" + str(pct) + "%)"
 			if obj["complete"]:
 				label.text = "✓ " + obj["label"] + " (Done)"
 				label.modulate = Color(0, 1, 0)
 			elif key == _focused_id:
-				label.text = "⟳ " + obj["label"] + " [Hold " + obj["key"] + "] " + str(pct) + "%"
+				label.text = "⟳ " + obj["label"] + " [Hold " + obj["key"] + "] " + progress_text
 				label.modulate = Color(1, 1, 0)
 			else:
-				label.text = "• " + obj["label"] + " " + str(int(obj["progress"])) + "/" + str(obj["target"])
+				label.text = "• " + obj["label"] + " " + progress_text
 				label.modulate = Color(1, 1, 1)
 
 func _on_interactable_focused(objective_id: String, _hold_time: float) -> void:

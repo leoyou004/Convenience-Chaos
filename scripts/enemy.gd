@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
-const SPEED := 6.5
+const SPEED := 5
 const CATCH_DISTANCE := 1.2
 const GRAVITY := 9.8
-const DISTRACTION_DURATION := 5.0
-const STUN_DURATION := 3.0
+const DISTRACTION_DURATION := 6
+const STUN_DURATION := 4
 
 var nav_agent: NavigationAgent3D
 var player: Node3D

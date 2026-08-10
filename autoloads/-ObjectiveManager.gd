@@ -1,7 +1,6 @@
 extends Node
 
-const SAVE_PATH := "user://objective_progress.save"
-
+signal objectives_reset
 var signal_bus: Node
 var has_won: bool = false
 var objectives: Dictionary = {
@@ -15,7 +14,7 @@ var objectives: Dictionary = {
 
 func _ready():
 	signal_bus = get_node("/root/SignalBus")
-	load_progress()
+	reset()
 	signal_bus.player_died.connect(_on_player_died)
 	signal_bus.all_objectives_completed.connect(_on_all_objectives_completed)
 
@@ -34,22 +33,7 @@ func add_progress(id: String, amount: float) -> void:
 			signal_bus.all_objectives_completed.emit()
 	else:
 		signal_bus.interact_progress.emit(objective["progress"] / float(objective["target"]))
-	save_progress()
 
-func set_progress(id: String, amount: float) -> void:
-	if not objectives.has(id):
-		return
-	var objective = objectives[id]
-	objective["progress"] = clamp(amount, 0.0, float(objective["target"]))
-	if objective["progress"] >= float(objective["target"]):
-		objective["progress"] = float(objective["target"])
-		objective["complete"] = true
-		signal_bus.objective_completed.emit(id)
-		if all_complete():
-			signal_bus.all_objectives_completed.emit()
-	else:
-		signal_bus.interact_progress.emit(objective["progress"] / float(objective["target"]))
-	save_progress()
 
 func get_progress(id: String) -> float:
 	if objectives.has(id):
@@ -66,7 +50,11 @@ func reset():
 	for key in objectives:
 		objectives[key]["complete"] = false
 		objectives[key]["progress"] = 0.0
-	save_progress()
+	has_won = false
+	var dir := DirAccess.open("user://")
+	if dir != null and dir.file_exists("objective_progress.save"):
+		dir.remove("objective_progress.save")
+	objectives_reset.emit()
 
 func _on_player_died() -> void:
 	reset()
@@ -75,36 +63,8 @@ func _on_all_objectives_completed() -> void:
 	if has_won:
 		return
 	has_won = true
+	reset()
 	call_deferred("_show_end_scene")
 
 func _show_end_scene() -> void:
 	get_tree().change_scene_to_file("res://end_scene.tscn")
-
-func save_progress() -> void:
-	var save_data: Dictionary = {}
-	for key in objectives:
-		var objective = objectives[key]
-		save_data[key] = {
-			"progress": objective["progress"],
-			"complete": objective["complete"]
-		}
-	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	if file != null:
-		file.store_var(save_data)
-		file.close()
-
-func load_progress() -> void:
-	if not FileAccess.file_exists(SAVE_PATH):
-		return
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if file == null:
-		return
-	var save_data = file.get_var()
-	file.close()
-	if save_data is Dictionary:
-		for key in save_data:
-			if objectives.has(key):
-				var data = save_data[key]
-				if data is Dictionary:
-					objectives[key]["progress"] = float(data.get("progress", 0.0))
-					objectives[key]["complete"] = bool(data.get("complete", false))

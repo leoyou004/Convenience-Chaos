@@ -159,6 +159,7 @@ func _on_player_caught() -> void:
 	if HotBarManager != null:
 		HotBarManager.clear_inventory()
 	SignalBus.sprint_stamina_changed.emit(0.0, max_stamina)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	var tween = create_tween()
 	tween.set_parallel(false)
