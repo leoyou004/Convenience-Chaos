@@ -64,11 +64,13 @@ debug_shape_thickness = 3
 script = ExtResource("2_gntrk")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CameraMount/Camera3D" unique_id=1475733171]
-transform = Transform3D(0.99878556, 0, -0.049268145, -0.0021395967, 0.9990566, -0.043374844, 0.049221665, 0.04342758, 0.99784327, -0.42348704, -0.6511569, 0)
+transform = Transform3D(0.997001, -0.0012242765, -0.077379, -0.002139597, 0.9990565, -0.04337484, 0.077359095, 0.043410312, 0.9960577, -0.42348704, -0.45542562, 0)
 light_color = Color(1, 0.81960785, 0.28627452, 1)
-light_energy = 3.891
-spot_range = 12.736554
-spot_angle = 20.922075
+light_energy = 6.725
+light_indirect_energy = 5.752
+light_volumetric_fog_energy = 0.0
+spot_range = 4.172592
+spot_angle = 30.79977
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=422502178]
 
