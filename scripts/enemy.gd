@@ -1,12 +1,16 @@
 extends CharacterBody3D
 
-const SPEED := 5
+const SPEED := 5.0
 const CATCH_DISTANCE := 1.2
 const GRAVITY := 9.8
-const DISTRACTION_DURATION := 6
-const STUN_DURATION := 4
+const DISTRACTION_DURATION := 6.0
+const STUN_DURATION := 4.0
 
-var nav_agent: NavigationAgent3D
+# 1. We grab nodes directly based on your provided scene tree
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var anim_player: AnimationPlayer = $EnemyModel/AnimationPlayer
+@onready var scream_audio: AudioStreamPlayer3D = $CollisionShape3D/Scream
+
 var player: Node3D
 var can_see_player := false
 var has_screamed := false
@@ -16,18 +20,10 @@ var distraction_timer := 0.0
 var is_stunned := false
 var stun_timer := 0.0
 
-var run_model: Node3D
-var idle_model: Node3D
-var sweep_model: Node3D
-var run_anim_player: AnimationPlayer
-var idle_anim_player: AnimationPlayer
-var sweep_anim_player: AnimationPlayer
-var current_anim_state := "idle"
-
-@onready var audio = $CollisionShape3D/Scream
+var current_anim_state := ""
 
 func _ready() -> void:
-	nav_agent = $NavigationAgent3D
+	# Keep your existing player setup
 	player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		player = get_tree().get_first_node_in_group("Player")
@@ -36,105 +32,32 @@ func _ready() -> void:
 	nav_agent.target_desired_distance = 0.8
 	nav_agent.avoidance_enabled = false
 
+	# Connect signals
 	$VisionCone.body_entered.connect(_on_vision_entered)
 	$VisionCone.body_exited.connect(_on_vision_exited)
 	SignalBus.distraction_thrown.connect(_on_distraction_thrown)
 	SignalBus.item_landed.connect(_on_item_landed)
+	
+	# Connect the single animation player's finished signal
+	anim_player.animation_finished.connect(_on_animation_finished)
 
-	_setup_animation_models()
 	_play_animation_state("idle")
 
-func _setup_animation_models() -> void:
-	run_model = $"Running (2)"
-	run_anim_player = _get_animation_player(run_model)
-
-	# Corrected path to match "Idle (1).fbx" in your FileSystem
-	idle_model = _create_animation_model("IdleModel", "res://Scenes/Idle (1).fbx")
-	idle_anim_player = _get_animation_player(idle_model)
-
-	# Path for Sweep Fall.fbx
-	sweep_model = _create_animation_model("SweepModel", "res://Scenes/Sweep Fall.fbx")
-	sweep_anim_player = _get_animation_player(sweep_model)
-
-	_configure_animation_player(run_anim_player, true)
-	_configure_animation_player(idle_anim_player, true)
-	_configure_animation_player(sweep_anim_player, false)
-
-	# Connect animation finished signal for the stun/sweep animation
-	if sweep_anim_player != null:
-		sweep_anim_player.animation_finished.connect(_on_animation_finished)
-
-func _create_animation_model(model_name: String, scene_path: String) -> Node3D:
-	if scene_path == "":
-		return null
-
-	var resource: Resource = load(scene_path)
-	if resource == null:
-		return null
-
-	var packed_scene := resource as PackedScene
-	if packed_scene == null:
-		return null
-
-	var instance = packed_scene.instantiate()
-	if instance is Node3D:
-		var model := instance as Node3D
-		model.name = model_name
-		model.transform = $"Running (2)".transform
-		add_child(model)
-		model.owner = self
-		model.visible = false
-		return model
-	return null
-
-func _get_animation_player(model: Node3D) -> AnimationPlayer:
-	if model == null:
-		return null
-	return model.get_node_or_null("AnimationPlayer") as AnimationPlayer
-
-func _configure_animation_player(anim_player: AnimationPlayer, loop: bool) -> void:
-	if anim_player == null:
-		return
-	var animation_name: StringName = "mixamo_com"
-	if not anim_player.has_animation(animation_name):
-		var list = anim_player.get_animation_list()
-		if list.size() > 0:
-			animation_name = StringName(list[0])
-	if anim_player.has_animation(animation_name):
-		var animation: Animation = anim_player.get_animation(animation_name)
-		animation.loop_mode = Animation.LOOP_LINEAR if loop else Animation.LOOP_NONE
-
-func _set_model_visibility(active_model: Node3D) -> void:
-	for model in [run_model, idle_model, sweep_model]:
-		if model != null:
-			model.visible = (model == active_model)
-
+# 2. Replaced the convoluted model swapping with simple string calls
 func _play_animation_state(state: String) -> void:
-	if state == current_anim_state and state != "stunned":
+	if state == current_anim_state:
 		return
 
 	current_anim_state = state
 
+	# IMPORTANT: Change the strings inside .play() to perfectly match 
+	# the animation names currently inside your AnimationPlayer list!
 	if state == "idle":
-		_set_model_visibility(idle_model if idle_model != null else run_model)
-		_play_animation_player(idle_anim_player)
+		anim_player.play("local/Zombie_Idle") # e.g. "Idle (1)" or "mixamo_com"
 	elif state == "run":
-		_set_model_visibility(run_model)
-		_play_animation_player(run_anim_player)
+		anim_player.play("local/Zombie_Walk_Fwd")  # e.g. "Running (2)"
 	elif state == "stunned":
-		_set_model_visibility(sweep_model if sweep_model != null else run_model)
-		_play_animation_player(sweep_anim_player)
-
-func _play_animation_player(anim_player: AnimationPlayer) -> void:
-	if anim_player == null:
-		return
-	var animation_name: StringName = "mixamo_com"
-	if not anim_player.has_animation(animation_name):
-		var list = anim_player.get_animation_list()
-		if list.size() > 0:
-			animation_name = StringName(list[0])
-	if anim_player.has_animation(animation_name):
-		anim_player.play(animation_name)
+		anim_player.play("sweep") # e.g. "Sweep Fall"
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	if current_anim_state == "stunned":
@@ -146,10 +69,11 @@ func _on_vision_entered(body: Node3D) -> void:
 		return
 	if not body.is_in_group("player") and not body.is_in_group("Player"):
 		return
+	
 	can_see_player = true
 	if not has_screamed:
 		has_screamed = true
-		audio.play()
+		scream_audio.play()
 
 func _on_vision_exited(body: Node3D) -> void:
 	if not body.is_in_group("player") and not body.is_in_group("Player"):
@@ -174,15 +98,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 0.0
 
+	# 3. Cleaned up the stun logic to prevent physics conflicts
 	if is_stunned:
 		stun_timer -= delta
 		if stun_timer <= 0.0:
 			is_stunned = false
+		else:
 			velocity.x = 0.0
 			velocity.z = 0.0
-		move_and_slide()
-		_play_animation_state("stunned" if is_stunned else ("run" if velocity.length_squared() > 0.25 else "idle"))
-		return
+			move_and_slide()
+			return # Exit early so they don't try to navigate while stunned
 
 	if has_item_target:
 		distraction_timer -= delta
@@ -210,8 +135,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	var should_run := velocity.length_squared() > 0.25
-	_play_animation_state("run" if should_run else "idle")
+	# Only play the run/idle animation if they aren't stunned
+	if not is_stunned:
+		var should_run := velocity.length_squared() > 0.25
+		_play_animation_state("run" if should_run else "idle")
 
 	if player and global_position.distance_to(player.global_position) <= CATCH_DISTANCE:
 		SignalBus.player_caught.emit()

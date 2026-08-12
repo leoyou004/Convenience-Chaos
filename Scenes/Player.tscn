@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://hvf27n5wefnr" path="res://scripts/interact.gd" id="2_gntrk"]
 [ext_resource type="AudioStream" uid="uid://kt0706swhj1h" path="res://Characters_psx/Characters_psx/Models/freesound_community-concrete-footsteps-6752.mp3" id="3_nn08x"]
 [ext_resource type="Shader" uid="uid://b2bih4d0syls" path="res://items/Player.gdshader" id="4_dewec"]
+[ext_resource type="Script" uid="uid://bh0eqpxve377k" path="res://Scenes/flashlight.gd" id="6_52ee3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rwas"]
 height = 1.6713257
@@ -63,14 +64,15 @@ transform = Transform3D(1, 0, 0, 0, -0.04951217, -0.99877363, 0, 0.99877363, -0.
 debug_shape_thickness = 3
 script = ExtResource("2_gntrk")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="CameraMount/Camera3D" unique_id=1475733171]
+[node name="flashlight" type="SpotLight3D" parent="CameraMount/Camera3D" unique_id=1475733171]
 transform = Transform3D(0.997001, -0.0012242765, -0.077379, -0.002139597, 0.9990565, -0.04337484, 0.077359095, 0.043410312, 0.9960577, -0.42348704, -0.45542562, 0)
 light_color = Color(1, 0.81960785, 0.28627452, 1)
-light_energy = 6.725
+light_energy = 9.893
 light_indirect_energy = 5.752
-light_volumetric_fog_energy = 0.0
-spot_range = 4.172592
-spot_angle = 30.79977
+light_volumetric_fog_energy = 1.426
+spot_range = 15.585
+spot_angle = 31.83
+script = ExtResource("6_52ee3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=422502178]
 

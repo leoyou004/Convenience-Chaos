@@ -1,10 +1,10 @@
-[gd_scene format=4 uid="uid://dacvqw5g61lxj"]
+[gd_scene format=4 uid="uid://casj8k0vkxhc8"]
 
-[ext_resource type="Script" uid="uid://dmo7f8t5h4fqw" path="res://scripts/enemy.gd" id="1_m1htj"]
-[ext_resource type="Animation" uid="uid://uls8x6mj3f4e" path="res://assets/models/animations/Zombie_Idle.res" id="3_1exfc"]
-[ext_resource type="PackedScene" uid="uid://nm2og7saqneo" path="res://Characters_psx/Characters_psx/Models/Killers/Running (2).fbx" id="3_xeo28"]
-[ext_resource type="Animation" uid="uid://bb5kxtnv1p52n" path="res://assets/models/animations/Zombie_Scratch.res" id="4_mo1ky"]
-[ext_resource type="Animation" uid="uid://dadxi6swf1438" path="res://assets/models/animations/Zombie_Walk_Fwd.res" id="5_6bs3c"]
+[ext_resource type="Script" uid="uid://dmo7f8t5h4fqw" path="res://scripts/enemy.gd" id="1_cp8lj"]
+[ext_resource type="PackedScene" uid="uid://dv74iuv30sff3" path="res://Characters_psx/Characters_psx/Models/Killers/Character_Killer_01.fbx" id="2_cp8lj"]
+[ext_resource type="Animation" uid="uid://uls8x6mj3f4e" path="res://assets/models/animations/Zombie_Idle.res" id="3_bihsd"]
+[ext_resource type="Animation" uid="uid://bb5kxtnv1p52n" path="res://assets/models/animations/Zombie_Scratch.res" id="4_od1td"]
+[ext_resource type="Animation" uid="uid://dadxi6swf1438" path="res://assets/models/animations/Zombie_Walk_Fwd.res" id="5_050u2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqquq"]
 margin = 0.0
@@ -24,15 +24,15 @@ size = Vector3(7.150238, 1, 27.35939)
 [sub_resource type="SphereShape3D" id="SphereShape3D_gqquq"]
 radius = 8.03375
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uoxpr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1elri"]
 _data = {
-&"Zombie_Idle": ExtResource("3_1exfc"),
-&"Zombie_Scratch": ExtResource("4_mo1ky"),
-&"Zombie_Walk_Fwd": ExtResource("5_6bs3c")
+&"Zombie_Idle": ExtResource("3_bihsd"),
+&"Zombie_Scratch": ExtResource("4_od1td"),
+&"Zombie_Walk_Fwd": ExtResource("5_050u2")
 }
 
 [node name="Enemy" type="CharacterBody3D" unique_id=879150185]
-script = ExtResource("1_m1htj")
+script = ExtResource("1_cp8lj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22295864]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26068115, 0)
@@ -66,44 +66,37 @@ shape = SubResource("BoxShape3D_s7bn3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HearingRange" unique_id=997895092]
 shape = SubResource("SphereShape3D_gqquq")
 
-[node name="EnemyModel" parent="." unique_id=2132411608 instance=ExtResource("3_xeo28")]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.022500813, -0.8954044, 0.008252203)
+[node name="Character_Killer_01" parent="." unique_id=1629382488 instance=ExtResource("2_cp8lj")]
+transform = Transform3D(0.8586263, 0, 0, 0, 0.3338106, 0, 0, 0, 1.138027, 0, -0.72642183, 0)
 
-[node name="GeneralSkeleton" parent="EnemyModel" index="0" unique_id=722823440]
-bones/0/position = Vector3(-0.02735103, 2.4779754, -0.4685376)
-bones/0/rotation = Quaternion(0.10908049, -0.009676853, 0.007000755, 0.99396116)
-bones/1/rotation = Quaternion(0.14691457, 0.072582364, -0.065847605, 0.98428255)
-bones/2/rotation = Quaternion(0.15632965, 0.028081886, -0.022580773, 0.98704743)
-bones/3/rotation = Quaternion(0.23998906, 0.026503198, -0.025264021, 0.97008485)
-bones/4/rotation = Quaternion(-0.22121286, -0.012436469, 0.021584757, 0.9749074)
-bones/5/rotation = Quaternion(0.14392447, 0.08627804, 0.16655815, 0.9716483)
-bones/7/rotation = Quaternion(0.52132756, 0.4776965, 0.4777322, -0.5213402)
-bones/8/rotation = Quaternion(0.18999904, 0.81149787, -0.5525233, 0.009463981)
-bones/9/rotation = Quaternion(0.22287217, -0.767336, 0.36730018, 0.4760399)
-bones/10/rotation = Quaternion(0.03217328, 0.85211396, -0.2435976, 0.46208984)
-bones/11/rotation = Quaternion(0.06882223, -0.007697194, 0.17074288, 0.98287904)
-bones/12/rotation = Quaternion(-0.11892553, -8.940697e-08, 0.08456068, 0.98929584)
-bones/13/rotation = Quaternion(0.39550126, 0.01902935, -0.0081991255, 0.9182317)
-bones/14/rotation = Quaternion(0.46019578, -2.9802322e-08, -3.2484531e-06, 0.8878175)
-bones/15/rotation = Quaternion(0.5, -0.49999988, -0.5, -0.5000001)
-bones/16/rotation = Quaternion(-0.22273076, 0.81679547, -0.5321213, -0.00911437)
-bones/17/rotation = Quaternion(0.19472194, 0.80011487, -0.39490354, 0.40737045)
-bones/18/rotation = Quaternion(0.008304489, -0.6790002, 0.11236486, 0.72544056)
-bones/19/rotation = Quaternion(0.023121, 0.008340359, -0.15933087, 0.9869192)
-bones/20/rotation = Quaternion(-0.11892578, -5.9604645e-08, -0.08456063, 0.98929584)
-bones/21/rotation = Quaternion(0.3955022, -0.019029304, 0.008198887, 0.9182313)
-bones/22/rotation = Quaternion(0.46019536, 0, 3.3378597e-06, 0.8878176)
-bones/23/rotation = Quaternion(-0.00014051655, 0.4258322, 0.9045791, -0.020091454)
-bones/24/rotation = Quaternion(-0.010588613, 0.9860769, -0.1484989, -0.07408317)
-bones/25/rotation = Quaternion(-0.1331302, 0.7375119, -0.6620357, 0.0078387335)
-bones/26/rotation = Quaternion(6.410518e-08, 1, 5.960463e-08, 3.901875e-08)
-bones/28/rotation = Quaternion(0.0012291186, 0.13657226, 0.9749192, 0.17572457)
-bones/29/rotation = Quaternion(0.012898747, 0.9438407, -0.32798663, 0.03772662)
-bones/30/rotation = Quaternion(0.1722631, 0.5663967, -0.79833573, -0.1103648)
-bones/31/rotation = Quaternion(-0.0037813506, 0.9894421, 0.14487873, -0.00055365014)
+[node name="Skeleton3D" parent="Character_Killer_01" index="0" unique_id=1705923108]
+bones/0/position = Vector3(-3.3825636e-06, 2.6496096, -0.013016633)
+bones/1/rotation = Quaternion(-1.0282723e-05, 8.491481e-07, 0.053612452, 0.99856186)
+bones/7/rotation = Quaternion(0.011743225, -0.63087213, 0.77578974, 0.0035632248)
+bones/8/rotation = Quaternion(-0.102974504, 0.07437436, 0.0037299134, 0.9918926)
+bones/9/rotation = Quaternion(1.2859091e-07, 0.0072976374, -2.635061e-07, 0.9999734)
+bones/10/rotation = Quaternion(3.8320636e-07, 0.0031754626, 2.1883176e-07, 0.99999505)
+bones/11/rotation = Quaternion(1.8898749e-07, -0.0024545027, -1.0517762e-07, 0.9999971)
+bones/12/rotation = Quaternion(-0.08752171, -8.571449e-08, -0.093155846, 0.9917973)
+bones/13/rotation = Quaternion(0.001961414, -0.0018932362, 0.012636448, 0.99991643)
+bones/15/rotation = Quaternion(0.7756518, -0.0043113525, 0.013359767, 0.63100505)
+bones/16/rotation = Quaternion(0.005875383, 0.9921748, -0.10287392, 0.070510425)
+bones/17/rotation = Quaternion(1.5013497e-07, -0.006750029, -1.9057188e-07, 0.99997723)
+bones/18/rotation = Quaternion(2.2231627e-07, -0.0010802458, -9.904579e-08, 0.9999994)
+bones/19/rotation = Quaternion(3.001997e-07, 0.008020829, 3.6990963e-07, 0.9999678)
+bones/20/rotation = Quaternion(0.010039354, 8.305374e-08, -0.042558458, 0.99904364)
+bones/21/rotation = Quaternion(0.002511856, 0.0010108374, 0.039554313, 0.99921376)
+bones/23/rotation = Quaternion(0.00016872815, -0.012798973, 0.99991745, -0.0011934494)
+bones/24/rotation = Quaternion(0.026073514, -0.0009650691, -0.033293802, 0.9991051)
+bones/25/rotation = Quaternion(0.32917625, -0.63766336, 0.39232942, 0.5754181)
+bones/28/rotation = Quaternion(-0.00015136207, 0.01281883, 0.9999178, -0.00026744368)
+bones/29/rotation = Quaternion(-0.026077213, 0.00096116395, -0.032087684, 0.9991444)
+bones/30/rotation = Quaternion(0.3933597, -0.57513696, 0.33049074, 0.6366015)
 
-[node name="AnimationPlayer" parent="EnemyModel" index="1" unique_id=365404858]
-libraries/local = SubResource("AnimationLibrary_uoxpr")
-speed_scale = 2.5
+[node name="Character_Killer_01" parent="Character_Killer_01/Skeleton3D" index="0" unique_id=1245427880]
+transform = Transform3D(1, 0, 0, 0, 1.0087512, 0, 0, 0, 1, 0, 0, 0)
 
-[editable path="EnemyModel"]
+[node name="AnimationPlayer" parent="Character_Killer_01" index="1" unique_id=246292105]
+libraries/local = SubResource("AnimationLibrary_1elri")
+
+[editable path="Character_Killer_01"]
