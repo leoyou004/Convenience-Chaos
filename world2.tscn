@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bjr3g0sovbbxv" path="res://scripts/food.gd" id="6_dvv3y"]
 [ext_resource type="Material" uid="uid://buf40hl0lpg2h" path="res://6twelve/Models/Materials/Food_shelf_04.tres" id="7_f6u5b"]
 [ext_resource type="Script" uid="uid://d00rsb66pj3b5" path="res://scripts/ledge_=hopper.gd" id="8_wuyn8"]
-[ext_resource type="PackedScene" uid="uid://dacvqw5g61lxj" path="res://Scenes/Enemy.tscn" id="9_is03e"]
 [ext_resource type="Script" uid="uid://dwuvaqgxm7m55" path="res://Scenes/mop.gd" id="10_1x1nw"]
 [ext_resource type="Script" uid="uid://m1hsi1bxq67m" path="res://scripts/door_bell.gd" id="11_b22el"]
 [ext_resource type="AudioStream" uid="uid://b43310cwccl1" path="res://Characters_psx/Characters_psx/Models/freesound_community-conveniencestorering-96090.mp3" id="12_qbvih"]
@@ -21,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d3hs32v3fwy4g" path="res://assets/Car 03/car3_yellow.png" id="19_8rva1"]
 [ext_resource type="ArrayMesh" uid="uid://311bhkqa253p" path="res://assets/Car 03/Car3.obj" id="20_mrlao"]
 [ext_resource type="PackedScene" uid="uid://b2fo4sxwt8qfk" path="res://Scenes/Ramp3d.tscn" id="21_q0mno"]
+[ext_resource type="PackedScene" uid="uid://ba6xtiifg4v2u" path="res://enemy_3.tscn" id="22_kamru"]
 [ext_resource type="PackedScene" uid="uid://casj8k0vkxhc8" path="res://enemy2.tscn" id="22_ryt4s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mpccf"]
@@ -1042,9 +1042,6 @@ shape = SubResource("BoxShape3D_kttmh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.217229, -0.35545897, -5.7489824)
 shape = SubResource("BoxShape3D_kes0n")
 
-[node name="enemy" parent="NavigationRegion3D/6twelve" unique_id=1703061241 instance=ExtResource("9_is03e")]
-transform = Transform3D(-0.99961257, 0, 0.02783431, 0, 1, 0, -0.02783431, 0, -0.99961257, 8.319764, 0.7203542, -27.972057)
-
 [node name="Mop" type="Area3D" parent="NavigationRegion3D/6twelve" unique_id=478981302]
 transform = Transform3D(0.56225395, 0, 0, 0, 0.46093518, 0, 0, 0, 0.5296279, -4.1252856, 0.16528821, -18.659761)
 collision_layer = 5
@@ -1238,7 +1235,10 @@ polygon = PackedVector2Array(-0.5089493, 0.50526494, 1.8584185, -0.39840817, 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2783527, 0.55087686, -22.826374)
 
 [node name="Enemy" parent="." unique_id=879150185 instance=ExtResource("22_ryt4s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.588119, 0.8524641, -15.505864)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.592135, 1.6769521, -28.029106)
+
+[node name="Enemy3" parent="." unique_id=1485036494 instance=ExtResource("22_kamru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.762657, -0.056543946, -16.438885)
 
 [connection signal="area_entered" from="NavigationRegion3D/6twelve/Mop" to="NavigationRegion3D/6twelve/Mop" method="_on_area_entered"]
 [connection signal="area_exited" from="NavigationRegion3D/6twelve/Mop" to="NavigationRegion3D/6twelve/Mop" method="_on_area_exited"]
