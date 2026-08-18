@@ -3,11 +3,45 @@
 [ext_resource type="Texture2D" uid="uid://c6eh4il6fjp51" path="res://assets/textures/mainmenu-image.png" id="1_1ehe0"]
 [ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items/main_menu.gdshader" id="1_ce3w2"]
 [ext_resource type="Script" uid="uid://d1621pod3vhb3" path="res://scripts/Normal-Mode-Button.gd" id="2_ce3w2"]
-[ext_resource type="Texture2D" uid="uid://dtbk2vu0d3oup" path="res://assets/textures/text-1778802576909-removebg-preview.png" id="3_n45e2"]
 [ext_resource type="Script" uid="uid://c4h6qt6bctfmg" path="res://scripts/main_menu.gd" id="4_a1b2c"]
+[ext_resource type="FontFile" uid="uid://c8i0yhd71nmor" path="res://items/Shadow of the Deads.ttf" id="4_trj04"]
+[ext_resource type="Texture2D" uid="uid://dqeym2vn542e6" path="res://BreadChase.png" id="6_cp0ys"]
 [ext_resource type="Script" uid="uid://d1n6op4kgfy57" path="res://Scenes/button_2.gd" id="6_opfnp"]
+[ext_resource type="Script" uid="uid://tomdm3wfpyyd" path="res://Scenes/Marlon.gd" id="7_trj04"]
+[ext_resource type="Texture2D" uid="uid://cmxdvavti0cfw" path="res://BreadIdle.png" id="7_yhxw7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
+shader = ExtResource("1_ce3w2")
+shader_parameter/time_scale = 1.0
+shader_parameter/distortion_strength = 0.01
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/noise_intensity = 0.1
+shader_parameter/color_bleed = 0.005
+shader_parameter/vignette_strength = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ht8l8"]
+shader = ExtResource("1_ce3w2")
+shader_parameter/time_scale = 1.0
+shader_parameter/distortion_strength = 0.01
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/noise_intensity = 0.1
+shader_parameter/color_bleed = 0.005
+shader_parameter/vignette_strength = 0.4
+
+[sub_resource type="LabelSettings" id="LabelSettings_6h6v5"]
+font = ExtResource("4_trj04")
+font_size = 90
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yhxw7"]
+shader = ExtResource("1_ce3w2")
+shader_parameter/time_scale = 1.0
+shader_parameter/distortion_strength = 0.01
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/noise_intensity = 0.1
+shader_parameter/color_bleed = 0.005
+shader_parameter/vignette_strength = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trj04"]
 shader = ExtResource("1_ce3w2")
 shader_parameter/time_scale = 1.0
 shader_parameter/distortion_strength = 0.01
@@ -21,25 +55,57 @@ script = ExtResource("4_a1b2c")
 
 [node name="bakcground image" type="TextureRect" parent="." unique_id=239448924]
 material = SubResource("ShaderMaterial_n45e2")
-offset_right = 1918.0
-offset_bottom = 1085.0
+offset_left = -232.0
+offset_top = -4.0
+offset_right = 1920.0
+offset_bottom = 1065.0
 texture = ExtResource("1_1ehe0")
 
-[node name="text main menu" type="TextureRect" parent="bakcground image" unique_id=102859411]
+[node name="Label" type="Label" parent="bakcground image" unique_id=157885035]
+material = SubResource("ShaderMaterial_ht8l8")
 layout_mode = 0
-offset_right = 1918.0
-offset_bottom = 262.0
-texture = ExtResource("3_n45e2")
+offset_left = 259.00003
+offset_top = 24.999998
+offset_right = 2286.0
+offset_bottom = 210.0
+scale = Vector2(0.91703606, 0.9883755)
+theme_override_font_sizes/font_size = 14
+text = "HUSS VALLEY CONVENIENCE"
+label_settings = SubResource("LabelSettings_6h6v5")
 
-[node name="Button" type="Button" parent="bakcground image" unique_id=698503243]
-layout_mode = 1
+[node name="Button" type="Button" parent="." unique_id=541551145]
+offset_left = 647.0
+offset_top = 860.0
+offset_right = 1032.0
+offset_bottom = 984.0
+text = "Scary mode
+"
+script = ExtResource("6_opfnp")
+
+[node name="BreadIdle" type="Sprite2D" parent="." unique_id=177340603]
+material = SubResource("ShaderMaterial_yhxw7")
+position = Vector2(1777.9999, 763)
+scale = Vector2(1.2409722, 1.0106516)
+texture = ExtResource("7_yhxw7")
+
+[node name="BreadChase" type="Sprite2D" parent="." unique_id=485202827]
+material = SubResource("ShaderMaterial_trj04")
+position = Vector2(1776.0001, 775)
+scale = Vector2(1.2889513, 1.1092011)
+texture = ExtResource("6_cp0ys")
+script = ExtResource("7_trj04")
+flash_chance = 0.2
+min_flash_duration = 0.2
+max_flash_duration = 0.3
+
+[node name="Button2" type="Button" parent="." unique_id=698503243]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -145.0
-offset_top = 708.0
-offset_right = 205.0
-offset_bottom = 822.0
+offset_left = 684.0
+offset_top = 653.0
+offset_right = 1034.0
+offset_bottom = 767.0
 grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -47,14 +113,5 @@ action_mode = 0
 text = "Normal mode"
 script = ExtResource("2_ce3w2")
 
-[node name="Button" type="Button" parent="." unique_id=541551145]
-offset_left = 792.0
-offset_top = 851.0
-offset_right = 1177.0
-offset_bottom = 975.0
-text = "Scary mode
-"
-script = ExtResource("6_opfnp")
-
-[connection signal="pressed" from="bakcground image/Button" to="bakcground image/Button" method="_on_pressed"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]

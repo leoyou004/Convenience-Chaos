@@ -5,11 +5,11 @@ var signal_bus: Node
 var has_won: bool = false
 var objectives: Dictionary = {
 	"mop_floor":      { "label": "Mop the floor",         "complete": false, "progress": 0.0, "target": 15, "key": "E" },
-	"restock_shelves":{ "label": "Restock shelves",        "complete": false, "progress": 0.0, "target": 10, "key": "F" },
-	"take_out_trash": { "label": "Take out the trash",     "complete": false, "progress": 0.0, "target": 12, "key": "Q" },
-	"count_register": { "label": "Count the register",     "complete": false, "progress": 0.0, "target": 8,  "key": "R" },
-	"turn_off_lights":{ "label": "Turn off aisle lights",  "complete": false, "progress": 0.0, "target": 6,  "key": "T" },
-	"clean_windows":  { "label": "Clean the windows",      "complete": false, "progress": 0.0, "target": 15, "key": "Y" },
+	"restock_shelves":{ "label": "Restock shelves",        "complete": false, "progress": 0.0, "target": 10, "key": "E" },
+	"take_out_trash": { "label": "Take out the trash",     "complete": false, "progress": 0.0, "target": 12, "key": "E" },
+	"count_register": { "label": "Count the register",     "complete": false, "progress": 0.0, "target": 8,  "key": "E" },
+	"turn_off_lights":{ "label": "Turn off aisle lights",  "complete": false, "progress": 0.0, "target": 6,  "key": "E" },
+	"clean_windows":  { "label": "Clean the windows",      "complete": false, "progress": 0.0, "target": 15, "key": "E" },
 }
 
 func _ready():

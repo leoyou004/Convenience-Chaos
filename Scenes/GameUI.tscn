@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://b4j1n4w3cj2bg"]
 
-[ext_resource type="Shader" path="res://items/main_menu.gdshader" id="1_d8tla"]
-[ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://assets/textures/icon.svg" id="1_tyage"]
+[ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items/main_menu.gdshader" id="1_d8tla"]
 [ext_resource type="Script" uid="uid://dobsby5ih2xbg" path="res://scripts/objectives_ui.gd" id="1_wjrrg"]
-[ext_resource type="Script" uid="uid://n5rrsdaw1u4b" path="res://scripts/noise_indicator.gd" id="2_37hul"]
 [ext_resource type="Script" uid="uid://d4gog80y88bix" path="res://scripts/timer.gd" id="2_d8tla"]
-[ext_resource type="Script" uid="uid://c7f2kulywtk7n" path="res://scripts/alert_icon.gd" id="3_po7eo"]
+[ext_resource type="Texture2D" uid="uid://bl3m61cf1v1p8" path="res://itemslot.png" id="4_co6lq"]
 [ext_resource type="Script" uid="uid://oo8x31t8njh2" path="res://scripts/hotbar_ui.gd" id="5_hotbarui"]
 
 [sub_resource type="GDScript" id="GDScript_co6lq"]
@@ -119,52 +117,28 @@ grow_vertical = 0
 script = ExtResource("5_hotbarui")
 
 [node name="TextureRect" type="TextureRect" parent="Hotbar" unique_id=1039081134]
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("1_tyage")
+texture = ExtResource("4_co6lq")
 
 [node name="TextureRect2" type="TextureRect" parent="Hotbar" unique_id=230288958]
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("1_tyage")
+texture = ExtResource("4_co6lq")
 
 [node name="TextureRect3" type="TextureRect" parent="Hotbar" unique_id=1279099117]
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("1_tyage")
-
-[node name="NoiseIndicator" type="TextureRect" parent="." unique_id=1778124687]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -135.0
-offset_top = -163.0
-offset_right = -7.0
-offset_bottom = -35.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_vertical = 8
-texture = ExtResource("1_tyage")
-script = ExtResource("2_37hul")
-metadata/_edit_use_anchors_ = true
-
-[node name="AlertIcon" type="TextureRect" parent="." unique_id=955623492]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -102.0
-offset_top = 3.0
-offset_right = 26.0
-offset_bottom = 131.0
-grow_horizontal = 2
-texture = ExtResource("1_tyage")
-script = ExtResource("3_po7eo")
-metadata/_edit_use_anchors_ = true
+texture = ExtResource("4_co6lq")
 
 [node name="SprintBar" type="ProgressBar" parent="." unique_id=434807550]
 anchors_preset = -1
@@ -178,6 +152,7 @@ offset_right = 343.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1.5600024, 1.72)
 value = 100.0
 script = SubResource("GDScript_co6lq")
 
