@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bxtgwe6o0js3l"]
 
 [ext_resource type="Script" uid="uid://qelmuk8if5k6" path="res://Scenes/item.gd" id="1_rp8b8"]
-[ext_resource type="Texture2D" uid="uid://dybb6it1ccb5j" path="res://assets/textures/icon.svg" id="2_g4n5x"]
+[ext_resource type="Texture2D" uid="uid://bl3m61cf1v1p8" path="res://itemslot.png" id="2_g4n5x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67bpl"]
 resource_name = "02 - Default"

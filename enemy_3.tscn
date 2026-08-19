@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://ba6xtiifg4v2u"]
 
-[ext_resource type="Script" uid="uid://w7kreb8qenmb" path="res://enemy_2.gd" id="1_dxyk6"]
-[ext_resource type="Texture2D" uid="uid://cmxdvavti0cfw" path="res://BreadIdle.png" id="1_hukrr"]
+[ext_resource type="Script" uid="uid://cdi8j1qna0g0r" path="res://enemy_3.gd" id="1_dxyk6"]
+[ext_resource type="Texture2D" uid="uid://bp3h7ffy71q7o" path="res://BreadIdle.png" id="1_hukrr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dxyk6"]
 margin = 0.0
@@ -22,8 +22,9 @@ radius = 8.03375
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2kam"]
 size = Vector3(7.150238, 1, 27.35939)
 
-[node name="Enemy3" type="CharacterBody3D" unique_id=289357669]
+[node name="Enemy3" type="CharacterBody3D" unique_id=289357669 node_paths=PackedStringArray("patrol_points")]
 script = ExtResource("1_dxyk6")
+patrol_points = [null]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1565373372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26068115, 0)
@@ -57,5 +58,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006210327, 0, 14.0283165)
 shape = SubResource("BoxShape3D_h2kam")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1666958534]
-transform = Transform3D(0.33923286, 0, 0, 0, 0.33905348, 0, 0, 0, 2.0972383, 0, 0.31743455, 0)
+transform = Transform3D(-0.33920258, 0, -0.028027503, 0, 0.33905345, 0, 0.0045335093, 0, -2.097051, 0, 0.31743455, -0.00021129847)
+billboard = 1
 texture = ExtResource("1_hukrr")

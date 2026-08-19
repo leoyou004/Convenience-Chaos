@@ -35,6 +35,16 @@ func pick_up_item(item: Node) -> bool:
 func add_item_to_first_empty(item_data: Variant) -> bool:
 	if item_data is Node:
 		return pick_up_item(item_data)
+	if item_data is Resource:
+		for i in MAX_SLOTS:
+			if slots[i] == null:
+				slots[i] = {
+					"name": item_data.get("name"),
+					"icon": item_data.get("icon"),
+					"scene_file": item_data.get("pickup_scene")
+				}
+				hotbar_updated.emit(slots.duplicate(), active_slot)
+				return true
 	return false
 
 func clear_inventory() -> void:

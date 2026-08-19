@@ -108,13 +108,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -445.0
-offset_top = -211.0
-offset_right = 431.0
-offset_bottom = -35.0
+offset_left = -679.0
+offset_top = -239.0
+offset_right = 197.0
+offset_bottom = -63.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("5_hotbarui")
+bottle_texture = ExtResource("4_co6lq")
 
 [node name="TextureRect" type="TextureRect" parent="Hotbar" unique_id=1039081134]
 custom_minimum_size = Vector2(128, 128)

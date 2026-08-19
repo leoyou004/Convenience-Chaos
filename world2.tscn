@@ -1235,10 +1235,92 @@ polygon = PackedVector2Array(-0.5089493, 0.50526494, 1.8584185, -0.39840817, 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2783527, 0.55087686, -22.826374)
 
 [node name="Enemy" parent="." unique_id=879150185 instance=ExtResource("22_ryt4s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.592135, 1.6769521, -28.029106)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.592135, 0.7400918, -28.029106)
 
-[node name="Enemy3" parent="." unique_id=1485036494 instance=ExtResource("22_kamru")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.762657, -0.056543946, -16.438885)
+[node name="Enemy3" parent="." unique_id=1485036494 node_paths=PackedStringArray("patrol_points") instance=ExtResource("22_kamru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.762657, 1.147832, -16.438885)
+patrol_points = [NodePath("../PatrolPoint"), NodePath("../PatrolPoint2"), NodePath("../PatrolPoint3"), NodePath("../PatrolPoint4"), NodePath("../PatrolPoint5"), NodePath("../PatrolPoint6"), NodePath("../PatrolPoint7"), NodePath("../PatrolPoint8"), NodePath("../PatrolPoint9"), NodePath("../PatrolPoint10"), NodePath("../PatrolPoint11"), NodePath("../PatrolPoint12"), NodePath("../PatrolPoint14"), NodePath("../PatrolPoint15"), NodePath("../PatrolPoint15"), NodePath("../PatrolPoint16"), NodePath("../PatrolPoint17"), NodePath("../PatrolPoint18"), NodePath("../PatrolPoint19"), NodePath("../PatrolPoint20"), NodePath("../PatrolPoint21"), NodePath("../PatrolPoint22"), NodePath("../PatrolPoint23"), NodePath("../PatrolPoint24"), NodePath("../PatrolPoint25"), NodePath("../PatrolPoint26"), NodePath("../PatrolPoint27")]
+
+[node name="PatrolPoint" type="Marker3D" parent="." unique_id=247289544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8783655, 0.24409962, -16.53271)
+
+[node name="PatrolPoint2" type="Marker3D" parent="." unique_id=950950610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8783655, 0.24409962, -21.530338)
+
+[node name="PatrolPoint3" type="Marker3D" parent="." unique_id=271660581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4927301, 0.24409962, -21.76061)
+
+[node name="PatrolPoint4" type="Marker3D" parent="." unique_id=179350598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4927301, 0.24409962, -24.122728)
+
+[node name="PatrolPoint5" type="Marker3D" parent="." unique_id=242500856]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.849296, 0.24409962, -24.122728)
+
+[node name="PatrolPoint6" type="Marker3D" parent="." unique_id=2134335546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.624686, 0.19787407, -27.986149)
+
+[node name="PatrolPoint7" type="Marker3D" parent="." unique_id=1450553580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, -28.278217)
+
+[node name="PatrolPoint8" type="Marker3D" parent="." unique_id=1805578063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, -7.1932974)
+
+[node name="PatrolPoint9" type="Marker3D" parent="." unique_id=1224368315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, 5.2757053)
+
+[node name="PatrolPoint10" type="Marker3D" parent="." unique_id=927453902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.042614, 0.19787407, 5.2757053)
+
+[node name="PatrolPoint11" type="Marker3D" parent="." unique_id=770552591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.042614, 0.19787407, -27.546867)
+
+[node name="PatrolPoint12" type="Marker3D" parent="." unique_id=1523277867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.441517, 0.19787407, -27.546867)
+
+[node name="PatrolPoint13" type="Marker3D" parent="." unique_id=216697199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.441517, 0.19787407, -7.061122)
+
+[node name="PatrolPoint14" type="Marker3D" parent="." unique_id=141559638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.797713, 0.19787407, -7.061122)
+
+[node name="PatrolPoint15" type="Marker3D" parent="." unique_id=1274379854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.797713, 0.19787407, -9.775733)
+
+[node name="PatrolPoint16" type="Marker3D" parent="." unique_id=1719822615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2929487, 0.19787407, -9.775733)
+
+[node name="PatrolPoint17" type="Marker3D" parent="." unique_id=1748927524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2929487, 0.19787407, -13.139633)
+
+[node name="PatrolPoint18" type="Marker3D" parent="." unique_id=1672037178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.518482, 0.19787407, -13.139633)
+
+[node name="PatrolPoint19" type="Marker3D" parent="." unique_id=1162720318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100623, 0.19787407, -13.139633)
+
+[node name="PatrolPoint20" type="Marker3D" parent="." unique_id=896215482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100623, 0.19787407, -9.371057)
+
+[node name="PatrolPoint21" type="Marker3D" parent="." unique_id=127896748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.100623, 0.19787407, -15.775885)
+
+[node name="PatrolPoint22" type="Marker3D" parent="." unique_id=986708335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4492545, 0.19787407, -15.775885)
+
+[node name="PatrolPoint23" type="Marker3D" parent="." unique_id=200491014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5431576, 0.19787407, -15.775885)
+
+[node name="PatrolPoint24" type="Marker3D" parent="." unique_id=865893811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5431576, 0.19787407, -18.529747)
+
+[node name="PatrolPoint25" type="Marker3D" parent="." unique_id=1186858026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9431744, 0.19787407, -18.529747)
+
+[node name="PatrolPoint26" type="Marker3D" parent="." unique_id=2025012783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97727, 0.19787407, -18.529747)
+
+[node name="PatrolPoint27" type="Marker3D" parent="." unique_id=1871160878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97727, 0.19787407, -15.777368)
 
 [connection signal="area_entered" from="NavigationRegion3D/6twelve/Mop" to="NavigationRegion3D/6twelve/Mop" method="_on_area_entered"]
 [connection signal="area_exited" from="NavigationRegion3D/6twelve/Mop" to="NavigationRegion3D/6twelve/Mop" method="_on_area_exited"]

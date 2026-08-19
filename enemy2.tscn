@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://casj8k0vkxhc8"]
 
 [ext_resource type="Script" uid="uid://w7kreb8qenmb" path="res://enemy_2.gd" id="1_jugo2"]
-[ext_resource type="Texture2D" uid="uid://dqeym2vn542e6" path="res://BreadChase.png" id="2_jugo2"]
+[ext_resource type="Texture2D" uid="uid://7ayy7nllvfeb" path="res://BreadChase.png" id="2_jugo2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqquq"]
 margin = 0.0
@@ -56,6 +56,7 @@ shape = SubResource("SphereShape3D_gqquq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006210327, 0, 14.0283165)
 shape = SubResource("BoxShape3D_s7bn3")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=66358605]
-transform = Transform3D(0.69867617, 0, 0, 0, 0.6337042, 0, 0, 0, 1, 0, 1.5682621, 0)
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=18745159]
+transform = Transform3D(0.32460415, 0, 0, 0, 0.33223236, 0, 0, 0, 1, 0, 0.41210175, 0)
+billboard = 1
 texture = ExtResource("2_jugo2")
