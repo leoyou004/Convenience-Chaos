@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://casj8k0vkxhc8"]
 
-[ext_resource type="Script" uid="uid://w7kreb8qenmb" path="res://enemy_2.gd" id="1_jugo2"]
-[ext_resource type="Texture2D" uid="uid://7ayy7nllvfeb" path="res://BreadChase.png" id="2_jugo2"]
+[ext_resource type="Script" uid="uid://w7kreb8qenmb" path="res://scripts/enemy_2 (2).gd" id="1_jugo2"]
+[ext_resource type="Texture2D" uid="uid://7ayy7nllvfeb" path="res://assets/images/BreadChase.png" id="2_jugo2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gqquq"]
 margin = 0.0
-radius = 0.1
+radius = 0.23779297
 height = 2.5
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_xeo28"]

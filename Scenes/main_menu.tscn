@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://c4h6qt6bctfmg" path="res://scripts/main_menu.gd" id="4_a1b2c"]
 [ext_resource type="FontFile" uid="uid://c8i0yhd71nmor" path="res://items/Shadow of the Deads.ttf" id="4_trj04"]
 [ext_resource type="Script" uid="uid://d1n6op4kgfy57" path="res://Scenes/button_2.gd" id="6_opfnp"]
-[ext_resource type="Texture2D" uid="uid://6i7fci4s4tf3" path="res://BreadChase-removebg-preview.png" id="7_16hvj"]
+[ext_resource type="Texture2D" uid="uid://6i7fci4s4tf3" path="res://assets/images/BreadChase-removebg-preview.png" id="7_16hvj"]
 [ext_resource type="Script" uid="uid://tomdm3wfpyyd" path="res://Scenes/Marlon.gd" id="7_trj04"]
-[ext_resource type="Texture2D" uid="uid://ch4r1ly6sd83k" path="res://BreadIdle-removebg-preview.png" id="8_vr1f0"]
-[ext_resource type="Texture2D" uid="uid://cm5p5yttxy2iy" path="res://Curse-of-Marl-8-20-2026-removebg-preview.png" id="10_16hvj"]
+[ext_resource type="Texture2D" uid="uid://ch4r1ly6sd83k" path="res://assets/images/BreadIdle-removebg-preview.png" id="8_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://cm5p5yttxy2iy" path="res://assets/images/Curse-of-Marl-8-20-2026-removebg-preview.png" id="10_16hvj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
 shader = ExtResource("1_ce3w2")

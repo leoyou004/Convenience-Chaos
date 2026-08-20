@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ayy7nllvfeb"
-path.s3tc="res://.godot/imported/BreadChase.png-6d4c70cbdcf1ec26c3810a83bc91fadc.s3tc.ctex"
+uid="uid://bmqabsxleloy1"
+path.s3tc="res://.godot/imported/mop_bucket__safety_cones__props_4.png-0ceee43b042e677023958548f7a16601.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "d08e2dc5e6e707626977566ce1e708da"
+}
 
 [deps]
 
-source_file="res://BreadChase.png"
-dest_files=["res://.godot/imported/BreadChase.png-6d4c70cbdcf1ec26c3810a83bc91fadc.s3tc.ctex"]
+source_file="res://assets/models/mop_bucket__safety_cones__props_4.png"
+dest_files=["res://.godot/imported/mop_bucket__safety_cones__props_4.png-0ceee43b042e677023958548f7a16601.s3tc.ctex"]
 
 [params]
 
@@ -26,8 +29,8 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=8
+roughness/src_normal="res://assets/models/mop_bucket__safety_cones__props_5.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

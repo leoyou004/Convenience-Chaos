@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6i7fci4s4tf3"
-path="res://.godot/imported/BreadChase-removebg-preview.png-8ebea4c32f629cbb8c84933725ccd752.ctex"
+uid="uid://gx47bpuhfw0e"
+path="res://.godot/imported/You Win text.png-4ff0add735598b132cde83a09a4dce34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BreadChase-removebg-preview.png"
-dest_files=["res://.godot/imported/BreadChase-removebg-preview.png-8ebea4c32f629cbb8c84933725ccd752.ctex"]
+source_file="res://assets/images/You Win text.png"
+dest_files=["res://.godot/imported/You Win text.png-4ff0add735598b132cde83a09a4dce34.ctex"]
 
 [params]
 

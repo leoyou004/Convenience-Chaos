@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b4bmk3faw7hde"]
+
+[ext_resource type="PackedScene" uid="uid://bus5qscehvv5t" path="res://assets/models/mop_bucket__safety_cones__props.glb" id="1_qdd2p"]
+
+[node name="Sketchfab_Scene" unique_id=1252293681 instance=ExtResource("1_qdd2p")]

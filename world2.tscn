@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://buf40hl0lpg2h" path="res://6twelve/Models/Materials/Food_shelf_04.tres" id="7_f6u5b"]
 [ext_resource type="Script" uid="uid://d00rsb66pj3b5" path="res://scripts/ledge_=hopper.gd" id="8_wuyn8"]
 [ext_resource type="Script" uid="uid://dwuvaqgxm7m55" path="res://Scenes/mop.gd" id="10_1x1nw"]
+[ext_resource type="PackedScene" uid="uid://b4bmk3faw7hde" path="res://Mop.tscn" id="10_kamru"]
 [ext_resource type="Script" uid="uid://m1hsi1bxq67m" path="res://scripts/door_bell.gd" id="11_b22el"]
 [ext_resource type="AudioStream" uid="uid://b43310cwccl1" path="res://Characters_psx/Characters_psx/Models/freesound_community-conveniencestorering-96090.mp3" id="12_qbvih"]
 [ext_resource type="PackedScene" uid="uid://b4j1n4w3cj2bg" path="res://Scenes/GameUI.tscn" id="13_m3i4r"]
@@ -266,8 +267,6 @@ size = Vector3(2.9244006, 0.5439348, 1.3814331)
 size = Vector3(24.416504, 0.9688721, 0.1574707)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lwewk"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_1yp27"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3w3pq"]
 size = Vector3(2.6028042, 5.105952, 9.97732)
@@ -1049,12 +1048,11 @@ collision_mask = 5
 script = ExtResource("10_1x1nw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/6twelve/Mop" unique_id=1327269635]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.268936, 0.69781566, 1.0759392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.211431, 0.69781566, 1.2108727)
 shape = SubResource("BoxShape3D_lwewk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/6twelve/Mop" unique_id=1086739380]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.271098, 0.6930456, 1.1269455)
-mesh = SubResource("BoxMesh_1yp27")
+[node name="Sketchfab_Scene" parent="NavigationRegion3D/6twelve/Mop" unique_id=1252293681 instance=ExtResource("10_kamru")]
+transform = Transform3D(1.7785558, 0, 0, 0, 2.1695025, 0, 0, 0, 1.888118, 4.3535366, 0.47455546, 0.7093735)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="NavigationRegion3D/6twelve" unique_id=1600543506]
 transform = Transform3D(1, 0, 0, 0, -0.39536917, 0.9185223, 0, -0.9185223, -0.39536917, -5.0606904, 13.652842, -6.974571)
@@ -1266,13 +1264,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, -28.278
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, -7.1932974)
 
 [node name="PatrolPoint9" type="Marker3D" parent="." unique_id=1224368315]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, 5.2757053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, -0.08369082, 5.2757053)
 
 [node name="PatrolPoint10" type="Marker3D" parent="." unique_id=927453902]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.042614, 0.19787407, 5.2757053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.271099, -0.1600123, 5.2757053)
 
 [node name="PatrolPoint11" type="Marker3D" parent="." unique_id=770552591]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.042614, 0.19787407, -27.546867)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.042614, 0.001850307, -27.546867)
 
 [node name="PatrolPoint12" type="Marker3D" parent="." unique_id=1523277867]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.441517, 0.19787407, -27.546867)

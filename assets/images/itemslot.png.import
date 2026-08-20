@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch4r1ly6sd83k"
-path="res://.godot/imported/BreadIdle-removebg-preview.png-bead6567f75c6cf8999e71cd35df60b3.ctex"
+uid="uid://bl3m61cf1v1p8"
+path="res://.godot/imported/itemslot.png-c5641eb030e5e7c87b66bc67e12d0de6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BreadIdle-removebg-preview.png"
-dest_files=["res://.godot/imported/BreadIdle-removebg-preview.png-bead6567f75c6cf8999e71cd35df60b3.ctex"]
+source_file="res://assets/images/itemslot.png"
+dest_files=["res://.godot/imported/itemslot.png-c5641eb030e5e7c87b66bc67e12d0de6.ctex"]
 
 [params]
 

@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://ba6xtiifg4v2u"]
 
-[ext_resource type="Script" uid="uid://cdi8j1qna0g0r" path="res://enemy_3.gd" id="1_dxyk6"]
-[ext_resource type="Texture2D" uid="uid://bp3h7ffy71q7o" path="res://BreadIdle.png" id="1_hukrr"]
+[ext_resource type="Script" uid="uid://cdi8j1qna0g0r" path="res://scripts/enemy_3.gd" id="1_dxyk6"]
+[ext_resource type="Texture2D" uid="uid://bp3h7ffy71q7o" path="res://assets/images/BreadIdle.png" id="1_hukrr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dxyk6"]
 margin = 0.0
-radius = 0.1
+radius = 0.16357422
 height = 2.5
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_no5mw"]

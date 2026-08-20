@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://60q2tktmuxj1"]
 
 [ext_resource type="Script" uid="uid://blcr8wacri8b" path="res://scripts/RestartButton.gd" id="2_taqub"]
-[ext_resource type="Texture2D" uid="uid://gx47bpuhfw0e" path="res://You Win text.png" id="3_tu0sp"]
-[ext_resource type="Script" uid="uid://end_scene_script" path="res://endscene.gd" id="4_endsc"]
+[ext_resource type="Texture2D" uid="uid://gx47bpuhfw0e" path="res://assets/images/You Win text.png" id="3_tu0sp"]
+[ext_resource type="Script" uid="uid://ckk3ij7gf3oa0" path="res://scripts/endscene.gd" id="4_endsc"]
 
 [node name="EndScene" type="Node2D" unique_id=1001323478]
 script = ExtResource("4_endsc")
-visible = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1234953208]
 anchors_preset = 8
