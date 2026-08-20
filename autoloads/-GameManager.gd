@@ -10,12 +10,11 @@ var night_duration: float = 360.0
 var total_objectives: int = 3
 var completed_objectives: int = 0
 
-# Reference to your UI CanvasLayer or Panel for the win/end screen
-# Replace "Path/To/WinScreen" with the actual path to your UI node
-@onready var win_screen = $CanvasLayer/WinScreen 
+# The active win flow changes to Scenes/end_scene.tscn from ObjectiveManager.
+var win_screen: CanvasItem
 
 func _ready():
-	# Ensure the win screen is hidden when the game starts up
+	win_screen = get_node_or_null("CanvasLayer/WinScreen") as CanvasItem
 	if win_screen:
 		win_screen.hide()
 

@@ -3,3 +3,4 @@
 [ext_resource type="PackedScene" uid="uid://bus5qscehvv5t" path="res://assets/models/mop_bucket__safety_cones__props.glb" id="1_qdd2p"]
 
 [node name="Sketchfab_Scene" unique_id=1252293681 instance=ExtResource("1_qdd2p")]
+transform = Transform3D(1.5532016, 0, 0, 0, 1.3992746, 0, 0, 0, 1.3312752, 0, 0, 0)

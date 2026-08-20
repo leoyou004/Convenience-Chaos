@@ -67,4 +67,4 @@ func _on_all_objectives_completed() -> void:
 	call_deferred("_show_end_scene")
 
 func _show_end_scene() -> void:
-	get_tree().change_scene_to_file("res://end_scene.tscn")
+	get_tree().change_scene_to_file("res://Scenes/end_scene.tscn")
