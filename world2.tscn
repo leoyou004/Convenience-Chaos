@@ -272,13 +272,13 @@ size = Vector3(24.416504, 0.9688721, 0.1574707)
 size = Vector3(2.6028042, 5.105952, 9.97732)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nqjej"]
-size = Vector3(3.7832747, 5.2441354, 10.377874)
+size = Vector3(3.6245475, 5.368161, 10.377874)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1jv68"]
 size = Vector3(3.0003157, 4.9193063, 18.058544)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f03e8"]
-size = Vector3(2.2952907, 6.641051, 17.59097)
+size = Vector3(2.4870307, 6.641051, 17.89607)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1yp27"]
 size = Vector3(2, 10, 56.585236)
@@ -1074,7 +1074,7 @@ shape = SubResource("BoxShape3D_3w3pq")
 debug_color = Color(0.89411765, 0, 0.78039217, 1)
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2" unique_id=146828063]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3356953, -0.0728662, -1.512275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.415059, -0.13487911, -1.512275)
 shape = SubResource("BoxShape3D_nqjej")
 debug_color = Color(0.89411765, 0, 0.78039217, 1)
 
@@ -1084,7 +1084,7 @@ shape = SubResource("BoxShape3D_1jv68")
 debug_color = Color(0.89411765, 0, 0.78039217, 1)
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2" unique_id=43007284]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13866377, 0.39390075, -17.765148)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04279375, 0.39390075, -17.917698)
 shape = SubResource("BoxShape3D_f03e8")
 debug_color = Color(0.89411765, 0, 0.78039217, 1)
 
@@ -1158,6 +1158,10 @@ objective_id = "take_out_trash"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TakeOutTrash" unique_id=1256265783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.054812, -0.68066305, -9.834582)
 shape = SubResource("BoxShape3D_o1gvc")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=89806849]
+transform = Transform3D(98.60108, 0, 0, 0, -1.1754165e-05, 98.601074, 0, -98.601074, -1.1754165e-05, 1389.3647, 970.2126, -94.31216)
+text = "TASK"
 
 [node name="WindowClean" type="Area3D" parent="." unique_id=1256186579]
 transform = Transform3D(4.150408, 0, 0, 0, 2.3763323, 0, 0, 0, 0.2885739, -9.930016, 2.0330677, -8.075112)
@@ -1237,7 +1241,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.592135, 0.7400918, -28.0291
 
 [node name="Enemy3" parent="." unique_id=1485036494 node_paths=PackedStringArray("patrol_points") instance=ExtResource("22_kamru")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.762657, 1.147832, -16.438885)
-patrol_points = [NodePath("../PatrolPoint"), NodePath("../PatrolPoint2"), NodePath("../PatrolPoint3"), NodePath("../PatrolPoint4"), NodePath("../PatrolPoint5"), NodePath("../PatrolPoint6"), NodePath("../PatrolPoint7"), NodePath("../PatrolPoint8"), NodePath("../PatrolPoint9"), NodePath("../PatrolPoint10"), NodePath("../PatrolPoint11"), NodePath("../PatrolPoint12"), NodePath("../PatrolPoint14"), NodePath("../PatrolPoint15"), NodePath("../PatrolPoint15"), NodePath("../PatrolPoint16"), NodePath("../PatrolPoint17"), NodePath("../PatrolPoint18"), NodePath("../PatrolPoint19"), NodePath("../PatrolPoint20"), NodePath("../PatrolPoint21"), NodePath("../PatrolPoint22"), NodePath("../PatrolPoint23"), NodePath("../PatrolPoint24"), NodePath("../PatrolPoint25"), NodePath("../PatrolPoint26"), NodePath("../PatrolPoint27")]
+patrol_points = [NodePath("../PatrolPoint"), NodePath("../PatrolPoint2"), NodePath("../PatrolPoint3"), NodePath("../PatrolPoint4"), NodePath("../PatrolPoint5"), NodePath("../PatrolPoint6"), NodePath("../PatrolPoint7"), NodePath("../PatrolPoint8"), NodePath("../PatrolPoint9"), NodePath("../PatrolPoint10"), NodePath("../PatrolPoint11"), NodePath("../PatrolPoint12"), NodePath("../PatrolPoint15"), NodePath("../PatrolPoint15"), NodePath("../PatrolPoint16"), NodePath("../PatrolPoint17"), NodePath("../PatrolPoint18"), NodePath("../PatrolPoint19"), NodePath("../PatrolPoint20"), NodePath("../PatrolPoint21"), NodePath("../PatrolPoint22"), NodePath("../PatrolPoint23"), NodePath("../PatrolPoint24"), NodePath("../PatrolPoint25"), NodePath("../PatrolPoint26"), NodePath("../PatrolPoint27")]
 
 [node name="PatrolPoint" type="Marker3D" parent="." unique_id=247289544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8783655, 0.24409962, -16.53271)
@@ -1255,28 +1259,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4927301, 0.24409962, -24.12
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.849296, 0.24409962, -24.122728)
 
 [node name="PatrolPoint6" type="Marker3D" parent="." unique_id=2134335546]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.624686, 0.19787407, -27.986149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.469162, 0.19787407, -28.185972)
 
 [node name="PatrolPoint7" type="Marker3D" parent="." unique_id=1450553580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, -28.278217)
 
 [node name="PatrolPoint8" type="Marker3D" parent="." unique_id=1805578063]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, 0.19787407, -7.1932974)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.359339, 0.19787407, -7.1932974)
 
 [node name="PatrolPoint9" type="Marker3D" parent="." unique_id=1224368315]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.405828, -0.08369082, 5.2757053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.278105, -0.08369082, 5.2757053)
 
 [node name="PatrolPoint10" type="Marker3D" parent="." unique_id=927453902]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.271099, -0.1600123, 5.2757053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.12558, -0.1600123, 5.2757053)
 
 [node name="PatrolPoint11" type="Marker3D" parent="." unique_id=770552591]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.042614, 0.001850307, -27.546867)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.433668, 0.001850307, -27.546867)
 
 [node name="PatrolPoint12" type="Marker3D" parent="." unique_id=1523277867]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.441517, 0.19787407, -27.546867)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.759891, 0.19787407, -27.546867)
 
 [node name="PatrolPoint13" type="Marker3D" parent="." unique_id=216697199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.441517, 0.19787407, -7.061122)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.419519, 0.19787407, -7.061122)
 
 [node name="PatrolPoint14" type="Marker3D" parent="." unique_id=141559638]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.797713, 0.19787407, -7.061122)

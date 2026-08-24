@@ -8,6 +8,7 @@ const GRAVITY := 9.8
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer if has_node("AnimationPlayer") else $EnemyModel/AnimationPlayer
 @onready var scream_audio: AudioStreamPlayer3D = $CollisionShape3D/Scream if has_node("CollisionShape3D/Scream") else null
+@onready var touch_area: Area3D = $TouchArea
 
 var player: Node3D
 var can_see_player := false
@@ -27,6 +28,7 @@ func _ready() -> void:
 	if has_node("VisionCone"):
 		$VisionCone.body_entered.connect(_on_vision_entered)
 		$VisionCone.body_exited.connect(_on_vision_exited)
+	touch_area.body_entered.connect(_on_touch_area_body_entered)
 
 	_play_animation_state("idle")
 
@@ -61,24 +63,35 @@ func _on_vision_exited(body: Node3D) -> void:
 	can_see_player = false
 	has_screamed = false
 
+func _on_touch_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player") or body.is_in_group("Player"):
+		SignalBus.player_caught.emit()
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	else:
 		velocity.y = 0.0
 
+	var direction := Vector3.ZERO
 	if player:
 		nav_agent.target_position = player.global_position
+		var next_position := nav_agent.get_next_path_position()
+		if next_position != Vector3.ZERO:
+			direction = next_position - global_position
+		else:
+			# Keep chasing while the navigation path is being recalculated.
+			direction = player.global_position - global_position
 
-	var next_position = nav_agent.get_next_path_position()
-	if next_position != Vector3.ZERO:
-		var direction = (next_position - global_position).normalized()
+	direction.y = 0.0
+	if player and direction.length_squared() <= 0.01:
+		direction = player.global_position - global_position
 		direction.y = 0.0
+	if direction.length_squared() > CATCH_DISTANCE * CATCH_DISTANCE:
+		direction = direction.normalized()
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		
-		if direction.length_squared() > 0.001:
-			look_at(global_position + direction, Vector3.UP)
+		look_at(global_position + direction, Vector3.UP)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, SPEED * delta)
 		velocity.z = move_toward(velocity.z, 0.0, SPEED * delta)
