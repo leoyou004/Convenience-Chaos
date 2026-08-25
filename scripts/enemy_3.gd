@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed: float = 15
+@export var speed: float = 17
 @export var patrol_points: Array[Node3D]
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
