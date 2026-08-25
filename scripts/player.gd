@@ -123,8 +123,8 @@ func _physics_process(delta):
 		is_crouching = not is_crouching
 
 	SignalBus.sprint_stamina_changed.emit(stamina, max_stamina)
-	move_and_slide()
 	_handle_footsteps(wants_to_sprint and stamina > 0.0, delta)
+	move_and_slide()
 
 func _handle_footsteps(sprinting: bool, delta: float) -> void:
 	var is_moving = Vector2(velocity.x, velocity.z).length() > 0.5
@@ -140,7 +140,6 @@ func _handle_footsteps(sprinting: bool, delta: float) -> void:
 			footsteps.play()
 	else:
 		step_timer = 0.0
-		footsteps.stop()
 
 func _on_pickup_area_body_entered(body: Node) -> void:
 	print("body entered pickup area: ", body.name)
