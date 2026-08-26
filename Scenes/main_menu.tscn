@@ -1,13 +1,14 @@
 [gd_scene format=4 uid="uid://1ovojs0ptwyp"]
 
 [ext_resource type="Texture2D" uid="uid://c6eh4il6fjp51" path="res://assets/textures/mainmenu-image.png" id="1_1ehe0"]
-[ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items/main_menu.gdshader" id="1_ce3w2"]
+[ext_resource type="Shader" uid="uid://baf83wnxmolxb" path="res://items font shader/main_menu.gdshader" id="1_ce3w2"]
 [ext_resource type="Script" uid="uid://d1621pod3vhb3" path="res://scripts/Normal-Mode-Button.gd" id="2_ce3w2"]
 [ext_resource type="Script" uid="uid://c4h6qt6bctfmg" path="res://scripts/main_menu.gd" id="4_a1b2c"]
-[ext_resource type="FontFile" uid="uid://c8i0yhd71nmor" path="res://items/Shadow of the Deads.ttf" id="4_trj04"]
+[ext_resource type="FontFile" uid="uid://c8i0yhd71nmor" path="res://items font shader/Shadow of the Deads.ttf" id="4_trj04"]
 [ext_resource type="Script" uid="uid://d1n6op4kgfy57" path="res://Scenes/button_2.gd" id="6_opfnp"]
 [ext_resource type="Texture2D" uid="uid://6i7fci4s4tf3" path="res://assets/images/BreadChase-removebg-preview.png" id="7_16hvj"]
 [ext_resource type="Script" uid="uid://tomdm3wfpyyd" path="res://Scenes/Marlon.gd" id="7_trj04"]
+[ext_resource type="Script" uid="uid://b663fn6psox0n" path="res://Scenes/buttontotutorial.gd" id="7_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://ch4r1ly6sd83k" path="res://assets/images/BreadIdle-removebg-preview.png" id="8_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://cm5p5yttxy2iy" path="res://assets/images/Curse-of-Marl-8-20-2026-removebg-preview.png" id="10_16hvj"]
 
@@ -39,6 +40,9 @@ bg_color = Color(0.34901962, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msyk2"]
 bg_color = Color(0.3254902, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1dhk"]
+bg_color = Color(0.6, 0.09803922, 0, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vr1f0"]
 shader = ExtResource("1_ce3w2")
 shader_parameter/time_scale = 1.0
@@ -64,7 +68,7 @@ loop = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t1dhk"]
 shader = ExtResource("1_ce3w2")
 shader_parameter/time_scale = 0.69200002961012
-shader_parameter/distortion_strength = 0.002000000095
+shader_parameter/distortion_strength = 0.00400000019
 shader_parameter/scanline_intensity = 0.3770000179075
 shader_parameter/noise_intensity = 0.1770000084075
 shader_parameter/color_bleed = 0.0
@@ -122,6 +126,16 @@ action_mode = 0
 text = "NORMAL MODE"
 script = ExtResource("2_ce3w2")
 
+[node name="Button3" type="Button" parent="." unique_id=1057746244]
+offset_left = 758.0
+offset_top = 948.0
+offset_right = 989.0
+offset_bottom = 1021.0
+theme_override_fonts/font = ExtResource("4_trj04")
+theme_override_styles/normal = SubResource("StyleBoxFlat_t1dhk")
+text = "TUTORIAL"
+script = ExtResource("7_vr1f0")
+
 [node name="BreadChase" type="Sprite2D" parent="." unique_id=1466316333]
 material = SubResource("ShaderMaterial_vr1f0")
 position = Vector2(1688, 724)
@@ -148,3 +162,4 @@ texture = ExtResource("10_16hvj")
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
+[connection signal="pressed" from="Button3" to="Button3" method="_on_pressed"]

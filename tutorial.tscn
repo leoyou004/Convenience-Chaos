@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c3mb4o4tx7pfh"]
+
+[ext_resource type="FontFile" uid="uid://c8i0yhd71nmor" path="res://items font shader/Shadow of the Deads.ttf" id="1_yb1ct"]
+[ext_resource type="Script" uid="uid://ceicrytmyimhb" path="res://scripts/buttontutorial.gd" id="2_ehuit"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ht8l8"]
+
+[node name="Tutorial" type="Node2D" unique_id=953795421]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1277198564]
+modulate = Color(0.5014678, 0, 0.12199091, 1)
+offset_left = -86.0
+offset_top = -44.0
+offset_right = 1972.0
+offset_bottom = 1162.0
+texture = SubResource("CanvasTexture_ht8l8")
+
+[node name="Label" type="Label" parent="." unique_id=490632370]
+offset_left = 35.0
+offset_top = 22.0
+offset_right = 1923.0
+offset_bottom = 1027.0
+theme_override_fonts/font = ExtResource("1_yb1ct")
+text = "CONTROLS
+
+WASD = MOVEMENT
+SHIFT = SPRINT
+E = INTERACT
+G = THROW ITEM
+Q = DROP ITEM
+SPACE = JUMP
+
+
+OBJECTIVES SHOW UP IN THE TOP RIGHT AND SHOW YOUR PROGRESS ON THEM THE TIMER IS TOP LEFT AND SHOWS THE TIME  YOU ARE DOING ON IT 
+(THIS CURRENTLY DOES NOT SHOW WHEN YOU WIN) YOU CAN PICK UP BOTTLES (ITEM) AND THROW THEM TO  LURE AWAY NORMAL ENEMY THE BOTTLE 
+DOES NOT WORK IN SCARY MODE THIS IS INTENDED.
+
+
+
+HAVE FUN AND GOOD LUCK!!!
+
+
+
+TIP:
+IF YOU CAN LOCATE THE OBJECTIVES HERE ARE SOME HINTS 
+WINDOW CLEAN IS THE LEFT WINDOW WHEN WALKING INTO THE STORE
+DUMPSTER IS AT BACK OF BUILDING
+LIGHT SWITCH IS ON THE RIGHT AS SOON AS YOU WALK IN NEXT TO THE DOOR IT IS A BIG GREY BUTTON
+MOP IS AT THE BACK OF THE SHELVES
+SHELF RESTOCK IS FRONT RIGHT SHELF
+MONEY COUNTING IS BEHIND THE COUNTER"
+
+[node name="Button" type="Button" parent="." unique_id=71486632]
+offset_left = 850.0
+offset_top = 152.0
+offset_right = 1431.0
+offset_bottom = 244.0
+text = "Return to Main Menu"
+script = ExtResource("2_ehuit")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

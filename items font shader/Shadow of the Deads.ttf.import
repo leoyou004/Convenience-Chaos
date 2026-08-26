@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c8i0yhd71nmor"
-path="res://.godot/imported/Shadow of the Deads.ttf-ce951770da2638433a21026df65266ef.fontdata"
+path="res://.godot/imported/Shadow of the Deads.ttf-1a09de25e698dfe7bc23dbc445568798.fontdata"
 
 [deps]
 
-source_file="res://items/Shadow of the Deads.ttf"
-dest_files=["res://.godot/imported/Shadow of the Deads.ttf-ce951770da2638433a21026df65266ef.fontdata"]
+source_file="res://items font shader/Shadow of the Deads.ttf"
+dest_files=["res://.godot/imported/Shadow of the Deads.ttf-1a09de25e698dfe7bc23dbc445568798.fontdata"]
 
 [params]
 

@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dxyk6"]
 margin = 0.0
-radius = 0.16357422
+radius = 0.40966797
 height = 2.5
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_no5mw"]
@@ -23,6 +23,8 @@ radius = 8.03375
 size = Vector3(7.150238, 1, 27.35939)
 
 [node name="Enemy3" type="CharacterBody3D" unique_id=289357669 node_paths=PackedStringArray("patrol_points")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_dxyk6")
 patrol_points = [null]
 
@@ -41,10 +43,18 @@ max_distance = 10.0
 [node name="Scream" type="AudioStreamPlayer3D" parent="CollisionShape3D" unique_id=1055217689]
 stream = SubResource("AudioStreamMP3_dxyk6")
 volume_db = -10.981
+autoplay = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1745417581]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=376743708]
+
+[node name="PlayerContact" type="Area3D" parent="." unique_id=-1793616775]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerContact" unique_id=-1793616774]
+shape = SubResource("CapsuleShape3D_dxyk6")
 
 [node name="HearingRange" type="Area3D" parent="." unique_id=1568537139]
 
@@ -58,6 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006210327, 0, 14.0283165)
 shape = SubResource("BoxShape3D_h2kam")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1666958534]
-transform = Transform3D(-0.33920258, 0, -0.028027503, 0, 0.33905345, 0, 0.0045335093, 0, -2.097051, 0, 0.31743455, -0.00021129847)
+transform = Transform3D(-0.33920258, 0, -0.028027503, 0, 0.33905345, 0, 0.0045335093, 0, -2.097051, 0, 0.70671475, -0.00021129847)
 billboard = 1
 texture = ExtResource("1_hukrr")

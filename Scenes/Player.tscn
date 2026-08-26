@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b4wu6acr8uvy4" path="res://Characters_psx/Characters_psx/Models/fnaf-doom-2-chase-3.mp3" id="2_5ixxa"]
 [ext_resource type="Script" uid="uid://hvf27n5wefnr" path="res://scripts/interact.gd" id="2_gntrk"]
 [ext_resource type="AudioStream" uid="uid://kt0706swhj1h" path="res://Characters_psx/Characters_psx/Models/freesound_community-concrete-footsteps-6752.mp3" id="3_nn08x"]
-[ext_resource type="Shader" uid="uid://b2bih4d0syls" path="res://items/Player.gdshader" id="4_dewec"]
+[ext_resource type="Shader" uid="uid://b2bih4d0syls" path="res://items font shader/Player.gdshader" id="4_dewec"]
 [ext_resource type="Script" uid="uid://bh0eqpxve377k" path="res://Scenes/flashlight.gd" id="6_52ee3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rwas"]

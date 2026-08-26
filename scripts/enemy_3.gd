@@ -4,10 +4,13 @@ extends CharacterBody3D
 @export var patrol_points: Array[Node3D]
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var player_contact: Area3D = $PlayerContact
 
 var current_point_index: int = 0
 
 func _ready() -> void:
+	player_contact.body_entered.connect(_on_player_contact_body_entered)
+
 	# Ensure we have points to patrol before starting
 	if patrol_points.size() > 0:
 		_update_target_location()
@@ -41,3 +44,7 @@ func _go_to_next_point() -> void:
 	# Loop back to the first point if we reach the end of the array
 	current_point_index = (current_point_index + 1) % patrol_points.size()
 	_update_target_location()
+
+func _on_player_contact_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Player"):
+		SignalBus.player_caught.emit()

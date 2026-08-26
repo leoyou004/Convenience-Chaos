@@ -1041,7 +1041,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.217229, -0.35545897, -5.74
 shape = SubResource("BoxShape3D_kes0n")
 
 [node name="enemy" parent="NavigationRegion3D/6twelve" unique_id=1703061241 instance=ExtResource("4_1jv68")]
-transform = Transform3D(-0.99961257, 0, 0.02783431, 0, 1, 0, -0.02783431, 0, -0.99961257, 8.319764, 0.7203542, -27.366615)
+transform = Transform3D(-0.99961257, 0, 0.02783431, 0, 1, 0, -0.02783431, 0, -0.99961257, 8.836775, 0.7203542, -27.366615)
 
 [node name="Mop" type="Area3D" parent="NavigationRegion3D/6twelve" unique_id=478981302]
 transform = Transform3D(0.56225395, 0, 0, 0, 0.46093518, 0, 0, 0, 0.5296279, -4.1252856, 0.16528821, -18.659761)
@@ -1147,7 +1147,7 @@ transform = Transform3D(1, 0, 1.5459955e-07, 0, 1, 0, 0, 0, 0.99999905, 3.301744
 shape = SubResource("BoxShape3D_crs7q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Turn off lights" unique_id=1299020252]
-transform = Transform3D(1, 0, -1.8626451e-09, 0, 1, 0, 0, 0, 0.9999998, 3.2701569, 0, 10.90901)
+transform = Transform3D(1, 0, -3.7252903e-09, 0, 1, 0, 0, 0, 0.9999997, 3.2564526, 0, 10.460508)
 mesh = SubResource("BoxMesh_kbp8u")
 
 [node name="TakeOutTrash" type="Area3D" parent="." unique_id=1932280607]

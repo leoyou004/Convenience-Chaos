@@ -1145,7 +1145,7 @@ transform = Transform3D(1, 0, 1.5459955e-07, 0, 1, 0, 0, 0, 0.99999905, 3.301744
 shape = SubResource("BoxShape3D_crs7q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Turn off lights" unique_id=1299020252]
-transform = Transform3D(1, 0, -1.8626451e-09, 0, 1, 0, 0, 0, 0.9999998, 3.2701569, 0, 10.90901)
+transform = Transform3D(1, 0, -5.5879354e-09, 0, 1, 0, 0, 0, 0.9999996, 3.2557392, 0, 10.437178)
 mesh = SubResource("BoxMesh_kbp8u")
 
 [node name="TakeOutTrash" type="Area3D" parent="." unique_id=1932280607]
